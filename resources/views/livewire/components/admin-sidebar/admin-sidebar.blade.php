@@ -32,10 +32,10 @@
                         <div class="collapse" id="stockin">
                             <ul class="nav sub-menu">
                                 <li class="nav-item">
-                                    <a href="" class="nav-link">Stock list</a>
+                                    <a href="{{ route('admin-stocklist') }}" class="nav-link">Stock List</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="" class="nav-link">Stock Records</a>
+                                    <a href="{{ route('admin-stockrecords') }}" class="nav-link">Stock Records</a>
                                 </li>
                             </ul>
                         </div>
@@ -49,7 +49,7 @@
                         <div class="collapse" id="uiComponents">
                             <ul class="nav sub-menu">
                                 <li class="nav-item">
-                                    <a href="" class="nav-link">Product list</a>
+                                    <a href="{{ route('admin-product-list') }}"class="nav-link">Product list</a>
                                 </li>
                                 <li class="nav-item">
                                     <a href="" class="nav-link">Sizes</a>

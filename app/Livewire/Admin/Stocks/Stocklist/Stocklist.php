@@ -8,6 +8,7 @@ class Stocklist extends Component
 {
     public function render()
     {
-        return view('livewire.admin.stocks.stocklist.stocklist');
+        return view('livewire.admin.stocks.stocklist.stocklist')
+        ->layout('components.layouts.admin');
     }
 }

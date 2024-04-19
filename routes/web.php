@@ -52,3 +52,17 @@ Route::middleware([Authenticated::class])->group(function () {
 
 });
 
+Route::middleware([Authenticated::class])->group(function () {
+    Route::prefix('admin')->group(function () {
+        Route::get('stocklist', Stocklist::class)->name('admin-stocklist'); 
+        Route::get('stockrecords', Stockrecords::class)->name('admin-stockrecords'); 
+    });
+});
+
+
+Route::middleware([Authenticated::class])->group(function () {
+    Route::prefix('admin')->group(function () {
+        Route::get('product-list', Productlist::class)->name('admin-product-list'); 
+    });
+});
+

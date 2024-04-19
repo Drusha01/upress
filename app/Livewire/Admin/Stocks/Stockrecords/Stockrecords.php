@@ -8,6 +8,7 @@ class Stockrecords extends Component
 {
     public function render()
     {
-        return view('livewire.admin.stocks.stockrecords.stockrecords');
+        return view('livewire.admin.stocks.stockrecords.stockrecords')
+        ->layout('components.layouts.admin');
     }
 }
