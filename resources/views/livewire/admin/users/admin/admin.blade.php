@@ -148,8 +148,17 @@
                             </div>
                         </div>
                     </div>
-                    <div class="row my-2"></div>
-                    {{$users_data->links()}}
+                    <div class="pagination-container">
+                        <ul class="pagination">
+                            <li><a href="{{ $users_data->previousPageUrl() }}">Previous</a></li>
+                            @foreach ($users_data->getUrlRange(1, $users_data->lastPage()) as $page => $url)
+                                <li class="{{ $page == $users_data->currentPage() ? 'active' : '' }}">
+                                    <a href="{{ $url }}">{{ $page }}</a>
+                                </li>
+                            @endforeach
+                            <li><a href="{{ $users_data->nextPageUrl() }}">Next</a></li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>

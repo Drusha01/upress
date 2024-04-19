@@ -49,6 +49,50 @@
                 {{ $slot }}
             </div>
         </div>
+        <style>
+            .pagination-container {
+                text-align: center;
+            }
+
+            .pagination {
+                display: inline-block;
+                list-style: none;
+                padding: 0;
+            }
+
+            .pagination > li {
+                display: inline-block;
+                margin-right: 5px;
+            }
+
+            .pagination > li > a,
+            .pagination > li > span {
+                display: inline-block;
+                padding: 5px 10px;
+                border: 1px solid #ccc;
+                border-radius: 3px;
+                text-decoration: none;
+                color: #333;
+            }
+
+            .pagination > li.active > a,
+            .pagination > li.active > span {
+                background-color: #007bff;
+                color: #fff;
+            }
+
+            .pagination > li > a:hover,
+            .pagination > li > span:hover {
+                background-color: #f0f0f0;
+            }
+
+            .pagination > li:first-child > a,
+            .pagination > li:last-child > a {
+                font-size: 14px; 
+            }
+
+
+        </style>
         <script>
             window.addEventListener('refresh-page', event => {
                 window.location.reload(false); 
