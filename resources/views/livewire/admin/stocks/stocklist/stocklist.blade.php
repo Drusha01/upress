@@ -40,7 +40,7 @@
                                         <th>Type</th>
                                         <th>Color</th>
                                         <th>Product Price</th>
-                                        <th>Action</th>
+                                        <th class="text-center">Action</th>
                                     </tr>
                                 </thead>
                                 <tbody class="text-black">
@@ -53,7 +53,7 @@
                                         <td>Stock In</td>
                                         <td>Red</td>
                                         <td>200</td>
-                                        <td>
+                                        <td class="text-center">
                                             <!-- Button to trigger modal -->
                                             <button class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#viewStockModal">
                                                 View
@@ -69,7 +69,7 @@
                                         <td>Stock Out</td>
                                         <td>Red</td>
                                         <td>200</td>
-                                        <td>
+                                        <td class="text-center">
                                             <!-- Button to trigger modal -->
                                             <button class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#viewStockModal">
                                                 View
@@ -93,38 +93,43 @@
                     <h5 class="modal-title text-white" id="addStockListLabel">Add New Stock</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <div class="modal-body bg-white text-black">
+                <div class="modal-body w-full bg-white text-black">
                     <form id="addStockForm">
-                        <div class="mb-3">
-                            <label for="productName" class="form-label text-black">Product Name:</label>
-                            <input type="text" class="form-control" id="productName" name="productName" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="sizeName" class="form-label text-black">Size Name:</label>
-                            <input type="text" class="form-control" id="sizeName" name="sizeName" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="quantity" class="form-label text-black">Quantity:</label>
-                            <input type="number" class="form-control" id="quantity" name="quantity" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="date" class="form-label text-black">Date:</label>
-                            <input type="date" class="form-control" id="date" name="date" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="color" class="form-label text-black">Color:</label>
-                            <input type="text" class="form-control" id="color" name="color" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="productPrice" class="form-label text-black">Product Price:</label>
-                            <input type="number" class="form-control" id="productPrice" name="productPrice" required>
+                        <div class="row">
+                            <div class="col-6">
+                                <div class="mb-3">
+                                    <label for="productName" class="form-label text-black">Product Name:</label>
+                                    <input type="text" class="form-control" id="productName" name="productName" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="sizeName" class="form-label text-black">Size Name:</label>
+                                    <input type="text" class="form-control" id="sizeName" name="sizeName" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="quantity" class="form-label text-black">Quantity:</label>
+                                    <input type="number" class="form-control" id="quantity" name="quantity" required>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="mb-3">
+                                    <label for="date" class="form-label text-black">Date:</label>
+                                    <input type="date" class="form-control" id="date" name="date" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="color" class="form-label text-black">Color:</label>
+                                    <input type="text" class="form-control" id="color" name="color" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="productPrice" class="form-label text-black">Product Price:</label>
+                                    <input type="number" class="form-control" id="productPrice" name="productPrice" required>
+                                </div>
+                            </div>
                         </div>
                         <div class="text-end">
                             <button type="submit" class="btn btn-success">Add Stock</button>
                         </div>
                     </form>
                 </div>
-
             </div>
         </div>
     </div>

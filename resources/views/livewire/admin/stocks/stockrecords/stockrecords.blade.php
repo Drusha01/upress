@@ -31,7 +31,7 @@
                                     <th>Date</th>
                                     <th>Color</th>
                                     <th>Product Price</th>
-                                    <th>Action</th>
+                                    <th class="text-center">Action</th>
                                 </tr>
                             </thead>
                             <tbody class="text-dark">
@@ -43,7 +43,7 @@
                                     <td>2024-04-18</td>
                                     <td>Red</td>
                                     <td>200</td>
-                                    <td>
+                                    <td class="text-center">
                                         <a href="#" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#viewStockModal">View</a>
                                     </td>
                                 </tr>
