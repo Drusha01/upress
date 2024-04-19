@@ -40,12 +40,6 @@
         <script src="{{url('assets')}}/vendors/feather-icons/feather.min.js"></script>
         <script src="{{url('assets')}}/js/template.js"></script>
 
-        <script src="../assets/vendors/core/core.js"></script>
-        <script src="../assets/vendors/flatpickr/flatpickr.min.js"></script>
-        <script src="../assets/vendors/apexcharts/apexcharts.min.js"></script>
-        <script src="../assets/vendors/feather-icons/feather.min.js"></script>
-        <script src="../assets/js/template.js"></script>
-
     </head>
     <body>
         <div class="main-wrapper">
