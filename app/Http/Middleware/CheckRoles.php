@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Illuminate\Support\Facades\DB;
 
-class IsAdmin
+class CheckRoles
 {
     /**
      * Handle an incoming request.
@@ -26,8 +26,12 @@ class IsAdmin
             ->where('u.id','=',$data['id'])
             ->join('roles as r','u.role_id','r.id')
             ->first()){
-                if($roles->role_name != 'admin' ){
-                    return redirect('/');
+                if($roles->role_name == 'admin' ){
+                    return redirect('/admin/dashboard');
+                }elseif( $roles->role_name == 'admin-staff' ){
+                    return redirect('/staff/dashboard');
+                }elseif( $roles->role_name == 'customer' ){
+                    return redirect('/customer/dashboard');
                 }
             }
         }

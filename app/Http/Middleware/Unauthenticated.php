@@ -16,7 +16,7 @@ class Unauthenticated
     public function handle(Request $request, Closure $next): Response
     {
         $data = $request->session()->all();
-        if(!isset($data['user_id'])  ){
+        if(!isset($data['id'])  ){
             return redirect('/login');
         }
         return $next($request);
