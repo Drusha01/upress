@@ -52,6 +52,10 @@ Route::middleware([Unauthenticated::class,IsAdmin::class])->group(function () {
         Route::get('dashboard', AdminDashboard::class)->name('admin-dashboard');
         Route::get('profile', AdminProfile::class)->name('admin-profile');
 
+        Route::get('stocklist', Stocklist::class)->name('admin-stocklist'); 
+        Route::get('stockrecords', Stockrecords::class)->name('admin-stockrecords'); 
+        Route::get('product-list', Productlist::class)->name('admin-product-list'); 
+
         Route::prefix('user')->group(function () {
             Route::get('adminusers', AdminUsers::class)->name('admin-user-admin');
             Route::get('staffusers', AdminStaff::class)->name('admin-user-staff');
@@ -68,17 +72,4 @@ Route::middleware([Unauthenticated::class,isStaff::class])->group(function () {
     });
 });
 
-Route::middleware([Authenticated::class])->group(function () {
-    Route::prefix('admin')->group(function () {
-        Route::get('stocklist', Stocklist::class)->name('admin-stocklist'); 
-        Route::get('stockrecords', Stockrecords::class)->name('admin-stockrecords'); 
-    });
-});
-
-
-Route::middleware([Authenticated::class])->group(function () {
-    Route::prefix('admin')->group(function () {
-        Route::get('product-list', Productlist::class)->name('admin-product-list'); 
-    });
-});
 
