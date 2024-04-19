@@ -87,6 +87,20 @@ class Admin extends Component
         dd('asdfas');
     }
     public function add_user_default($modal_id){
+        $this->user = [
+            'id' => NULL,
+            'first_name' => NULL,
+            'middle_name' => NULL,
+            'last_name' => NULL,
+            'email' => NULL,
+            'contact_no' => NULL,
+            'role_id' => NULL,
+            'college_id' => NULL,
+            'department_id' => NULL,
+            'password' => NULL,
+            'confirm_password' => NULL,
+            'error' => NULL,
+        ];
         $this->dispatch('openModal',$modal_id);
     }
     public function add_user($modal_id){
@@ -152,6 +166,101 @@ class Admin extends Component
                 'password' => bcrypt($this->user['password']),
         ])){
             $this->dispatch('closeModal',$modal_id);
+            $this->resetPage();
+        }
+    }
+    public function edit_user($id,$modal_id){
+        $roles = DB::table('roles')
+        ->where('name','=','admin')
+        ->first();
+
+        if($user = DB::table('users as u')
+        ->where('u.id','=',$id)
+        ->where('u.role_id','=',$roles->id)
+        ->get()
+        ->first()){
+            $this->user = [
+                'id' => $user->id,
+                'first_name' => $user->first_name,
+                'middle_name' => $user->middle_name,
+                'last_name' => $user->last_name,
+                'email' => $user->email,
+                'contact_no' => $user->contact_no,
+                'role_id' => $user->role_id,
+                'college_id' => $user->college_id,
+                'department_id' => $user->department_id,
+                'error' => NULL,
+            ];
+        }
+        $this->dispatch('openModal',$modal_id);
+
+    }
+    public function save_deactivate_user($id,$modal_id){
+        $roles = DB::table('roles')
+        ->where('name','=','admin')
+        ->first();
+        if(DB::table('users as u')
+        ->where('u.id','=',$id)
+        ->where('u.role_id','=',$roles->id)
+        ->update([
+            'is_active' => 0
+        ])){
+            $this->dispatch('closeModal',$modal_id);
+        }
+    }
+    public function save_activate_user($id,$modal_id){
+        $roles = DB::table('roles')
+        ->where('name','=','admin')
+        ->first();
+        if(DB::table('users as u')
+        ->where('u.id','=',$id)
+        ->where('u.role_id','=',$roles->id)
+        ->update([
+            'is_active' => 1
+        ])){
+            $this->dispatch('closeModal',$modal_id);
+        }
+    }
+    public function save_edit_user($id,$modal_id){
+        $roles = DB::table('roles')
+        ->where('name','=','admin')
+        ->first();
+        if(strlen($this->user['first_name'])<= 0){
+            $this->user['error'] = "Please Input firstname";
+            return;
+        }
+        if(strlen($this->user['last_name'])<= 0){
+            $this->user['error'] = "Please Input lastname";
+            return;
+        }
+        
+  
+        if(!DB::table('colleges')    
+            ->where('id','=',$this->user['college_id'])
+            ->first()){
+            $this->user['error'] = "Please select college";
+            return;
+        }
+        if(!DB::table('departments as d')    
+            ->where('d.id','=',$this->user['department_id'])
+            ->where('d.college_id','=',$this->user['college_id'])
+            ->first()){
+            $this->user['error'] = "Invalid department";
+            return;
+        }
+        if(DB::table('users as u')
+            ->where('u.id','=',$id)
+            ->where('u.role_id','=',$roles->id)
+            ->update([
+                'first_name' => $this->user['first_name'],
+                'middle_name' => $this->user['middle_name'],
+                'last_name' => $this->user['last_name'],
+                'contact_no' => $this->user['contact_no'],
+                'college_id' => $this->user['college_id'],
+                'department_id' => $this->user['department_id'],
+        ])){
+            $this->dispatch('closeModal',$modal_id);
+            $this->resetPage();
         }
     }
 }
