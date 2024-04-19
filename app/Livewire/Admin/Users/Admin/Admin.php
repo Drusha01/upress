@@ -72,7 +72,7 @@ class Admin extends Component
                 ->join('colleges as c','u.college_id','c.id')
                 ->join('departments as d','u.department_id','d.id')
                 ->where('role_id','=',$roles->id)
-                ->paginate(10);
+                ->paginate(1);
         }
         return view('livewire.admin.users.admin.admin',[
             'users_data' =>$users_data,
