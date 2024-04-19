@@ -8,6 +8,7 @@ class Productlist extends Component
 {
     public function render()
     {
-        return view('livewire.admin.products.productlist.productlist');
+        return view('livewire.admin.products.productlist.productlist')
+        ->layout('components.layouts.admin');
     }
 }
