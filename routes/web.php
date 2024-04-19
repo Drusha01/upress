@@ -28,7 +28,8 @@ use App\Livewire\Admin\Services\Completedservices\Completedservices;
 use App\Livewire\Admin\Services\Pendingservices\Pendingservices;
 use App\Livewire\Admin\Services\Servicelist\Servicelist;
 use App\Livewire\Admin\Stocks\Stocklist\Stocklist;
-use App\Livewire\Admin\Stocks\Stockrecords\Stockrecords;
+use App\Livewire\Admin\Stocks\StockInRecords\StockInRecords;
+use App\Livewire\Admin\Stocks\StockOutRecords\StockOutRecords;
 use App\Livewire\Admin\Transactions\Transactionrecords\Transactionrecords;
 use App\Livewire\Admin\Users\Admin\Admin as AdminUsers;
 use App\Livewire\Admin\Users\Customers\Customers as AdminCustomers;
@@ -52,10 +53,16 @@ Route::middleware([Unauthenticated::class,IsAdmin::class])->group(function () {
         Route::get('dashboard', AdminDashboard::class)->name('admin-dashboard');
         Route::get('profile', AdminProfile::class)->name('admin-profile');
 
-        Route::get('stocklist', Stocklist::class)->name('admin-stocklist'); 
-        Route::get('stockrecords', Stockrecords::class)->name('admin-stockrecords'); 
-        Route::get('product-list', Productlist::class)->name('admin-product-list'); 
-
+        Route::prefix('stock')->group(function () {
+            Route::get('stocklist', Stocklist::class)->name('admin-stocklist'); 
+            Route::get('stockinrecords', StockInRecords::class)->name('admin-stock-in-records'); 
+            Route::get('stockoutrecords', StockOutRecords::class)->name('admin-stock-out-records'); 
+        });
+        Route::prefix('products')->group(function () {
+            Route::get('product-list', Productlist::class)->name('admin-product-list'); 
+            Route::get('product-size', ProductSizes::class)->name('admin-product-size'); 
+            Route::get('product-color', ProductColor::class)->name('admin-product-color'); 
+        });
         Route::prefix('user')->group(function () {
             Route::get('adminusers', AdminUsers::class)->name('admin-user-admin');
             Route::get('staffusers', AdminStaff::class)->name('admin-user-staff');

@@ -9,76 +9,73 @@
                         <h4 class="mb-2">UPRESS Product Information</h4>
 
                         <div class="d-flex justify-content-end mb-4">
-                            <button type="button" class="btn btn-success me-2" data-bs-toggle="modal" data-bs-target="#addProductModal">
-                                Add Product
+                            <button type="button" class="btn btn-success me-2" wire:click="add_product_default('addModalToggler')"> 
+                                Add
                             </button>
+                            <button class="btn btn-success me-md-2" data-bs-toggle="modal" data-bs-target="#addModal" id="addModalToggler" style="display:none">Add</button>
+                            <button class="btn btn-success me-md-2" data-bs-toggle="modal" data-bs-target="#editModal" id="editModalToggler" style="display:none">Add</button>
+                            <button class="btn btn-success me-md-2" data-bs-toggle="modal" data-bs-target="#activateModal" id="activateModalToggler" style="display:none">Add</button>
+                            <button class="btn btn-success me-md-2" data-bs-toggle="modal" data-bs-target="#deactivateModal" id="deactivateModalToggler" style="display:none">Add</button>
                         </div>
 
                         <div class="table-responsive">
                             <table class="table table-bordered">
                                 <thead class="thead-dark">
                                     <tr>
-                                        <th>Image</th>
-                                        <th>Product ID</th>
+                                        <th>#</th>
+                                        <th class="text-center">Image</th>
+                                        <th>Product Code</th>
                                         <th>Product Name</th>
                                         <th>Description</th>
-                                        <th>Unit Price</th>
                                         <th>Status</th>
-                                        <th>Action</th>
+                                        <th class="text-center">Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td>
-                                            <img src="#" alt="Product Image" class="img-thumbnail" style="width:50px height: 50px;">
-                                        </td>
-                                        <td>Product ID</td>
-                                        <td>Product Name</td>
-                                        <td>Description</td>
-                                        <td>Unit price</td>
-                                        <td>status</td>
-                                        <td>
-                                            <!-- Button to trigger Edit Product Modal -->
-                                            <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#editProductModal">
-                                                <i class="fas fa-pencil-alt"></i> Edit
-                                            </button>
-
-                                            <form action="#" method="post" style="display: inline;">
-                                                <button type="submit" class="btn btn-danger btn-sm" title="Delete" onclick="return confirm('Confirm delete?')">
-                                                    <i class="fas fa-trash-alt"></i> Delete
+                                    @forelse ($products_data  as $key => $value )
+                                        <tr>
+                                            <th scope="row" class="align-middle">{{(intval($products_data->currentPage()-1)*$products_data->perPage())+$key+1 }}</th>
+                                            <td class="text-center">
+                                                <img src="{{asset('storage/content/products/'.$value->image)}}" alt="Product Image"  style="object-fit: cover;width:150px height: 150px;">
+                                            </td>
+                                            <td>{{$value->code}}</td>
+                                            <td>{{$value->name}}</td>
+                                            <td>{{$value->description}}</td>
+                                            <td>@if($value->is_active) Available @else Unavailable @endif</td>
+                                            <td class="text-center">
+                                                <button type="button" class="btn btn-primary btn-sm"  wire:click="edit({{$value->id}},'editModalToggler')">
+                                                    <i class="fas fa-pencil-alt"></i> Edit
                                                 </button>
-                                            </form>
-
-                                        </td>
-                                    </tr>
-                                    <!-- <tr>
-                                        <td colspan="7" class="text-center">No products found</td>
-                                    </tr> -->
+                                                @if($value->is_active)
+                                                    <button class="btn btn-danger btn-sm" wire:click="edit({{$value->id}},'deactivateModalToggler')">
+                                                        <i class="fa fa-pencil-square-o" aria-hidden="true"></i> Deactivate
+                                                    </button>
+                                                @else 
+                                                    <button class="btn btn-warning btn-sm" wire:click="edit({{$value->id}},'activateModalToggler')">
+                                                        <i class="fa fa-pencil-square-o" aria-hidden="true"></i> Activate
+                                                    </button>
+                                                @endif
+                                            </td>
+                                        </tr>
+                                    @empty
+                                        <tr>
+                                            <td colspan="42" class="text-center text-dark">NO DATA</td>
+                                        </tr>
+                                    @endforelse
                                 </tbody>
                             </table>
                         </div>
-                        
-                        <!-- Pagination -->
-                        <nav aria-label="Product Pagination" class="mt-4 ">
-                            <ul class="pagination justify-content-center">
-                                <li class="page-item ">
-                                    <a class="page-link bg-white text-black" aria-label="Previous">
-                                        <span aria-hidden="true">&laquo;</span>
-                                    </a>
+                    </div>
+                    <div class="pagination-container mt-3">
+                        <ul class="pagination">
+                            <li><a href="{{ $products_data->previousPageUrl() }}">Previous</a></li>
+                            @foreach ($products_data->getUrlRange(1, $products_data->lastPage()) as $page => $url)
+                                <li class="{{ $page == $products_data->currentPage() ? 'active' : '' }}">
+                                    <a href="{{ $url }}">{{ $page }}</a>
                                 </li>
-                            
-                                    <li class="page-item">
-                                        <a class="page-link bg-white text-black">page</a>
-                                    </li>
-                            
-                                <li class="page-item">
-                                    <a class="page-link bg-white text-black" aria-label="Next">
-                                        <span aria-hidden="true">&raquo;</span>
-                                    </a>
-                                </li>
-                            </ul>
-                        </nav>
-                        
+                            @endforeach
+                            <li><a href="{{ $products_data->nextPageUrl() }}">Next</a></li>
+                        </ul>
                     </div>
                 </div>
             </div>
@@ -86,74 +83,136 @@
     </div>
 
     <!-- Add Product Modal -->
-    <div class="modal fade" id="addProductModal" tabindex="-1" aria-labelledby="addProductModalLabel" aria-hidden="true">
+    <div wire:ignore.self class="modal fade" id="addModal" tabindex="-1" aria-labelledby="addModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content" style="background-color: white; color: black;">
-                <form action="#" method="post">
+                <form wire:submit.prevent="save_add_product('addModalToggler')">
 
                     <div class="modal-header bg-dark">
-                        <h5 class="modal-title text-white" id="addProductModalLabel">Add Product</h5>
+                        <h5 class="modal-title text-white" id="addModalLabel">Add Product</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
 
                     <div class="modal-body">
+                        <div class="mb-2 bg-white">
+                            <label for="product_image" class="form-label text-black">Product Image</label>
+                            <input type="file" wire:model="product.image" class="form-control" id="product_image" name="product_image" accept=".jpg,.png" required>
+                        </div>
+                        <div class="mb-2">
+                            <label for="product_code" class="form-label text-black">Product Code</label>
+                            <input type="text"  wire:model="product.code" class="form-control" id="product_code" name="product_code" placeholder="Product code" required>
+                        </div>
                         <div class="mb-2">
                             <label for="product_name" class="form-label text-black">Product Name</label>
-                            <input type="text" class="form-control" id="product_name" name="product_name" required>
+                            <input type="text" wire:model="product.name" class="form-control" id="product_name" name="product_name" placeholder="Product name"  required>
                         </div>
                         <div class="mb-2">
                             <label for="description" class="form-label text-black">Description</label>
-                            <textarea class="form-control" id="description" name="description" rows="3" required></textarea>
+                            <textarea class="form-control" wire:model="product.description" id="description" name="description" placeholder="Product description" rows="3"></textarea>
                         </div>
-                        <div class="mb-2">
-                            <label for="number" class="form-label text-black">Price</label>
-                            <input type="number" class="form-control" id="product_price" name="product_price" required>
+                        @if($product['error'])
+                        <div class="col-md-12 mx-3">
+                            <p style ="color:red">Error: {{$product['error']}}</p>
                         </div>
-                        <div class="mb-2">
-                            <label for="number" class="form-label text-black">Price</label>
-                            <input type="number" class="form-control" id="product_price" name="product_price" required>
-                        </div>
+                    @endif
                     </div>
 
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary">Save Product</button>
+                        <button type="submit" class="btn btn-primary">Add</button>
                     </div>
                 </form>
             </div>
         </div>
     </div>
 
-    <!-- Edit Product Modal -->
-    <div class="modal fade" id="editProductModal" tabindex="-1" aria-labelledby="editProductModalLabel" aria-hidden="true">
+    <div wire:ignore.self class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-                <form> 
-                    <div class="modal-header bg-dark text-white">
-                        <h5 class="modal-title" id="editProductModalLabel">Edit Product</h5>
+            <div class="modal-content" style="background-color: white; color: black;">
+                <form wire:submit.prevent="save_edit_product({{$product['id']}},'editModalToggler')">
+
+                    <div class="modal-header bg-dark">
+                        <h5 class="modal-title text-white" id="editModalLabel">Edit Product</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
+
                     <div class="modal-body">
-                        <div class="mb-3">
-                            <label for="edit_product_name" class="form-label">Product Name</label>
-                            <input type="text" class="form-control" id="edit_product_name" name="edit_product_name" value="#" required>
+                        <div class="mb-2 bg-white">
+                            <label for="product_image" class="form-label text-black">Product Image</label>
+                            <input type="file" wire:model="product.image" class="form-control" id="product_image" name="product_image" accept=".jpg,.png" >
                         </div>
-                        <div class="mb-3">
-                            <label for="edit_description" class="form-label">Description</label>
-                            <textarea class="form-control" id="edit_description" name="edit_description" rows="3" required></textarea>
+                        <div class="mb-2">
+                            <label for="product_code" class="form-label text-black">Product Code</label>
+                            <input type="text"  wire:model="product.code" class="form-control" id="product_code" name="product_code" placeholder="Product code" required>
                         </div>
-                        <div class="mb-3">
-                            <label for="edit_unit_price" class="form-label">Unit Price</label>
-                            <input type="number" step="0.01" class="form-control" id="edit_unit_price" name="edit_unit_price" value="#" required>
+                        <div class="mb-2">
+                            <label for="product_name" class="form-label text-black">Product Name</label>
+                            <input type="text" wire:model="product.name" class="form-control" id="product_name" name="product_name" placeholder="Product name"  required>
                         </div>
+                        <div class="mb-2">
+                            <label for="description" class="form-label text-black">Description</label>
+                            <textarea class="form-control" wire:model="product.description" id="description" name="description" placeholder="Product description" rows="3"></textarea>
+                        </div>
+                        @if($product['error'])
+                        <div class="col-md-12 mx-3">
+                            <p style ="color:red">Error: {{$product['error']}}</p>
+                        </div>
+                    @endif
                     </div>
+
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary">Update Product</button>
+                        <button type="submit" class="btn btn-primary">Save </button>
                     </div>
                 </form>
             </div>
         </div>
     </div>
+
+    <div wire:ignore.self class="modal fade" id="activateModal" tabindex="-1" aria-labelledby="activateModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <form wire:submit.prevent="save_activate_product({{$product['id']}},'activateModalToggler')">
+                    <div class="modal-header bg-dark text-white">
+                        <h5 class="modal-title" id="activateModalLabel">Activate</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body bg-white">
+                        <div class="col-md-12 text-center">
+                            <p class="text-center text-warning">Are you sure you want to activate this?</p>
+                        </div>
+                    </div>
+                    <div class="modal-footer bg-white">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Save</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div wire:ignore.self class="modal fade" id="deactivateModal" tabindex="-1" aria-labelledby="deactivateModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <form wire:submit.prevent="save_deactivate_product({{$product['id']}},'deactivateModalToggler')">
+                    <div class="modal-header bg-dark text-white">
+                        <h5 class="modal-title" id="deactivateModalLabel">Deactivate</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body bg-white">
+                        <div class="col-md-12 text-center">
+                            <p class="text-danger text-center">Are you sure you want to deactivate this?</p>
+                        </div>
+                    </div>
+                    <div class="modal-footer bg-white">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Save</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+   
 
 </div>

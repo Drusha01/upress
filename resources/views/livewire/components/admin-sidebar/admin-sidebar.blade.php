@@ -35,7 +35,10 @@
                                     <a href="{{ route('admin-stocklist') }}" class="nav-link">Stock List</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="{{ route('admin-stockrecords') }}" class="nav-link">Stock Records</a>
+                                    <a href="{{ route('admin-stock-in-records') }}" class="nav-link">Stock In Records</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="{{ route('admin-stock-out-records') }}" class="nav-link">Stock Out Records</a>
                                 </li>
                             </ul>
                         </div>
@@ -49,13 +52,13 @@
                         <div class="collapse" id="uiComponents">
                             <ul class="nav sub-menu">
                                 <li class="nav-item">
-                                    <a href="{{ route('admin-product-list') }}"class="nav-link">Product list</a>
+                                    <a href="{{route('admin-product-list')}}" class="nav-link @if( Route::is('admin-product-list')) active @endif">Product list</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="" class="nav-link">Sizes</a>
+                                    <a href="{{route('admin-product-size')}}" class="nav-link @if( Route::is('admin-product-size')) active @endif">Sizes</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="" class="nav-link">Color</a>
+                                    <a href="{{route('admin-product-color')}}" class="nav-link @if( Route::is('admin-product-color')) active @endif">Color</a>
                                 </li>
                             </ul>
                         </div>

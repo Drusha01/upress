@@ -34,7 +34,7 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach ($users_data  as $key => $value )
+                                        @forelse ($users_data  as $key => $value )
                                             <tr class="table-light">
                                                 <th scope="row" class="px-4 py-3 align-middle">{{(intval($users_data->currentPage()-1)*$users_data->perPage())+$key+1 }}</th>
                                                 <td class="align-middle">
@@ -54,22 +54,26 @@
                                                         </button>
                                                     </a>
                                                     @if($value->is_active)
-                                                    <a  wire:click="edit_user({{$value->id}},'DeactivateAccountModalToggler')">
-                                                        <button class="btn btn-danger btn-sm">
-                                                            <i class="fa fa-pencil-square-o" aria-hidden="true"></i> Deactivate
-                                                        </button>
-                                                    </a>
+                                                        <a  wire:click="edit_user({{$value->id}},'DeactivateAccountModalToggler')">
+                                                            <button class="btn btn-danger btn-sm">
+                                                                <i class="fa fa-pencil-square-o" aria-hidden="true"></i> Deactivate
+                                                            </button>
+                                                        </a>
                                                     @else 
-                                                    <a  wire:click="edit_user({{$value->id}},'ActivateAccountModalToggler')">
-                                                        <button class="btn btn-warning btn-sm">
-                                                            <i class="fa fa-pencil-square-o" aria-hidden="true"></i> Activate
-                                                        </button>
-                                                    </a>
+                                                        <a  wire:click="edit_user({{$value->id}},'ActivateAccountModalToggler')">
+                                                            <button class="btn btn-warning btn-sm">
+                                                                <i class="fa fa-pencil-square-o" aria-hidden="true"></i> Activate
+                                                            </button>
+                                                        </a>
                                                     @endif
                                                     
                                                 </td>
                                             </tr>
-                                        @endforeach
+                                        @empty
+                                            <tr>
+                                                <td colspan="42" class="text-center text-dark">NO DATA</td>
+                                            </tr>
+                                        @endforelse
                                     </tbody>
                                 </table>
                             </div>
