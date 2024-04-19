@@ -148,6 +148,8 @@
                             </div>
                         </div>
                     </div>
+                    <div class="row my-2"></div>
+                    {{$users_data->links()}}
                 </div>
             </div>
         </div>
