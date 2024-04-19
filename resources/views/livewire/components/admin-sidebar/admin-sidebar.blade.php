@@ -1,6 +1,7 @@
 <div>
     <nav class="sidebar">
-        <div class="sidebar-header">
+        
+        <div class="sidebar-header" style="background-color: #8d021f;">
             <a href="#" class="sidebar-brand">
                 UPRESS
             </a>
