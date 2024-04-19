@@ -15,7 +15,8 @@ class Authenticated
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if(isset($data['user_id'])  ){
+        $data = $request->session()->all();
+        if(isset($data['id'])  ){
             return redirect('/');
         }
         return $next($request);

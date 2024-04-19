@@ -27,7 +27,7 @@ return new class extends Migration
             NOW(),
             NOW()),
             (NULL,
-            "staff-admin",
+            "admin-staff",
             NOW(),
             NOW()),
             (NULL,

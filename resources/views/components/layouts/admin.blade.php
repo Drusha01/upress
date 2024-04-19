@@ -27,12 +27,18 @@
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
-        <link rel="stylesheet" href="../assets/vendors/core/core.css">
-        <link rel="stylesheet" href="../assets/vendors/flatpickr/flatpickr.min.css">
-        <link rel="stylesheet" href="../assets/fonts/feather-font/css/iconfont.css">
-        <link rel="stylesheet" href="../assets/vendors/flag-icon-css/css/flag-icon.min.css">
-        <link rel="stylesheet" href="../assets/css/demo2/style.css">
-        <link rel="shortcut icon" href="../assets/logo/upress-logo.png" />
+        <link rel="stylesheet" href="{{url('assets')}}/vendors/core/core.css">
+        <link rel="stylesheet" href="{{url('assets')}}/vendors/flatpickr/flatpickr.min.css">
+        <link rel="stylesheet" href="{{url('assets')}}/fonts/feather-font/css/iconfont.css">
+        <link rel="stylesheet" href="{{url('assets')}}/vendors/flag-icon-css/css/flag-icon.min.css">
+        <link rel="stylesheet" href="{{url('assets')}}/css/demo2/style.css">
+        <link rel="shortcut icon" href="{{url('assets')}}/logo/upress-logo.png" />
+
+        <script src="{{url('assets')}}/vendors/core/core.js"></script>
+        <script src="{{url('assets')}}/vendors/flatpickr/flatpickr.min.js"></script>
+        <script src="{{url('assets')}}s/vendors/apexcharts/apexcharts.min.js"></script>
+        <script src="{{url('assets')}}/vendors/feather-icons/feather.min.js"></script>
+        <script src="{{url('assets')}}/js/template.js"></script>
 
         <script src="../assets/vendors/core/core.js"></script>
         <script src="../assets/vendors/flatpickr/flatpickr.min.js"></script>

@@ -111,21 +111,30 @@
                             </ul>
                         </div>
                     </li>
-                    <li class="nav-item nav-category">Accounts</li>
-                    <li class="nav-item">
-                        <a class="nav-link" data-bs-toggle="collapse" href="#general-pages" role="button" aria-expanded="false" aria-controls="general-pages">
-                            <i class="link-icon" data-feather="users"></i>
-                            <span class="link-title">Users</span>
-                            <i class="link-arrow" data-feather="chevron-down"></i>
-                        </a>
-                        <div class="collapse" id="general-pages">
-                            <ul class="nav sub-menu">
-                                <li class="nav-item">
-                                    <a href="" class="nav-link">Account informations</a>
-                                </li>
-                            </ul>
-                        </div>
-                    </li> 
+                    @if($user_info->role_name == 'admin')
+                        <li class="nav-item nav-category">Accounts</li>
+                            <li class="nav-item">
+                                <a class="nav-link" data-bs-toggle="collapse" href="#generalpages" role="button" aria-expanded="false" aria-controls="general-pages">
+                                    <i class="link-icon" data-feather="users"></i>
+                                    <span class="link-title">Users</span>
+                                    <i class="link-arrow" data-feather="chevron-down"></i>
+                                </a>
+                                <div class="collapse" id="generalpages">
+                                    <ul class="nav sub-menu">
+                                        <li class="nav-item">
+                                            <a href="{{route('admin-user-admin')}}" class="nav-link @if( Route::is('admin-user-admin')) active @endif">Admins</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a href="{{route('admin-user-staff')}}" class="nav-link @if( Route::is('admin-user-admin')) active @endif">Staffs</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a href="{{route('admin-user-customer')}}" class="nav-link @if( Route::is('admin-user-admin')) active @endif">Customers</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li> 
+                        </li> 
+                    @endif
                 </li>
             </ul>
         </div>
