@@ -18,26 +18,26 @@
                             <table class="table table-bordered">
                                 <thead class="thead-dark">
                                     <tr>
-                                        <th>Image</th>
-                                        <th>Product ID</th>
-                                        <th>Product Name</th>
-                                        <th>Description</th>
-                                        <th>Unit Price</th>
-                                        <th>Status</th>
-                                        <th>Action</th>
+                                        <th class="text-center font-weight">Image</th>
+                                        <th class="text-center font-weight">Product ID</th>
+                                        <th class="text-center font-weight">Product Name</th>
+                                        <th class="text-center font-weight">Description</th>
+                                        <th class="text-center">Unit Price</th>
+                                        <th class="text-center">Status</th>
+                                        <th class="text-center">Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <tr>
                                         <td>
-                                            <img src="#" alt="Product Image" class="img-thumbnail" style="width:50px height: 50px;">
+                                            <img src="public\assets\images\joe.png" class="img-fluid" alt="...">
                                         </td>
-                                        <td>Product ID</td>
-                                        <td>Product Name</td>
-                                        <td>Description</td>
-                                        <td>Unit price</td>
-                                        <td>status</td>
-                                        <td>
+                                        <td class="text-dark text-center" >012345</td>
+                                        <td class="text-dark text-center">ID lanyard</td>
+                                        <td class="text-dark text-center">Id lace</td>
+                                        <td class="text-dark text-center">Php 100.00</td>
+                                        <td class="text-dark text-center">Available</td>
+                                        <td class="text-center">
                                             <!-- Button to trigger Edit Product Modal -->
                                             <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#editProductModal">
                                                 <i class="fas fa-pencil-alt"></i> Edit
