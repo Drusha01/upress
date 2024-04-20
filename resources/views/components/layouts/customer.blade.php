@@ -9,20 +9,13 @@
         <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <title>UPRESS - Customer</title>
-        <link href="{{url('landingpage')}}/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
         <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
-        <link rel="stylesheet" href="{{url('landingpage')}}/essential.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
-
-
 
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha384-nfF0pACuL6Df1PEHsuvQa3dxj1qSfWdI6YlY8+NO1L7SdLEqdXt1sGgE4IkuPwKc" crossorigin="anonymous">
         <link rel="stylesheet" href="{{url('landingpage')}}/assets/css/fontawesome.css">
         <link rel="stylesheet" href="{{url('landingpage')}}/assets/css/templatemo-sixteen.css">
         <link rel="stylesheet" href="{{url('landingpage')}}/assets/css/owl.css">
         <link rel="shortcut icon" href="{{url('assets')}}/logo/upress-logo.png" />
-        <script src="{{url('landingpage')}}/vendor/jquery/jquery.min.js"></script>
-        <script src="{{url('landingpage')}}/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-
 
         <script src="{{url('assets')}}/vendors/core/core.js"></script>
         <script src="{{url('assets')}}/vendors/flatpickr/flatpickr.min.js"></script>
@@ -30,8 +23,7 @@
         <script src="{{url('assets')}}/vendors/feather-icons/feather.min.js"></script>
         <script src="{{url('assets')}}/js/template.js"></script>
 
-     
-        <link rel="stylesheet" href="{{url('assets')}}/css/demo2/style.css">
+        <link href="{{url('landingpage')}}/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
 
     </head>
