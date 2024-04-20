@@ -46,9 +46,6 @@
                                                 </div>
                                             </div>
                                             <div class="row mx-2">
-                                                <p>Stocks: {{ $value->product_quantity }}</p>
-                                            </div>
-                                            <div class="row mx-2">
                                                 <p>Status: @if($value->is_active ) Available @else Unavailable @endif</p>
                                             </div>
                                             <div class="row mx-2" style="height:50px">
