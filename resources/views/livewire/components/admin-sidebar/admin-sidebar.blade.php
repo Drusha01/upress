@@ -30,7 +30,7 @@
                             <span class="link-title">Stock</span>
                             <i class="link-arrow" data-feather="chevron-down"></i>
                         </a>
-                        <div class="collapse" id="stockin">
+                        <div wire:ignore.self class="collapse" id="stockin">
                             <ul class="nav sub-menu">
                                 <li class="nav-item">
                                     <a href="{{ route('admin-stocklist') }}" class="nav-link">Stock List</a>
