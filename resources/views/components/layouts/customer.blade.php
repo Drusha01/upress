@@ -11,7 +11,6 @@
         <title>UPRESS - Customer</title>
         <link href="{{url('landingpage')}}/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
         <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
-        <link rel="stylesheet" href="{{url('landingpage')}}/essential.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
 
 
 
@@ -20,8 +19,8 @@
         <link rel="stylesheet" href="{{url('landingpage')}}/assets/css/templatemo-sixteen.css">
         <link rel="stylesheet" href="{{url('landingpage')}}/assets/css/owl.css">
         <link rel="shortcut icon" href="{{url('assets')}}/logo/upress-logo.png" />
-        <script src="{{url('landingpage')}}/vendor/jquery/jquery.min.js"></script>
-        <script src="{{url('landingpage')}}/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+        <!-- <script src="{{url('landingpage')}}/vendor/jquery/jquery.min.js"></script>
+        <script src="{{url('landingpage')}}/vendor/bootstrap/js/bootstrap.bundle.min.js"></script> -->
 
 
         <script src="{{url('assets')}}/vendors/core/core.js"></script>
@@ -31,7 +30,6 @@
         <script src="{{url('assets')}}/js/template.js"></script>
 
      
-        <link rel="stylesheet" href="{{url('assets')}}/css/demo2/style.css">
 
 
     </head>
