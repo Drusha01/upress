@@ -11,6 +11,7 @@ use App\Http\Middleware\Logout;
 use App\Http\Middleware\Unauthenticated;
 use App\Http\Middleware\CheckRoles;
 use App\Http\Middleware\isStaff;
+use App\Http\Middleware\isCustomer;
 
 // authentications
 use App\Livewire\Authentication\Login;
@@ -18,22 +19,33 @@ use App\Livewire\Authentication\Logout as AuthenticationLogout;
 
 // admin
 use App\Livewire\Admin\Dashboard\Dashboard as AdminDashboard;
-use App\Livewire\Admin\Orders\ProductOrders\ProductOrders;
-use App\Livewire\Admin\Products\Color\Color as ProductColor;
-use App\Livewire\Admin\Products\Productlist\Productlist;
-use App\Livewire\Admin\Products\Sizes\Sizes as ProductSizes;
+use App\Livewire\Admin\Orders\ProductOrders\ProductOrders  as AdminProductOrders; 
+use App\Livewire\Admin\Products\Color\Color as AdminProductColor;
+use App\Livewire\Admin\Products\Productlist\Productlist  as AdminProductlist;
+use App\Livewire\Admin\Products\Sizes\Sizes as AdminProductSizes;
 use App\Livewire\Admin\Profile\Profile\Profile as AdminProfile;
-use App\Livewire\Admin\Services\Approvedservices\Approvedservices;
-use App\Livewire\Admin\Services\Completedservices\Completedservices;
-use App\Livewire\Admin\Services\Pendingservices\Pendingservices;
-use App\Livewire\Admin\Services\Servicelist\Servicelist;
-use App\Livewire\Admin\Stocks\Stocklist\Stocklist;
-use App\Livewire\Admin\Stocks\StockInRecords\StockInRecords;
-use App\Livewire\Admin\Stocks\StockOutRecords\StockOutRecords;
-use App\Livewire\Admin\Transactions\Transactionrecords\Transactionrecords;
+use App\Livewire\Admin\Services\Approvedservices\Approvedservices as AdminApprovedservices;
+use App\Livewire\Admin\Services\Completedservices\Completedservices as AdminCompletedservices;
+use App\Livewire\Admin\Services\Pendingservices\Pendingservices as AdminPendingservices;
+use App\Livewire\Admin\Services\Servicelist\Servicelist as AdminServicelist;
+use App\Livewire\Admin\Stocks\Stocklist\Stocklist as AdminStocklist;
+use App\Livewire\Admin\Stocks\StockInRecords\StockInRecords as AdminStockInRecords;
+use App\Livewire\Admin\Stocks\StockOutRecords\StockOutRecords as AdminStockOutRecords;
+use App\Livewire\Admin\Transactions\Transactionrecords\Transactionrecords as AdminTransactionrecords;
 use App\Livewire\Admin\Users\Admin\Admin as AdminUsers;
 use App\Livewire\Admin\Users\Customers\Customers as AdminCustomers;
 use App\Livewire\Admin\Users\Staff\Staff as AdminStaff;
+
+// customer
+use App\Livewire\Customer\Cart\Cart as CustomerCart;
+use App\Livewire\Customer\Contact\Contact as CustomerContact;
+use App\Livewire\Customer\Dashboard\Dashboard as CustomerDashboard;
+use App\Livewire\Customer\OrderList\OrderList as CustomerOrderList;
+use App\Livewire\Customer\Products\Products as CustomerProducts;
+use App\Livewire\Customer\Profile\Profile as CustomerProfile;
+use App\Livewire\Customer\Services\Services as CustomerServices;
+use App\Livewire\Customer\TrackOrder\TrackOrder as CustomerTrackOrder;
+
 // pages
 use App\Livewire\Page\About\About;
 use App\Livewire\Page\Contact\Contact;
@@ -65,14 +77,14 @@ Route::middleware([Unauthenticated::class,IsAdmin::class])->group(function () {
         Route::get('profile', AdminProfile::class)->name('admin-profile');
 
         Route::prefix('stock')->group(function () {
-            Route::get('stocklist', Stocklist::class)->name('admin-stocklist'); 
-            Route::get('stockinrecords', StockInRecords::class)->name('admin-stock-in-records'); 
-            Route::get('stockoutrecords', StockOutRecords::class)->name('admin-stock-out-records'); 
+            Route::get('stocklist', AdminStocklist::class)->name('admin-stocklist'); 
+            Route::get('stockinrecords', AdminStockInRecords::class)->name('admin-stock-in-records'); 
+            Route::get('stockoutrecords', AdminStockOutRecords::class)->name('admin-stock-out-records'); 
         });
         Route::prefix('products')->group(function () {
-            Route::get('product-list', Productlist::class)->name('admin-product-list'); 
-            Route::get('product-size', ProductSizes::class)->name('admin-product-size'); 
-            Route::get('product-color', ProductColor::class)->name('admin-product-color'); 
+            Route::get('product-list', AdminProductlist::class)->name('admin-product-list'); 
+            Route::get('product-size', AdminProductSizes::class)->name('admin-product-size'); 
+            Route::get('product-color', AdminProductColor::class)->name('admin-product-color'); 
         });
         Route::prefix('user')->group(function () {
             Route::get('adminusers', AdminUsers::class)->name('admin-user-admin');
@@ -90,4 +102,16 @@ Route::middleware([Unauthenticated::class,isStaff::class])->group(function () {
     });
 });
 
+Route::middleware([Unauthenticated::class,isCustomer::class])->group(function () {
+    Route::prefix('customer')->group(function () {
+        Route::get('cart', CustomerCart::class)->name('customer-cart');
+        Route::get('dashboard', CustomerDashboard::class)->name('customer-dashboard');
+        Route::get('orderlist', CustomerOrderList::class)->name('customer-order-list');
+        Route::get('products', CustomerProducts::class)->name('customer-product');
+        Route::get('profile', CustomerProfile::class)->name('customer-profile');
+        Route::get('services', CustomerServices::class)->name('customer-services');
+        Route::get('trackorder', CustomerTrackOrder::class)->name('customer-track-order');
+        Route::get('/contact',CustomerContact::class)->name('customer-contact');
+    });
+});
 
