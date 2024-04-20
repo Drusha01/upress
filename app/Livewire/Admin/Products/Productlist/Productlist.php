@@ -19,6 +19,7 @@ class Productlist extends Component
         'name' => NULL,
         'description' => NULL,
         'image' => NULL,
+        'price' => NULL,
         'error' => NULL,
     ];
     public function render()
@@ -90,6 +91,7 @@ class Productlist extends Component
             'name' => NULL,
             'description' => NULL,
             'image' => NULL,
+            'price' => NULL,
             'error' => NULL,
         ];
         $this->dispatch('openModal',$modal_id);
@@ -110,6 +112,10 @@ class Productlist extends Component
             $this->product['error'] = "Please input name";
             return;
         }
+        if(strlen($this->product['price'])<=0){
+            $this->product['error'] = "Please input valid price";
+            return;
+        }
         if(DB::table('products')
             ->where('name','=',$this->product['name'])
             ->first()){
@@ -128,6 +134,7 @@ class Productlist extends Component
                 'code' => $this->product['code'],
                 'name' => $this->product['name'],
                 'description' =>  $this->product['description'] ,
+                'price' => $this->product['price'],
                 'image' =>  $product['image'],
                 ])){
             $this->dispatch('closeModal',$modal_id);
@@ -143,6 +150,7 @@ class Productlist extends Component
                     'code' => $product->code,
                     'name' => $product->name,
                     'description' => $product->description,
+                    'price' => $product->price,
                     'image' => NULL,
                     'error' => NULL,
                 ];
@@ -201,6 +209,7 @@ class Productlist extends Component
             'code' => $this->product['code'],
             'name' => $this->product['name'],
             'description' =>  $this->product['description'] ,
+            'price' => $this->product['price'],
             ])){
         }
             $this->dispatch('closeModal',$modal_id);

@@ -10,7 +10,7 @@
 
                         <div class="d-flex justify-content-end mb-4">
                             <button type="button" class="btn btn-success me-2" wire:click="add_product_default('addModalToggler')"> 
-                                Add
+                                Add Product
                             </button>
                             <button class="btn btn-success me-md-2" data-bs-toggle="modal" data-bs-target="#addModal" id="addModalToggler" style="display:none">Add</button>
                             <button class="btn btn-success me-md-2" data-bs-toggle="modal" data-bs-target="#editModal" id="editModalToggler" style="display:none">Add</button>
@@ -27,6 +27,7 @@
                                         <th>Product Code</th>
                                         <th>Product Name</th>
                                         <th>Description</th>
+                                        <th>Price</th>
                                         <th>Status</th>
                                         <th class="text-center">Action</th>
                                     </tr>
@@ -41,6 +42,7 @@
                                             <td>{{$value->code}}</td>
                                             <td>{{$value->name}}</td>
                                             <td>{{$value->description}}</td>
+                                            <td>{{$value->price}}</td>
                                             <td>@if($value->is_active) Available @else Unavailable @endif</td>
                                             <td class="text-center">
                                                 <button type="button" class="btn btn-primary btn-sm"  wire:click="edit({{$value->id}},'editModalToggler')">
@@ -106,6 +108,10 @@
                             <label for="product_name" class="form-label text-black">Product Name</label>
                             <input type="text" wire:model="product.name" class="form-control" id="product_name" name="product_name" placeholder="Product name"  required>
                         </div>
+                        <div class="mb-3">
+                            <label for="productPrice" class="form-label text-black">Product Price:</label>
+                            <input type="number" min="0.01" step="0.01" class="form-control"  wire:model="product.price" id="productPrice" name="productPrice" required>
+                        </div>
                         <div class="mb-2">
                             <label for="description" class="form-label text-black">Description</label>
                             <textarea class="form-control" wire:model="product.description" id="description" name="description" placeholder="Product description" rows="3"></textarea>
@@ -148,6 +154,10 @@
                         <div class="mb-2">
                             <label for="product_name" class="form-label text-black">Product Name</label>
                             <input type="text" wire:model="product.name" class="form-control" id="product_name" name="product_name" placeholder="Product name"  required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="productPrice" class="form-label text-black">Product Price:</label>
+                            <input type="number" min="0.01" step="0.01" class="form-control"  wire:model="product.price" id="productPrice" name="productPrice" required>
                         </div>
                         <div class="mb-2">
                             <label for="description" class="form-label text-black">Description</label>
