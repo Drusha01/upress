@@ -47,20 +47,20 @@
                             </a>
                             <a href="javascript:;" class="dropdown-item d-flex align-items-center py-2">
                                 <div class="wd-30 ht-30 d-flex align-items-center justify-content-center bg-primary rounded-circle me-3">
-                                                        <i class="icon-sm text-white" data-feather="layers"></i>
+                                    <i class="icon-sm text-white" data-feather="layers"></i>
                                 </div>
                                 <div class="flex-grow-1 me-2">
-                                                        <p>Apps are ready for update</p>
-                                                        <p class="tx-12 text-muted">5 hrs ago</p>
+                                    <p>Apps are ready for update</p>
+                                    <p class="tx-12 text-muted">5 hrs ago</p>
                                 </div>	
                             </a>
                             <a href="javascript:;" class="dropdown-item d-flex align-items-center py-2">
                                 <div class="wd-30 ht-30 d-flex align-items-center justify-content-center bg-primary rounded-circle me-3">
-                                                        <i class="icon-sm text-white" data-feather="download"></i>
+                                    <i class="icon-sm text-white" data-feather="download"></i>
                                 </div>
                                 <div class="flex-grow-1 me-2">
-                                                        <p>Download completed</p>
-                                                        <p class="tx-12 text-muted">6 hrs ago</p>
+                                    <p>Download completed</p>
+                                    <p class="tx-12 text-muted">6 hrs ago</p>
                                 </div>	
                             </a>
                         </div>
@@ -85,7 +85,7 @@
                         </div>
                         <ul class="list-unstyled p-1">
                             <li class="dropdown-item py-2">
-                                <a href="route('profile.edit')" class="text-body ms-0">
+                                <a href="{{ route('admin-profile') }}" class="text-body ms-0">
                                 <i class="me-2 icon-md" data-feather="user"></i>
                                 <span>Profile</span>
                                 </a>
