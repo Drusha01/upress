@@ -70,59 +70,29 @@
                             @endforeach
                         </div>
                     </div>
-                    <button class="btn btn-success me-md-2" data-bs-toggle="modal" data-bs-target="#cartModal1" id="cartModalToggler" style="display:">Add</button>
+
+                    <button class="btn btn-success me-md-2" data-bs-toggle="modal" data-bs-target="#cartModal" id="cartModalToggler" style="display:none">Add</button>
                     
-                    <div>
-                        <div wire:ignore.self class="modal fade" id="cartModal" tabindex="-1" aria-labelledby="cartModalLabel" aria-hidden="true">
-                            <div class="modal-dialog modal-lg">
-                                <div class="modal-content" style="background-color: white; color: black;">
-                                    <span class="close" onclick="closeModal()">&times;</span>
-                                    <h2>Cart</h2>
-                                    <form >
-                                        <div class="form-row">
-                                            <div class="col-md-4 form-group">
-                                                <label for="colorSelect">Select Color:</label>
-                                                <select id="colorSelect" name="color" class="form-control">
-                                                    <option value="red">Red</option>
-                                                    <option value="blue">Blue</option>
-                                                    <option value="green">Green</option>
-                                                    <option value="other">Other</option>
-                                                </select>
-                                            </div>
-                                            <div class="col-md-4 form-group">
-                                                <label for="quantityInput">Quantity:</label>
-                                                <input type="number" id="quantityInput" name="quantity" value="1" min="1" class="form-control">
-                                            </div>
-                                            <div class="col-md-4 form-group">
-                                                <label for="totalPrice">Total Price:</label>
-                                                <input type="text" id="totalPrice" name="total_amount" class="form-control" readonly>
-                                            </div>
-                                        </div>
-                                        <button type="submit" class="btn btn-primary">Add to Cart</button>
-                                    </form>
+                    <div wire:ignore.self class="modal fade" id="cartModal" tabindex="-1" aria-labelledby="cartModalLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-lg">
+                            <div class="modal-content" style="background-color: white; color: black;">
+                                <div class="modal-header align-middle">
+                                    <h5>Cart</h5>
+                                    <span class="btn btn" data-bs-toggle="modal">&times;</span>
                                 </div>
-                            </div>
-                        </div>
-
-                        <div wire:ignore.self class="modal fade" id="cartModal1" tabindex="-1" aria-labelledby="addModalLabel" aria-hidden="true">
-                            <div class="modal-dialog modal-lg">
-                                <div class="modal-content" style="background-color: white; color: black;">
-                                    <form wire:submit.prevent="save_add_product('addModalToggler')">
-
-                                        <div class="modal-header bg-dark">
-                                            <h5 class="modal-title text-white" id="addModalLabel">Add Product</h5>
-                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                        </div>
-
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                            <button type="submit" class="btn btn-primary">Add</button>
-                                        </div>
-                                    </form>
+                                <div class="modal-body bg-white">
+                                    <div class="col-md-12 text-center">
+                                        <p class="text-danger text-center">Are you sure you want to deactivate this?</p>
+                                    </div>
+                                </div>
+                                <div class="modal-footer bg-white">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                    <button type="submit" class="btn btn-primary">Save</button>
                                 </div>
                             </div>
                         </div>
                     </div>
+                        
                 </div>
             </div>
             <div class="row">
