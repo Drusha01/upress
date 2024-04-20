@@ -96,7 +96,7 @@
                         <div class="collapse" id="orders">
                             <ul class="nav sub-menu">
                             <li class="nav-item">
-                                <a href="" class="nav-link">Product Ordering</a>
+                                <a href="{{ route('admin-product-orders') }}" class="nav-link">Product Ordering</a>
                             </li>
                             </ul>
                         </div>
@@ -110,7 +110,7 @@
                         <div class="collapse" id="transaction">
                             <ul class="nav sub-menu">
                                 <li class="nav-item">
-                                    <a href="" class="nav-link">Transaction Records</a>
+                                    <a href="{{ route('admin-transactionrecords') }}" class="nav-link">Transaction Records</a>
                                 </li>
                             </ul>
                         </div>

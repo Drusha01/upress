@@ -8,6 +8,7 @@ class ProductOrders extends Component
 {
     public function render()
     {
-        return view('livewire.admin.orders.product-orders.product-orders');
+        return view('livewire.admin.orders.product-orders.product-orders')
+        ->layout('components.layouts.admin');
     }
 }

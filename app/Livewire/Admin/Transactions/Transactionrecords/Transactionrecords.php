@@ -8,6 +8,7 @@ class Transactionrecords extends Component
 {
     public function render()
     {
-        return view('livewire.admin.transactions.transactionrecords.transactionrecords');
+        return view('livewire.admin.transactions.transactionrecords.transactionrecords')
+        ->layout('components.layouts.admin');
     }
 }

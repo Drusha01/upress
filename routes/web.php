@@ -91,8 +91,19 @@ Route::middleware([Unauthenticated::class,IsAdmin::class])->group(function () {
             Route::get('staffusers', AdminStaff::class)->name('admin-user-staff');
             Route::get('customerusers', AdminCustomers::class)->name('admin-user-customer');
         });
+
+        Route::prefix('transactions')->group(function () {
+            Route::get('transactionrecord',AdminTransactionrecords::class)->name('admin-transactionrecords');
+        });
+
+        Route::prefix('orders')->group(function () {
+            Route::get('product-orders',AdminProductOrders::class)->name('admin-product-orders');
+        });
+
     });
 });
+
+
 
 Route::middleware([Unauthenticated::class,isStaff::class])->group(function () {
     Route::prefix('staff')->group(function () {
