@@ -37,7 +37,7 @@
                                                     Login
                                                 </button>
                                             </div>
-                                            <a href="{{route('homepage-homepage')}}" class="d-block mt-3 text-muted">Homepage</a>
+                                            <a href="{{route('page-homepage')}}" class="d-block mt-3 text-muted">Homepage</a>
                                         </form>
                                     </div>
                                 </div>

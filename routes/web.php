@@ -35,10 +35,21 @@ use App\Livewire\Admin\Users\Admin\Admin as AdminUsers;
 use App\Livewire\Admin\Users\Customers\Customers as AdminCustomers;
 use App\Livewire\Admin\Users\Staff\Staff as AdminStaff;
 // pages
+use App\Livewire\Page\About\About;
+use App\Livewire\Page\Contact\Contact;
 use App\Livewire\Page\Homepage\Homepage; 
+use App\Livewire\Page\Products\Products;
+use App\Livewire\Page\Services\Services;
+use App\Livewire\Page\LatestProduct\LatestProduct;
 
 Route::middleware([CheckRoles::class])->group(function () {
-    Route::get('/',Homepage::class)->name('homepage-homepage');
+    Route::get('/about',About::class)->name('page-about');
+    Route::get('/contact',Contact::class)->name('page-contact');
+    Route::get('/',Homepage::class)->name('page-homepage');
+    Route::get('/products',Products::class)->name('page-products');
+    Route::get('/services',Services::class)->name('page-services');
+    Route::get('/product/latest',LatestProduct::class)->name('page-latest-product');
+    
 });
 
 Route::get('/logout', AuthenticationLogout::class)->middleware(Logout::class)->name('logout');

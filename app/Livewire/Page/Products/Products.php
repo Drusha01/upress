@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire\Page\Homepage;
+namespace App\Livewire\Page\Products;
 
 use Livewire\Component;
 use Illuminate\Http\Request;
@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Livewire\WithPagination;
 
-class Homepage extends Component
+class Products extends Component
 {
     public function render()
     {
@@ -32,9 +32,9 @@ class Homepage extends Component
         ->join('product_sizes as psz','psz.id','product_size_id')
         ->join('product_colors as pc','pc.id','product_color_id')
         ->paginate(10);
-        return view('livewire.page.homepage.homepage',[
-            'stocks_data'=>$stocks_data
-        ])        
+        return view('livewire.page.products.products',[
+            'stocks_data'=> $stocks_data
+        ])
         ->layout('components.layouts.page');
     }
 }
