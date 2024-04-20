@@ -30,8 +30,7 @@
                                         <th>Product Size</th>
                                         <th>Product Color</th>
                                         <th>Product Qty</th>
-                                        <th>Product Price</th>
-                                        <th>Status</th>
+                                        <th class="text-center">Status</th>
                                         <th class="text-center">Action</th>
                                     </tr>
                                 </thead>
@@ -47,8 +46,7 @@
                                             <td class="align-middle">{{$value->product_size}}</td>
                                             <td class="align-middle">{{$value->product_color}}</td>
                                             <td class="align-middle">{{$value->product_quantity}}</td>
-                                            <td class="align-middle">{{$value->product_price}}</td>
-                                            <td class="align-middle">@if($value->is_active) Available @else Unavailable @endif</td>
+                                            <td class="align-middle text-center">@if($value->is_active) Available @else Unavailable @endif</td>
                                             <td class="text-center align-middle">
                                                 <button type="button" class="btn btn-primary btn-sm"  wire:click="edit({{$value->id}},'editModalToggler')">
                                                     <i class="fas fa-pencil-alt"></i> Edit
@@ -148,10 +146,6 @@
                         <div class="mb-3">
                             <label for="quantity" class="form-label text-black">Quantity:</label>
                             <input type="number" min="1" max="1000" step="1" wire:model="product_stock.product_quantity" class="form-control bg-white" id="quantity" name="quantity" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="productPrice" class="form-label text-black">Product Price:</label>
-                            <input type="number" min="0.01" step="0.01" class="form-control"  wire:model="product_stock.product_price" id="productPrice" name="productPrice" required>
                         </div>
                         @if($product_stock['error'])
                         <div class="col-md-12 mx-3">
@@ -275,10 +269,6 @@
                             <label for="quantity" class="form-label text-black">Quantity:</label>
                             <input  type="number" min="{{$product_stock['product_quantity']}}" max="1000" step="1" wire:model="product_stock.product_quantity" class="form-control bg-white" id="quantity" name="quantity" required>
                         </div>
-                        <div class="mb-3">
-                            <label for="productPrice disabled" class="form-label text-black">Product Price:</label>
-                            <input disabled type="number" min="0.01" step="0.01" class="form-control bg-white"  wire:model="product_stock.product_price" id="productPrice" name="productPrice" required>
-                        </div>
                         @if($product_stock['error'])
                         <div class="col-md-12 mx-3">
                             <p style ="color:red">Error: {{$product_stock['error']}}</p>
@@ -328,10 +318,6 @@
                         <div class="mb-3">
                             <label for="quantity" class="form-label text-black">Quantity:</label>
                             <input type="number" min="0" max="{{$product_stock['product_quantity']}}" step="1" wire:model="product_stock.product_quantity" class="form-control bg-white" id="quantity" name="quantity" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="productPrice disabled" class="form-label text-black">Product Price:</label>
-                            <input disabled type="number" min="0.01" step="0.01" class="form-control bg-white"  wire:model="product_stock.product_price" id="productPrice" name="productPrice" required>
                         </div>
                         @if($product_stock['error'])
                         <div class="col-md-12 mx-3">

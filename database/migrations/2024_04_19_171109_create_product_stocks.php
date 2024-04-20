@@ -17,7 +17,6 @@ return new class extends Migration
             product_color_id INT,
             product_size_id INT,
             quantity INT,
-            price DOUBLE NOT NULL,
             is_active BOOL DEFAULT 1,
             date_created DATETIME DEFAULT CURRENT_TIMESTAMP,
             date_updated DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP

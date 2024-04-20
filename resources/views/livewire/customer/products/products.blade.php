@@ -46,9 +46,6 @@
                                                 </div>
                                             </div>
                                             <div class="row mx-2">
-                                                <p>Stocks: {{ $value->product_quantity }}</p>
-                                            </div>
-                                            <div class="row mx-2">
                                                 <p>Status: @if($value->is_active ) Available @else Unavailable @endif</p>
                                             </div>
                                             <div class="row mx-2" style="height:50px">
@@ -59,7 +56,7 @@
                                                 @endif
                                             </div>
                                             <div class="row mx-2 mt-4 ">
-                                                <button class="btn add-to-cart" >Add Cart</button>
+                                                <button class="btn add-to-cart" wire:click="add_to_cart({{$value->id}},'cartModalToggler')" >Add Cart</button>
                                             </div>
                                         </div>
                                     </div>

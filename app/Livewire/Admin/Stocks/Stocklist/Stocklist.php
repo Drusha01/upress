@@ -21,7 +21,6 @@ class Stocklist extends Component
         'product_size' => NULL,
         'product_color_id' => NULL,
         'product_quantity' => 1,
-        'product_price' => NULL,
         'error' => NULL,
     ];
     public $user_id = NULL;
@@ -56,7 +55,6 @@ class Stocklist extends Component
                 'product_color_id' ,
                 'pc.name as product_color' ,
                 'ps.quantity as product_quantity' ,
-                'ps.price as product_price' ,
                 'ps.is_active',
             )
             ->join('products as p','p.id','product_id')
@@ -82,7 +80,6 @@ class Stocklist extends Component
             'product_color_id' => NULL,
             'product_color' => NULL,
             'product_quantity' => NULL,
-            'product_price' => NULL,
             'error' => NULL,
         ];
         $this->dispatch('openModal',$modal_id);
@@ -147,7 +144,6 @@ class Stocklist extends Component
                 'product_color_id' => $this->product_stock['product_color_id'],
                 'product_size_id' => $this->product_stock['product_size_id'],
                 'quantity' => $this->product_stock['product_quantity'],
-                'price' => $this->product_stock['product_price'],
         ])){
             $product_stock = DB::table('product_stocks')
                 ->where('product_id','=',$this->product_stock['product_id'])
@@ -181,7 +177,6 @@ class Stocklist extends Component
                 'product_color_id' ,
                 'pc.name as product_color' ,
                 'ps.quantity as product_quantity' ,
-                'ps.price as product_price' ,
                 'ps.is_active',
             )
             ->join('products as p','p.id','product_id')
@@ -199,7 +194,6 @@ class Stocklist extends Component
                 'product_size' => $product_stock->product_size,
                 'product_color_id' => $product_stock->product_color_id,
                 'product_quantity' => $product_stock->product_quantity,
-                'product_price' => $product_stock->product_price,
                 'error' => NULL,
             ];
             $this->dispatch('openModal',$modal_id);
@@ -242,7 +236,6 @@ class Stocklist extends Component
                 'product_id' => $this->product_stock['product_id'],
                 'product_color_id' => $this->product_stock['product_color_id'],
                 'product_size_id' => $this->product_stock['product_size_id'],
-                'price' => $this->product_stock['product_price'],
         ])){
 
         }
@@ -279,7 +272,6 @@ class Stocklist extends Component
             'product_color_id' ,
             'pc.name as product_color' ,
             'ps.quantity as product_quantity' ,
-            'ps.price as product_price' ,
             'ps.is_active',
         )
         ->join('products as p','p.id','product_id')
@@ -322,7 +314,6 @@ class Stocklist extends Component
             'product_color_id' ,
             'pc.name as product_color' ,
             'ps.quantity as product_quantity' ,
-            'ps.price as product_price' ,
             'ps.is_active',
         )
         ->join('products as p','p.id','product_id')
@@ -355,6 +346,5 @@ class Stocklist extends Component
             }
         }
         $this->dispatch('closeModal',$modal_id);
-
     }
 }
