@@ -4,11 +4,11 @@
             <div class="col-md-12 grid-margin">
                 <div class="card border rounded">
                     <div class="card-body">
-                        <h4 class="mb-2">Pending Services</h4>
-                        <div class="d-flex justify-content-end mb-4">
-                            <button type="button" class="btn btn-success float-end mb-2" data-bs-toggle="modal" data-bs-target="#addServiceModal">
+                        <h4 class="mb-1">Pending Services</h4>
+                        <div class="d-flex justify-content-end mb-1">
+                            <!-- <button type="button" class="btn btn-success float-end mb-2" data-bs-toggle="modal" data-bs-target="#addServiceModal">
                                 Add Service
-                            </button>
+                            </button> -->
                         </div>
                         <div class="table-responsive">
                             <table class="table table-bordered text-black">

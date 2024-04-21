@@ -5,8 +5,8 @@
                 <div class="card border rounded">
                    
                     <div class="card-body">
-                        <h4 class="mb-2">Service List</h4>
-                        <div class="d-flex justify-content-end mb-4">
+                        <h4 class="mb-1">Service List</h4>
+                        <div class="d-flex justify-content-end mb-2">
                             <button type="button" class="btn btn-success float-end mb-2" data-bs-toggle="modal" data-bs-target="#addServiceModal">
                                 Add Service
                             </button>
