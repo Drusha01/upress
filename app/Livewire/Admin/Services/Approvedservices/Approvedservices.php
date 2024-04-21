@@ -8,6 +8,7 @@ class Approvedservices extends Component
 {
     public function render()
     {
-        return view('livewire.admin.services.approvedservices.approvedservices');
+        return view('livewire.admin.services.approvedservices.approvedservices')
+        ->layout('components.layouts.admin');
     }
 }

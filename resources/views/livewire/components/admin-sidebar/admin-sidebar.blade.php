@@ -79,7 +79,7 @@
                                     <a href="{{route('admin-pendingservices')}}"class="nav-link">Pending Services</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="#" class="nav-link">Approved Services</a>
+                                    <a href="{{route ('admin-approvedservices')}}" class="nav-link">Approved Services</a>
                                 </li>
                                 <li class="nav-item">
                                     <a href="" class="nav-link">Completed Services</a>
