@@ -74,20 +74,20 @@
                     <button class="btn btn-success me-md-2" data-bs-toggle="modal" data-bs-target="#cartModal" id="cartModalToggler" style="display:none">Add</button>
                     
                     <div wire:ignore.self class="modal fade" id="cartModal" tabindex="-1" aria-labelledby="cartModalLabel" aria-hidden="true">
-                        <div class="modal-dialog modal-lg">
-                            <div class="modal-content" style="background-color: white; color: black;">
-                                <div class="modal-header align-middle">
-                                    <h5>Cart</h5>
-                                    <span class="btn btn" data-bs-toggle="modal">&times;</span>
-                                </div>
+                        <div class="modal-dialog modal-md">
+                            <div class="modal-content">
+                                <div class="col-md-12 text-center">
+                                    <span class="btn btn" data-bs-toggle="modal" style="display: flex; justify-content:end; font-size:32px">&times;</span> 
+                                    <svg width="120px" height="120px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M12 16.99V17M12 7V14M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z" stroke="#8c8787" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path> </g></svg>
+                                <div>
                                 <div class="modal-body bg-white">
                                     <div class="col-md-12 text-center">
-                                        <p class="text-danger text-center">Are you sure you want to deactivate this?</p>
+                                        <h5 class="text-danger text-center">Are you sure you want to deactivate this?</h5>
                                     </div>
                                 </div>
-                                <div class="modal-footer bg-white">
-                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                    <button type="submit" class="btn btn-primary">Save</button>
+                                <div class="modal-footer bg-white" style="justify-content: center;">
+                                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal" style="border-radius: 8px">Yes, Proceed</button>
+                                    <button type="submit" class="btn btn-secondary" style="border-radius: 8px">No, Cancel</button>
                                 </div>
                             </div>
                         </div>
