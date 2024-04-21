@@ -74,7 +74,7 @@
                 <div class="modal-body bg-white text-black">
                     <div class="container-fluid">
                         <!-- Header Section -->
-                        <div class="row justify-content-center align-items-center mb-4">
+                        <div class="row justify-content-center align-items-center mb-4  border-bottom">
                             <!-- University Logo 1 -->
                             <div class="col-6 col-md-3 text-center">
                                 <img class="img-fluid rounded-circle mb-2" src="{{url('assets')}}/logo/wmsu-logo.png" alt="University Logo" style="max-width: 100px;">
