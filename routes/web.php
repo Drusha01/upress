@@ -104,6 +104,7 @@ Route::middleware([Unauthenticated::class,IsAdmin::class])->group(function () {
             Route::get('servicelist',AdminServicelist::class)->name('admin-servicelist');
             Route::get('pendingservices',AdminPendingservices::class)->name('admin-pendingservices');
             Route::get('approvedservices',AdminApprovedservices::class)->name('admin-approvedservices');
+            Route::get('completedservices',AdminCompletedservices::class)->name('admin-completedservices');
         });
 
     });
