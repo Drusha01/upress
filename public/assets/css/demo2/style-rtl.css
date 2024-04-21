@@ -21129,8 +21129,8 @@ div.tox .btn-group-lg > .btn-icon-text.tox-button .btn-icon-append,
 }
 .nav.nav-tabs .nav-item .nav-link.active {
   border-color: #172340 #172340 #0c1427;
-  color: #6571ff;
-  background: #0c1427;
+  /* color: #6571ff; */
+  /* background: #0c1427; */
 }
 .nav.nav-tabs .nav-item .nav-link.disabled {
   background-color: transparent;

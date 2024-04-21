@@ -6,8 +6,10 @@
 					<div class="col-md-8 col-xl-6 mx-auto">
 						<div class="card-register">
 							<div class="row">
+                                <!-- LOGIN PICTURE -->
                                 <div class="col-md-4 pe-md-0">
                                     <div class="auth-side-wrapper">
+                                        <!-- <img class="" src="{{url('assets')}}/logo/wmsu-logo.png" alt="University Logo"> -->
                                     </div>
                                 </div>
                                 <div class="col-md-8 ps-md-0">
