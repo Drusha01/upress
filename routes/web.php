@@ -35,6 +35,7 @@ use App\Livewire\Admin\Transactions\Transactionrecords\Transactionrecords as Adm
 use App\Livewire\Admin\Users\Admin\Admin as AdminUsers;
 use App\Livewire\Admin\Users\Customers\Customers as AdminCustomers;
 use App\Livewire\Admin\Users\Staff\Staff as AdminStaff;
+use App\Livewire\Admin\Orders\Revieworders\Revieworders as AdminRevieworders;
 
 // customer
 use App\Livewire\Customer\Cart\Cart as CustomerCart;
@@ -98,6 +99,7 @@ Route::middleware([Unauthenticated::class,IsAdmin::class])->group(function () {
 
         Route::prefix('orders')->group(function () {
             Route::get('product-orders',AdminProductOrders::class)->name('admin-product-orders');
+            Route::get('revieworders',AdminRevieworders::class)->name('admin-revieworders');
         });
 
         Route::prefix('services')->group(function () {

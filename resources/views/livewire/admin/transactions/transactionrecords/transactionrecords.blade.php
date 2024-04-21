@@ -74,10 +74,10 @@
                 <div class="modal-body bg-white text-black">
                     <div class="container-fluid">
                         <!-- Header Section -->
-                        <div class="row justify-content-center align-items-center mb-4">
+                        <div class="row justify-content-center align-items-center mb-4  border-bottom">
                             <!-- University Logo 1 -->
                             <div class="col-6 col-md-3 text-center">
-                                <img class="img-fluid rounded-circle mb-2" src="../landingpage/assets/images/wmsu.png" alt="University Logo" style="max-width: 100px;">
+                                <img class="img-fluid rounded-circle mb-2" src="{{url('assets')}}/logo/wmsu-logo.png" alt="University Logo" style="max-width: 100px;">
                             </div>
 
                             <!-- University Details -->
@@ -89,7 +89,7 @@
 
                             <!-- University Logo 2 -->
                             <div class="col-6 col-md-3 text-center">
-                                <img class="img-fluid rounded-circle mb-2" src="../assets/logo/upress-logo.png" alt="University Logo" style="max-width: 100px;">
+                                <img class="img-fluid rounded-circle mb-2" src="{{url('assets')}}/logo/upress-logo.png" alt="University Logo" style="max-width: 100px;">
                             </div>
                         </div>
 
@@ -138,7 +138,7 @@
                 <div class="modal-footer bg-white text-black">
                     <a href="#" class="btn btn-primary">Download PDF</a>
                     <a href="#" class="btn btn-secondary">Print</a>
-                    <button type="button" class="btn btn-light" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-light" data-bs-dismiss="modal">Close</button>
                 </div>
             </div>
         </div>

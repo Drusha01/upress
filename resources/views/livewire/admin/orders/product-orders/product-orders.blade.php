@@ -41,18 +41,18 @@
                                     </thead>
                                     <tbody class="text-dark">
                                         <tr>
-                                            <th>1</th>
-                                            <th>Bryan Tingkasan</th>
-                                            <th>WMSU Lanyard</th>
-                                            <th>Red</th>
-                                            <th>Medium</th>
-                                            <th>Php 100.00</th>
-                                            <th>2</th>
-                                            <th>Php 200.00</th>
-                                            <th>Pending</th>
-                                            <th>January 21,2024</th>                                            
+                                            <td>1</td>
+                                            <td>Bryan Tingkasan</td>
+                                            <td>WMSU Lanyard</td>
+                                            <td>Red</td>
+                                            <td>Medium</td>
+                                            <td>Php 100.00</td>
+                                            <td>2</td>
+                                            <td>Php 200.00</td>
+                                            <td>Pending</td>
+                                            <td>January 21,2024</td>                                            
                                             <td>
-                                                <a href="{{ url('admin-order-review') }}" class="btn btn-primary">Review Order</a>
+                                                <a href="{{ route('admin-revieworders') }}" class="btn btn-primary">Review Order</a>
                                             </td>
                                         </tr>
                                      
@@ -67,10 +67,10 @@
     </div>
 
     <!-- View Transaction Modal -->
-    <div class="modal fade" id="viewTransactionModal" tabindex="-1" role="dialog" aria-labelledby="viewTransactionModalLabel" aria-hidden="true">
+    <!-- <div class="modal fade" id="viewTransactionModal" tabindex="-1" role="dialog" aria-labelledby="viewTransactionModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
-                <!-- Modal Header -->
+              
                 <div class="modal-header bg-dark text-white">
                     <h5 class="modal-title" id="viewTransactionModalLabel">Transaction Details</h5>
                     <button type="button" class="close text-light" data-dismiss="modal" aria-label="Close">
@@ -78,32 +78,32 @@
                     </button>
                 </div>
 
-                <!-- Modal Body -->
+           
                 <div class="modal-body bg-white text-black">
                     <div class="container-fluid">
-                    <!-- Header Section -->
+                  
                     <div class="row justify-content-center align-items-center mb-4">
-                        <!-- University Logo 1 -->
+                  
                         <div class="col-6 col-md-3 text-center">
                             <img class="img-fluid rounded-circle mb-2" src="../landingpage/assets/images/wmsu.png" alt="University Logo" style="max-width: 100px;">
                         </div>
 
-                        <!-- University Details -->
+                      
                         <div class="col-6 col-md-3 text-center">
                             <span>Western Mindanao State University</span><br>
                             <h5>UNIVERSITY PRESS</h5>
                             <span>Zamboanga City</span>
                         </div>
 
-                        <!-- University Logo 2 -->
+                      
                         <div class="col-6 col-md-3 text-center">
                             <img class="img-fluid rounded-circle mb-2" src="../assets/logo/upress-logo.png" alt="University Logo" style="max-width: 100px;">
                         </div>
                     </div>
 
-                        <!-- Transaction Details and Payment Proof -->
+                     
                         <div class="row">
-                            <!-- Left Column (Transaction Information) -->
+              
                             <div class="col-md-6 mt-3">
                                 <div class="mb-2">
                                     <p><strong>Order ID:</strong> 1</p>
@@ -131,7 +131,7 @@
                                 </div>
                             </div>
 
-                            <!-- Right Column (Payment Proof Image) -->
+                         
                             <div class="col-md-6 text-center">
                                 <div class="mb-0">
                                     <p><strong>Payment Proof:</strong></p>
@@ -142,7 +142,7 @@
                     </div>
                     
                 </div>
-                <!-- Modal Footer -->
+            
                 <div class="modal-footer bg-white text-black">
                     <a href="#" class="btn btn-primary">Download PDF</a>
                     <a href="#" class="btn btn-secondary">Print</a>
@@ -151,7 +151,7 @@
 
             </div>
         </div>
-    </div>
+    </div> -->
 
 </div>
 
