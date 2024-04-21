@@ -56,12 +56,68 @@
                                                 @endif
                                             </div>
                                             <div class="row mx-2 mt-4 ">
-                                                <button class="btn add-to-cart" wire:click="add_to_cart({{$value->id}},'cartModalToggler')" >Add Cart</button>
+                                                <button class="btn btn-success" wire:click="add_to_cart({{$value->id}},'cartModalToggler')" >Add Cart</button>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             @endforeach
+                        </div>
+                    </div>
+                    <button class="btn btn-success me-md-2" data-bs-toggle="modal" data-bs-target="#cartModal" id="cartModalToggler" style="display:none">Add</button>
+                    
+                    <div wire:ignore.self class="modal fade" id="cartModal" tabindex="-1" aria-labelledby="cartModalLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-md">
+                            <div class="modal-content">
+                                <div class="col-md-12 ">
+                                    <span class="btn btn" data-bs-toggle="modal" style="display: flex; justify-content:end; font-size:32px">
+                                        &times;
+                                    </span> 
+                                    <form wire:submit.prevent="save_add_to_cart('cartModalToggler')">
+                                        <div class="modal-body bg-white">
+                                            <div class="mb-3">
+                                                <h4>
+                                                    @if($current_cart['product'])
+                                                        {{$current_cart['product']->name}}
+                                                    @endif
+                                                </h4>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="productCode" class="form-label text-black">Size:</label>
+                                                <select class="form-select"  wire:model="current_cart.product_size_id" wire:change="update_product_color_details()" name="role" required id="role" aria-label="Select Role">
+                                                    <option selected value="">Select Size</option>    
+                                                    @foreach($current_cart['product_sizes'] as $key =>$value)
+                                                    <option value="{{$value->product_size_id}}">{{$value->product_size_description}}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="productCode" class="form-label text-black text-start">Color:</label>
+                                                <select class="form-select"  wire:model="current_cart.product_color_id" wire:change="update_product_size_details()" name="role" required id="role" aria-label="Select Role">
+                                                    <option selected value="">Select Color</option>    
+                                                    @foreach($current_cart['product_colors'] as $key =>$value)
+                                                    <option value="{{$value->product_color_id}}">{{$value->product_color_name}}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="quantity" class="form-label text-black">Quantity:</label>
+                                                <input type="number" wire:change="update_max_stock()" min="1" max="1000" step="1" wire:model="current_cart.quantity" class="form-control bg-white" id="quantity" name="quantity" required>
+                                            </div>
+                                            @if($current_cart['error'])
+                                                <div class="col-md-12 mx-3">
+                                                    <p style ="color:red">Error: {{$current_cart['error']}}</p>
+                                                </div>
+                                            @endif
+                                        </div>
+                                        <div class="modal-footer bg-white">
+                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" style="border-radius: 8px">Cancel</button>
+                                            <button  class="btn btn-success" type="submit" style="border-radius: 8px">Add to cart</button>
+                                        </div>
+                                    </form>
+                              
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>

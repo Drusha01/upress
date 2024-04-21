@@ -21,7 +21,7 @@ class Login extends Component
 
     public function login(Request $request){
         $data = $request->session()->all();
-        if(!isset($data['user_id'])){ 
+        if(!isset($data['id'])){ 
             $user_details = DB::table('users as u')
                 ->select(
                     'u.id',

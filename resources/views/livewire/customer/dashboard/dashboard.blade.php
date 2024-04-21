@@ -76,23 +76,57 @@
                     <div wire:ignore.self class="modal fade" id="cartModal" tabindex="-1" aria-labelledby="cartModalLabel" aria-hidden="true">
                         <div class="modal-dialog modal-md">
                             <div class="modal-content">
-                                <div class="col-md-12 text-center">
-                                    <span class="btn btn" data-bs-toggle="modal" style="display: flex; justify-content:end; font-size:32px">&times;</span> 
-                                    <svg width="120px" height="120px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M12 16.99V17M12 7V14M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z" stroke="#8c8787" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path> </g></svg>
-                                <div>
-                                <div class="modal-body bg-white">
-                                    <div class="col-md-12 text-center">
-                                        <h5 class="text-danger text-center">Are you sure you want to deactivate this?</h5>
-                                    </div>
-                                </div>
-                                <div class="modal-footer bg-white" style="justify-content: center;">
-                                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal" style="border-radius: 8px">Yes, Proceed</button>
-                                    <button type="submit" class="btn btn-secondary" style="border-radius: 8px">No, Cancel</button>
+                                <div class="col-md-12 ">
+                                    <span class="btn btn" data-bs-toggle="modal" style="display: flex; justify-content:end; font-size:32px">
+                                        &times;
+                                    </span> 
+                                    <form wire:submit.prevent="save_add_to_cart('cartModalToggler')">
+                                        <div class="modal-body bg-white">
+                                            <div class="mb-3">
+                                                <h4>
+                                                    @if($current_cart['product'])
+                                                        {{$current_cart['product']->name}}
+                                                    @endif
+                                                </h4>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="productCode" class="form-label text-black">Size:</label>
+                                                <select class="form-select"  wire:model="current_cart.product_size_id" wire:change="update_product_color_details()" name="role" required id="role" aria-label="Select Role">
+                                                    <option selected value="">Select Size</option>    
+                                                    @foreach($current_cart['product_sizes'] as $key =>$value)
+                                                    <option value="{{$value->product_size_id}}">{{$value->product_size_description}}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="productCode" class="form-label text-black text-start">Color:</label>
+                                                <select class="form-select"  wire:model="current_cart.product_color_id" wire:change="update_product_size_details()" name="role" required id="role" aria-label="Select Role">
+                                                    <option selected value="">Select Color</option>    
+                                                    @foreach($current_cart['product_colors'] as $key =>$value)
+                                                    <option value="{{$value->product_color_id}}">{{$value->product_color_name}}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="quantity" class="form-label text-black">Quantity:</label>
+                                                <input type="number" wire:change="update_max_stock()" min="1" max="1000" step="1" wire:model="current_cart.quantity" class="form-control bg-white" id="quantity" name="quantity" required>
+                                            </div>
+                                            @if($current_cart['error'])
+                                                <div class="col-md-12 mx-3">
+                                                    <p style ="color:red">Error: {{$current_cart['error']}}</p>
+                                                </div>
+                                            @endif
+                                        </div>
+                                        <div class="modal-footer bg-white">
+                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" style="border-radius: 8px">Cancel</button>
+                                            <button  class="btn btn-success" type="submit" style="border-radius: 8px">Add to cart</button>
+                                        </div>
+                                    </form>
+                              
                                 </div>
                             </div>
                         </div>
                     </div>
-                        
                 </div>
             </div>
             <div class="row">

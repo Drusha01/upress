@@ -10,9 +10,119 @@ use Livewire\WithPagination;
 
 class Cart extends Component
 {
-    public function render()
-    {
-        return view('livewire.customer.cart.cart')
+    use WithPagination;
+    public $customer_cart = [];
+    public $order = [
+        'Customer Detail' =>NULL,
+        'customer_cart' => NULL,
+    ];
+    public function mount(Request $request){
+        $data = $request->session()->all();
+        $this->customer_cart = DB::table('customer_cart as cc')
+            ->select(
+                'product_stock_id',
+                DB::raw('SUM(cc.quantity) as quantity'),
+                'ps.product_id' ,
+                'p.image as product_image' ,
+                'p.code as product_code' ,
+                'p.price as product_price' ,
+                'p.name as product_name' ,
+                'ps.product_size_id' ,
+                'psz.name as product_size' ,
+                'ps.product_color_id' ,
+                'pc.name as product_color' ,
+                'ps.quantity as product_quantity' ,
+                'ps.is_active',
+                )
+            ->join('product_stocks as ps','ps.id','cc.product_stock_id')
+            ->join('products as p','p.id','ps.product_id')
+            ->join('product_sizes as psz','psz.id','ps.product_size_id')
+            ->join('product_colors as pc','pc.id','ps.product_color_id')
+            ->where('cc.customer_id','=',$data['id'])
+            ->groupby('product_stock_id')
+            ->get()
+            ->toArray();
+    }
+    public function render(Request $request){
+        $data = $request->session()->all();
+       
+        return view('livewire.customer.cart.cart',[
+        ])
         ->layout('components.layouts.customer');
+    }
+    public function update_cart_quantity(Request $request,$id){
+        $data = $request->session()->all();
+        $quantity = NULL;
+        $product_quantity = NULL;
+        foreach ($this->customer_cart as $key => $value) {
+            if($value->product_stock_id == $id){
+                $quantity = $this->customer_cart[$key]->quantity;
+                $product_quantity = $this->customer_cart[$key]->product_quantity;
+            }
+        }
+        $cart_quantity = DB::table('customer_cart as cc')
+            ->select(DB::raw('SUM(quantity) as quantity'))
+            ->where('cc.customer_id','=',$data['id'])
+            ->where('cc.product_stock_id','=',$id)
+            ->first();
+        if($cart_quantity){
+            $cart_quantity = $cart_quantity->quantity;
+        }
+        if($customer_product_cart = DB::table('customer_cart as cc')
+        ->select('*')
+        ->where('cc.customer_id','=',$data['id'])
+        ->where('cc.product_stock_id','=',$id)
+        ->get()
+        ->toArray()){
+            if($quantity && intval($quantity)>0 ){
+                if($quantity <= $product_quantity ){
+                    $current_val = $cart_quantity - $quantity;
+                    if($quantity < $cart_quantity ){
+                        foreach ($customer_product_cart as $key => $value) {
+                            if( $current_val >= 0){
+                                if(($value->quantity - $current_val ) > 0){
+                                    DB::table('customer_cart as cc') 
+                                        ->where('id','=',$value->id)
+                                        ->where('cc.customer_id','=',$data['id'])
+                                        ->where('cc.product_stock_id','=',$id)
+                                        ->update([
+                                            'quantity' => $value->quantity -  $current_val
+                                        ]);
+                                }else{
+                                    DB::table('customer_cart as cc') 
+                                    ->where('id','=',$value->id)
+                                    ->where('cc.customer_id','=',$data['id'])
+                                    ->where('cc.product_stock_id','=',$id)
+                                    ->delete();
+                                }
+                                $current_val -= $value->quantity;
+                            }
+                        }
+                    }else{
+                        foreach ($customer_product_cart as $key => $value) {
+                            if($quantity <= $product_quantity){
+                                if($customer_product_cart){
+                                    DB::table('customer_cart as cc') 
+                                    ->where('id','=',$customer_product_cart[0]->id)
+                                    ->where('cc.customer_id','=',$data['id'])
+                                    ->where('cc.product_stock_id','=',$id)
+                                    ->update([
+                                        'quantity' => $quantity
+                                    ]);
+                                }
+                            }else{
+                                //error
+                            }
+                        }
+                    }
+                }else{
+                    // error
+                }
+               
+            }
+        }
+    }
+    public function add_order(){
+        
     }
 }
