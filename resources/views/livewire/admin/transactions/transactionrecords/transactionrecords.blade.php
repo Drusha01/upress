@@ -45,12 +45,11 @@
                                             <td>$900</td>
                                             <td>Paid or Unpaid</td>
                                             <td>
-                                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#viewTransactionModal">
-                                                View Details
+                                            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#viewTransactionModal">
+                                                View Transaction Details
                                             </button>
                                             </td>
                                         </tr>
-                                     
                                     </tbody>
                                 </table>
                             </div>
@@ -68,33 +67,31 @@
                 <!-- Modal Header -->
                 <div class="modal-header bg-dark text-white">
                     <h5 class="modal-title" id="viewTransactionModalLabel">Transaction Details</h5>
-                    <button type="button" class="close text-light" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
 
                 <!-- Modal Body -->
                 <div class="modal-body bg-white text-black">
                     <div class="container-fluid">
-                    <!-- Header Section -->
-                    <div class="row justify-content-center align-items-center mb-4">
-                        <!-- University Logo 1 -->
-                        <div class="col-6 col-md-3 text-center">
-                            <img class="img-fluid rounded-circle mb-2" src="../landingpage/assets/images/wmsu.png" alt="University Logo" style="max-width: 100px;">
-                        </div>
+                        <!-- Header Section -->
+                        <div class="row justify-content-center align-items-center mb-4">
+                            <!-- University Logo 1 -->
+                            <div class="col-6 col-md-3 text-center">
+                                <img class="img-fluid rounded-circle mb-2" src="../landingpage/assets/images/wmsu.png" alt="University Logo" style="max-width: 100px;">
+                            </div>
 
-                        <!-- University Details -->
-                        <div class="col-6 col-md-3 text-center">
-                            <span>Western Mindanao State University</span><br>
-                            <h5>UNIVERSITY PRESS</h5>
-                            <span>Zamboanga City</span>
-                        </div>
+                            <!-- University Details -->
+                            <div class="col-6 col-md-3 text-center">
+                                <span>Western Mindanao State University</span><br>
+                                <h5>UNIVERSITY PRESS</h5>
+                                <span>Zamboanga City</span>
+                            </div>
 
-                        <!-- University Logo 2 -->
-                        <div class="col-6 col-md-3 text-center">
-                            <img class="img-fluid rounded-circle mb-2" src="../assets/logo/upress-logo.png" alt="University Logo" style="max-width: 100px;">
+                            <!-- University Logo 2 -->
+                            <div class="col-6 col-md-3 text-center">
+                                <img class="img-fluid rounded-circle mb-2" src="../assets/logo/upress-logo.png" alt="University Logo" style="max-width: 100px;">
+                            </div>
                         </div>
-                    </div>
 
                         <!-- Transaction Details and Payment Proof -->
                         <div class="row">
@@ -107,22 +104,22 @@
                                     <p><strong>Customer Name:</strong> John Doe</p>
                                 </div>
                                 <div class="mb-2">
-                                    <p><strong>College:</strong>College of Computing Studies</p>
+                                    <p><strong>College:</strong> College of Computing Studies</p>
                                 </div>
                                 <div class="mb-2">
-                                    <p><strong>Department :</strong>Computer Science</p>
+                                    <p><strong>Department:</strong> Computer Science</p>
                                 </div>
                                 <div class="mb-2">
                                     <p><strong>Product:</strong> Lanyard (Red, Large)</p>
                                 </div>
                                 <div class="mb-2">
-                                    <p><strong>Unit Price:</strong> 300</p>
+                                    <p><strong>Unit Price:</strong> $300</p>
                                 </div>
                                 <div class="mb-2">
                                     <p><strong>Quantity:</strong> 3</p>
                                 </div>
                                 <div class="mb-2">
-                                    <p><strong>Total Amount:</strong> 900</p>
+                                    <p><strong>Total Amount:</strong> $900</p>
                                 </div>
                             </div>
 
@@ -135,17 +132,17 @@
                             </div>
                         </div>
                     </div>
-                    
                 </div>
+
                 <!-- Modal Footer -->
                 <div class="modal-footer bg-white text-black">
                     <a href="#" class="btn btn-primary">Download PDF</a>
                     <a href="#" class="btn btn-secondary">Print</a>
                     <button type="button" class="btn btn-light" data-dismiss="modal">Close</button>
                 </div>
-
             </div>
         </div>
     </div>
+
 
 </div>
