@@ -57,7 +57,7 @@
                             <div class="dropdown-menu p-0" aria-labelledby="profileDropdown">
                                 <div class="d-flex flex-column align-items-center border-bottom px-5 py-3">
                                     <div class="mb-3">
-                                        <img class="wd-80 ht-80 rounded-circle" src="{{asset('storage/profile/'.$user_info->image) }}" alt="">
+                                        <img class="wd-80 ht-80 rounded-circle" src="{{asset('storage/profile/'.$user_info->image) }}" alt="profile">
                                     </div>
                                     <div class="text-center">
                                         <p class="tx-16 fw-bolder"></p>
