@@ -4,7 +4,7 @@
             <div class="col-md-12 grid-margin">
                 <div class="card border rounded">
                     <div class="card-header bg-dark text-white">
-                        <h3 class="text-center">Product Stocks</h3>
+                        <h3 class="text-center">Product Stock In Records</h3>
                     </div>
                     <div class="card-body">
 
