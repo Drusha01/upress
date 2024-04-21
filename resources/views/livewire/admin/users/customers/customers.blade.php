@@ -3,7 +3,9 @@
         <div class="row">
             <div class="col-md-12 grid-margin">
                 <div class="card shadow">
-                
+                    <div class="card-header bg-dark text-white">
+                        <h3 class="text-center"> Customers</h3>
+                    </div>
                     <div class="card-body">
                         @if (session()->has('message'))
                         <div class="alert alert-success" id="success-alert">
@@ -12,7 +14,6 @@
                         </div>
                         @endif
                         
-                        <h4 class="mb-3 mb-md-0">Customers</h4>
                         <div class="d-grid gap-2 d-md-flex justify-content-md-end">
                             <a href="#" class="btn btn-success me-md-2" wire:click="add_user_default('addAccountModalToggler')">Add</a>
                         </div>

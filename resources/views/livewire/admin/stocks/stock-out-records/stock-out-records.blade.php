@@ -3,9 +3,10 @@
         <div class="row">
             <div class="col-md-12 grid-margin">
                 <div class="card border rounded">
-                   
+                    <div class="card-header bg-dark text-white">
+                        <h3 class="text-center">Product Stocks</h3>
+                    </div>
                     <div class="card-body">
-                        <h4 class="mb-2">UPRESS Product Stocks</h4>
 
                         <div class="d-flex justify-content-end mb-4">
                         </div>
@@ -24,7 +25,7 @@
                                         <th>Stocked Out By</th>
                                     </tr>
                                 </thead>
-                                <tbody>
+                                <tbody class="text-dark">
                                     @forelse ($stock_in_out_records  as $key => $value )
                                         <tr>
                                             <th scope="row" class="align-middle">{{(intval($stock_in_out_records->currentPage()-1)*$stock_in_out_records->perPage())+$key+1 }}</th>

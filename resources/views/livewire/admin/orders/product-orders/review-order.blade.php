@@ -1,3 +1,4 @@
+
 <div>
 
     <div class="page-content">
@@ -27,27 +28,31 @@
                                         <tr>
                                             <th>Order ID</th>
                                             <th>Customer Name</th>
-                                            <th>Product</th>
+                                            <th>Product Name</th>
+                                            <th>Color</th>
+                                            <th>Size</th>
                                             <th>Unit Price</th>
                                             <th>Quantity</th>
                                             <th>Total Amount</th>
-                                            <th>Payment OR</th>
+                                            <th>Order Status</th>
+                                            <th>Order Date</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>
-                                    <tbody class="text-dark font-bold">
+                                    <tbody class="text-dark">
                                         <tr>
-                                            <td>1</td>
-                                            <td>John Doe</td>
-                                            <td>Lanyard (Red, Large)</td>
-                                            <td>$300</td>
-                                            <td>3</td>
-                                            <td>$900</td>
-                                            <td>Paid or Unpaid</td>
+                                            <th>1</th>
+                                            <th>Bryan Tingkasan</th>
+                                            <th>WMSU Lanyard</th>
+                                            <th>Red</th>
+                                            <th>Medium</th>
+                                            <th>Php 100.00</th>
+                                            <th>2</th>
+                                            <th>Php 200.00</th>
+                                            <th>Pending</th>
+                                            <th>January 21,2024</th>                                            
                                             <td>
-                                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#viewTransactionModal">
-                                                View Details
-                                            </button>
+                                                <a href="{{ url('admin-order-review') }}" class="btn btn-primary">Review Order</a>
                                             </td>
                                         </tr>
                                      
@@ -149,3 +154,6 @@
     </div>
 
 </div>
+
+
+

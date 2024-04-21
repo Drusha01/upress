@@ -4,9 +4,11 @@
         <div class="row">
             <div class="col-md-12 grid-margin">
                 <div class="card border rounded">
-                   
+                    
+                    <div class="card-header bg-dark text-white">
+                        <h3 class="text-center">Product Information</h3>
+                    </div>
                     <div class="card-body">
-                        <h4 class="mb-2">UPRESS Product Information</h4>
 
                         <div class="d-flex justify-content-end mb-4">
                             <button type="button" class="btn btn-success me-2" wire:click="add_product_default('addModalToggler')"> 
@@ -32,7 +34,7 @@
                                         <th class="text-center">Action</th>
                                     </tr>
                                 </thead>
-                                <tbody>
+                                <tbody class="text-dark">
                                     @forelse ($products_data  as $key => $value )
                                         <tr>
                                             <th scope="row" class="align-middle">{{(intval($products_data->currentPage()-1)*$products_data->perPage())+$key+1 }}</th>
@@ -96,10 +98,14 @@
                     </div>
 
                     <div class="modal-body">
-                        <div class="mb-2 bg-white">
+                        <div class="mb-2">
                             <label for="product_image" class="form-label text-black">Product Image</label>
-                            <input type="file" wire:model="product.image" class="form-control" id="product_image" name="product_image" accept=".jpg,.png" required>
-                        </div>
+                            <div class="input-group" style="border: 1px solid black;padding: 6px ;border-radius: 5px;">
+                                <div class="custom-file">
+                                    <input type="file" wire:model="product.image" class="custom-file-input" id="product_image" name="product_image" accept=".jpg,.png" required>
+                                </div>
+                            </div>
+                        </div> 
                         <div class="mb-2">
                             <label for="product_code" class="form-label text-black">Product Code</label>
                             <input type="text"  wire:model="product.code" class="form-control" id="product_code" name="product_code" placeholder="Product code" required>
@@ -143,10 +149,14 @@
                     </div>
 
                     <div class="modal-body">
-                        <div class="mb-2 bg-white">
+                        <div class="mb-2">
                             <label for="product_image" class="form-label text-black">Product Image</label>
-                            <input type="file" wire:model="product.image" class="form-control" id="product_image" name="product_image" accept=".jpg,.png" >
-                        </div>
+                            <div class="input-group" style="border: 1px solid black;padding: 6px ;border-radius: 5px;">
+                                <div class="custom-file">
+                                    <input type="file" wire:model="product.image" class="custom-file-input" id="product_image" name="product_image" accept=".jpg,.png" required>
+                                </div>
+                            </div>
+                        </div> 
                         <div class="mb-2">
                             <label for="product_code" class="form-label text-black">Product Code</label>
                             <input type="text"  wire:model="product.code" class="form-control" id="product_code" name="product_code" placeholder="Product code" required>
