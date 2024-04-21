@@ -73,10 +73,10 @@
                         <div class="collapse" id="advancedUI">
                             <ul class="nav sub-menu">
                                 <li class="nav-item">
-                                    <a href="" class="nav-link">Service Lists</a>
+                                    <a href="{{route('admin-servicelist')}}" class="nav-link">Service Lists</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="#" class="nav-link">Pending Services</a>
+                                    <a href="{{route('admin-pendingservices')}}"class="nav-link">Pending Services</a>
                                 </li>
                                 <li class="nav-item">
                                     <a href="#" class="nav-link">Approved Services</a>

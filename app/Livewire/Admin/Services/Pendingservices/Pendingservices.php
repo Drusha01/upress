@@ -8,6 +8,7 @@ class Pendingservices extends Component
 {
     public function render()
     {
-        return view('livewire.admin.services.pendingservices.pendingservices');
+        return view('livewire.admin.services.pendingservices.pendingservices')
+        ->layout('components.layouts.admin');
     }
 }

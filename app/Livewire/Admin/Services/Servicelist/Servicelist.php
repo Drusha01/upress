@@ -8,6 +8,7 @@ class Servicelist extends Component
 {
     public function render()
     {
-        return view('livewire.admin.services.servicelist.servicelist');
+        return view('livewire.admin.services.servicelist.servicelist')
+        ->layout('components.layouts.admin');
     }
 }

@@ -100,6 +100,11 @@ Route::middleware([Unauthenticated::class,IsAdmin::class])->group(function () {
             Route::get('product-orders',AdminProductOrders::class)->name('admin-product-orders');
         });
 
+        Route::prefix('services')->group(function () {
+            Route::get('servicelist',AdminServicelist::class)->name('admin-servicelist');
+            Route::get('pendingservices',AdminPendingservices::class)->name('admin-pendingservices');
+        });
+
     });
 });
 
