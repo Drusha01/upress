@@ -8,6 +8,7 @@ class Completedservices extends Component
 {
     public function render()
     {
-        return view('livewire.admin.services.completedservices.completedservices');
+        return view('livewire.admin.services.completedservices.completedservices')
+        ->layout('components.layouts.admin');
     }
 }
