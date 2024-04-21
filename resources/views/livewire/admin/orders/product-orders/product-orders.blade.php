@@ -41,18 +41,18 @@
                                     </thead>
                                     <tbody class="text-dark">
                                         <tr>
-                                            <th>1</th>
-                                            <th>Bryan Tingkasan</th>
-                                            <th>WMSU Lanyard</th>
-                                            <th>Red</th>
-                                            <th>Medium</th>
-                                            <th>Php 100.00</th>
-                                            <th>2</th>
-                                            <th>Php 200.00</th>
-                                            <th>Pending</th>
-                                            <th>January 21,2024</th>                                            
+                                            <td>1</td>
+                                            <td>Bryan Tingkasan</td>
+                                            <td>WMSU Lanyard</td>
+                                            <td>Red</td>
+                                            <td>Medium</td>
+                                            <td>Php 100.00</td>
+                                            <td>2</td>
+                                            <td>Php 200.00</td>
+                                            <td>Pending</td>
+                                            <td>January 21,2024</td>                                            
                                             <td>
-                                                <a href="{{ url('admin-order-review') }}" class="btn btn-primary">Review Order</a>
+                                                <a href="{{ route('admin-revieworders') }}" class="btn btn-primary">Review Order</a>
                                             </td>
                                         </tr>
                                      
