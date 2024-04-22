@@ -66,7 +66,7 @@
 
     <button class="btn btn-success me-md-2" data-bs-toggle="modal" data-bs-target="#viewModal" id="viewModalToggler" style="display:none">Add</button>
     <div wire:ignore.self class="modal fade" id="viewModal" tabindex="-1" role="dialog" aria-labelledby="viewModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-xl" role="document">
+        <div class="modal-dialog modal-x=" role="document">
             <div class="modal-content">
                 <div class="modal-header bg-dark text-white">
                     <h5 class="modal-title" id="viewModalLabel">Order Details</h5>
@@ -105,6 +105,9 @@
                                 </div>
                                 <div class="mb-2">
                                     <p><strong>Department :</strong>@if($order_details['customer_order']) {{$order_details['customer_order']->department_name}} @endif</p>
+                                </div>
+                                <div class="mb-2">
+                                    <p><strong>Order Date :</strong>@if($order_details['customer_order']) {{date_format(date_create($order_details['customer_order']->date_created),"M d, Y h:i a")}} @endif</p>
                                 </div>
                                 <div class="mb-2">
                                     <p><strong>Total Amount:</strong> @if($order_details['customer_order']) {{$order_details['customer_order']->total_price}} @endif</p>

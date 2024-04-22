@@ -223,7 +223,7 @@ class Cart extends Component
                 ]);
             $current_order = DB::table('orders as o')
                 ->where('order_by','=',$order['order_by'])
-                ->orderBy('o.id')
+                ->orderBy('o.id','desc')
                 ->first();
             foreach ($cart  as $key => $value) {
                 DB::table('order_items')

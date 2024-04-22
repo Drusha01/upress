@@ -48,6 +48,7 @@ use App\Livewire\Admin\Orders\ReadyForPickup\ReadyForPickup as AdminReadyForPick
 use App\Livewire\Customer\Cart\Cart as CustomerCart;
 use App\Livewire\Customer\Contact\Contact as CustomerContact;
 use App\Livewire\Customer\Dashboard\Dashboard as CustomerDashboard;
+use App\Livewire\Customer\Order\CancelledOrder\CancelledOrder as CustomerCancelledOrder;
 use App\Livewire\Customer\Order\CompleteOrder\CompleteOrder as CustomerCompleteOrder;
 use App\Livewire\Customer\Order\ConfirmedOrder\ConfirmedOrder as CustomerConfirmedOrder;
 use App\Livewire\Customer\Order\DeclinedOrder\DeclinedOrder as CustomerDeclinedOrder;
@@ -150,6 +151,7 @@ Route::middleware([Unauthenticated::class,isCustomer::class])->group(function ()
         Route::get('dashboard', CustomerDashboard::class)->name('customer-dashboard');
 
         Route::prefix('orders')->group(function () {
+            Route::get('cancelled', CustomerCancelledOrder::class)->name('customer-order-cancelled');
             Route::get('completed', CustomerCompleteOrder::class)->name('customer-order-completed');
             Route::get('confirmed', CustomerConfirmedOrder::class)->name('customer-order-confirmed');
             Route::get('declined', CustomerDeclinedOrder::class)->name('customer-order-declined');

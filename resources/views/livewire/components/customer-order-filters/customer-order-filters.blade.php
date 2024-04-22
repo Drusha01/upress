@@ -7,6 +7,9 @@
                         All Orders
                     </li>
                 </a>
+                <a href="{{route('customer-order-cancelled')}}" style="text-decoration:none;">
+                    <li data-status="Declined" @if( Route::is('customer-order-cancelled')) class="active" @endif">Cancelled</li>
+                </a>
                 <a href="{{route('customer-order-declined')}}" style="text-decoration:none;">
                     <li data-status="Declined" @if( Route::is('customer-order-declined')) class="active" @endif">Declined</li>
                 </a>
