@@ -220,6 +220,13 @@
                             Are you sure you want to return this confirm order?
                         </p>
                     </div>
+                    @if(isset($order_details['error'] ))
+                    <div class="modal-body bg-white text-black">
+                        <p class="text-danger text-center">
+                            {{$order_details['error']}}
+                        </p>
+                    </div>
+                    @endif
                     <div class="modal-footer bg-white text-black">
                         <button type="button" class="btn btn-light" data-bs-dismiss="modal">Close</button>
                         <button type="submit" class="btn btn-success" >Confirm Order</button>

@@ -66,7 +66,7 @@
 
     <button class="btn btn-success me-md-2" data-bs-toggle="modal" data-bs-target="#viewModal" id="viewModalToggler" style="display:none">Add</button>
     <div wire:ignore.self class="modal fade" id="viewModal" tabindex="-1" role="dialog" aria-labelledby="viewModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-x=" role="document">
+        <div class="modal-dialog modal-xl" role="document">
             <div class="modal-content">
                 <div class="modal-header bg-dark text-white">
                     <h5 class="modal-title" id="viewModalLabel">Order Details</h5>
@@ -136,8 +136,7 @@
                                             $valid_cart = true;
                                         ?>
                                         @forelse($order_details['order_items']  as $key => $value )
-                                        <?php if($valid_cart && $value->quantity > $value->product_quantity || !$value->is_active) {$valid_cart = false;}?>
-                                        <tr @if($value->quantity > $value->product_quantity || !$value->is_active) class="bg-danger" @endif >
+                                        <tr >
                                             <th scope="row" class="align-middle">{{$key+1 }}</th>
                                             <td class="text-center align-middle">
                                                 <img src="{{asset('storage/content/products/'.$value->product_image)}}" alt="Product Image"  style="object-fit: cover;width:150px; height: 150px;">

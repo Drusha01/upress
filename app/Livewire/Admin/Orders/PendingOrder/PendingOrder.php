@@ -144,44 +144,48 @@ class PendingOrder extends Component
             ->groupby('product_stock_id')
             ->get()
             ->toArray();
-        if(DB::table('orders')
-            ->where('id','=',$id)
-            ->update([
-                'status'=>$order_status->id
-            ])){
-
-            // check if we have stock
-            foreach($order_items as $key => $value){
-                $current_stock = DB::table('product_stocks as ps')
-                ->where('ps.id','=',$value->product_stock_id)
-                ->first();
-                if($value->quantity > $current_stock->quantity){
-                    $this->order_details['error'] = "Product ".$value->product_name.' has only '.$current_stock->quantity.' it is not adequate for the order';
-                    return;
-                }
+        $valid =true;
+        $this->order_details['error'] = NULL;
+        foreach($order_items as $key => $value){
+            $current_stock = DB::table('product_stocks as ps')
+            ->where('ps.id','=',$value->product_stock_id)
+            ->first();
+            if($value->quantity > $current_stock->quantity){
+                $this->order_details['error'] = "Customer avail ".$value->quantity." pcs of Product \"".$value->product_name.'" has only '.$current_stock->quantity.' it is not adequate for the order';
+                $valid =false;
+                break;
             }
-            // stock out
-            foreach($order_items as $key => $value){
-                $current_stock = DB::table('product_stocks as ps')
-                ->where('ps.id','=',$value->product_stock_id)
-                ->first();
-                if($current_stock ){
-                    DB::table('product_stocks as ps')
+        }
+        if($valid){
+            if(DB::table('orders')
+                ->where('id','=',$id)
+                ->update([
+                    'status'=>$order_status->id
+                ])){
+                foreach($order_items as $key => $value){
+                    $current_stock = DB::table('product_stocks as ps')
                     ->where('ps.id','=',$value->product_stock_id)
-                    ->update([
-                        'quantity'=>$current_stock->quantity - $value->quantity
+                    ->first();
+                    if($current_stock ){
+                        DB::table('product_stocks as ps')
+                        ->where('ps.id','=',$value->product_stock_id)
+                        ->update([
+                            'quantity'=>$current_stock->quantity - $value->quantity
+                        ]);
+                    }
+                    DB::table('stockin_stockout_records')
+                    ->insert([
+                        'product_stock_id' => $value->product_stock_id,
+                        'stock_type_id' => 2,
+                        'stock_by' => $this->user_id,
+                        'quantity' => $value->quantity,
                     ]);
                 }
-                DB::table('stockin_stockout_records')
-                ->insert([
-                    'product_stock_id' => $value->product_stock_id,
-                    'stock_type_id' => 2,
-                    'stock_by' => $this->user_id,
-                    'quantity' => $value->quantity,
-                ]);
+                $this->dispatch('closeModal',$modal_id);
             }
-          
-            $this->dispatch('closeModal',$modal_id);
+        }else{
+            return;
         }
+        
     }
 }
