@@ -9,48 +9,64 @@
                             <h3 class="text-center">Transaction Records</h3>
                         </div>
                         <div class="card-body">
-                        <div class="row mb-3 justify-content-end">
-                            <div class="col-auto">
-                                    <label for="stockTypeFilter" class="form-label">Filter:</label>
-                                </div>
+                            <div class="row mb-3 justify-content-end">
                                 <div class="col-auto">
-                                    <select class="form-select form-select-sm" id="stockTypeFilter">
-                                        <option value="all">All</option>
-                                        <option value="stock-in">2</option>
-                                        <option value="stock-out">1</option>
-                                    </select>
-                                </div>
-                        </div>
-                        <div class="table-responsive">
-                            <table id="shoppingCart" class="table-condensed table">
-                                <thead>
-                                    <tr>
-                                        <th style="width:20%">Track No.</th>
-                                        <th style="width:12%">Account Name</th>
-                                        <th style="width:12%" class="text-center">Status</th>
-                                        <th style="width:12%" class="align-middle text-center">Action</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @forelse($customer_order as $key =>$value)
-                                    <tr>
-                                        <td data-th="Price" class="align-middle">Track No: {{str_pad($value->id, 8, '0', STR_PAD_LEFT)}}</td>
-                                        <td data-th="Price" class="align-middle">{{$value->first_name.' '.$value->middle_name.' '.$value->last_name}}</td>
-                                        <td data-th="Price" class="align-middle text-center">{{$value->order_status}}</td>
-                                        <td class="align-middle text-center">
-                                            <button class="btn btn-primary btn-sm" wire:click="view_order({{$value->id}},'viewModalToggler')">
-                                                <i class="fa fa-pencil-square-o" aria-hidden="true"></i> View
-                                            </button>
-                                        </td>
-                                    </tr>
-                                    @empty
+                                        <label for="stockTypeFilter" class="form-label">Filter:</label>
+                                    </div>
+                                    <div class="col-auto">
+                                        <select class="form-select form-select-sm" id="stockTypeFilter">
+                                            <option value="all">All</option>
+                                            <option value="stock-in">2</option>
+                                            <option value="stock-out">1</option>
+                                        </select>
+                                    </div>
+                            </div>
+                            <div class="table-responsive">
+                                <table id="shoppingCart" class="table-condensed table">
+                                    <thead>
                                         <tr>
-                                            <td colspan="42" class="text-center text-dark">NO DATA</td>
+                                            <th style="width:20%">Track No.</th>
+                                            <th style="width:12%">Account Name</th>
+                                            <th style="width:12%" class="text-center">Status</th>
+                                            <th style="width:12%">Price</th>
+                                            <th style="width:12%">Transaction Date</th>
+                                            <th style="width:12%" class="align-middle text-center">Action</th>
                                         </tr>
-                                    @endforelse
-                                </tbody>
-                            </table>
-                        </div>
+                                    </thead>
+                                    <tbody>
+                                        @forelse($customer_order as $key =>$value)
+                                        <tr>
+                                            <td data-th="Price" class="align-middle">Track No: {{str_pad($value->id, 8, '0', STR_PAD_LEFT)}}</td>
+                                            <td data-th="Price" class="align-middle">{{$value->first_name.' '.$value->middle_name.' '.$value->last_name}}</td>
+                                            <td data-th="Price" class="align-middle text-center">{{$value->order_status}}</td>
+                                            <td data-th="Price" class="align-middle ">PHP {{number_format($value->total_price, 2, '.', ',')}}</td>
+                                            <td data-th="Price" class="align-middle">{{date_format(date_create($value->date_updated),"M d, Y h:i a")}}</td>
+                                            
+                                            <td class="align-middle text-center">
+                                                <button class="btn btn-primary btn-sm" wire:click="view_order({{$value->id}},'viewModalToggler')">
+                                                    <i class="fa fa-pencil-square-o" aria-hidden="true"></i> View
+                                                </button>
+                                            </td>
+                                        </tr>
+                                        @empty
+                                            <tr>
+                                                <td colspan="42" class="text-center text-dark">NO DATA</td>
+                                            </tr>
+                                        @endforelse
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="pagination-container mt-3">
+                                <ul class="pagination">
+                                    <li><a href="{{ $customer_order->previousPageUrl() }}">Previous</a></li>
+                                    @foreach ($customer_order->getUrlRange(1, $customer_order->lastPage()) as $page => $url)
+                                        <li class="{{ $page == $customer_order->currentPage() ? 'active' : '' }}">
+                                            <a href="{{ $url }}">{{ $page }}</a>
+                                        </li>
+                                    @endforeach
+                                    <li><a href="{{ $customer_order->nextPageUrl() }}">Next</a></li>
+                                </ul>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -101,6 +117,9 @@
                                 </div>
                                 <div class="mb-2">
                                     <p><strong>Order Date :</strong>@if($order_details['customer_order']) {{date_format(date_create($order_details['customer_order']->date_created),"M d, Y h:i a")}} @endif</p>
+                                </div>
+                                <div class="mb-2">
+                                    <p><strong>Transaction Date :</strong>@if($order_details['customer_order']) {{date_format(date_create($order_details['customer_order']->date_updated),"M d, Y h:i a")}} @endif</p>
                                 </div>
                                 <div class="mb-2">
                                     <p><strong>Total Amount:</strong> @if($order_details['customer_order']) {{$order_details['customer_order']->total_price}} @endif</p>

@@ -59,8 +59,8 @@ class PendingOrder extends Component
                 "u.department_id",
                 "d.name as department_name",
                 "u.is_active",
-                "u.date_created",
-                "u.date_updated",
+                "o.date_created",
+                "o.date_updated",
             )
             ->join('order_status as os','os.id','o.status')
             ->join('users as u','u.id','o.order_by')

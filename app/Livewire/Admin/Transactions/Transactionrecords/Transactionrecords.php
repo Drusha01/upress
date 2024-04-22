@@ -27,6 +27,7 @@ class Transactionrecords extends Component
             'os.name as order_status',
             'o.total_price',
             'o.date_created as date_created',
+            'o.date_updated as date_updated',
             "u.first_name",
             "u.middle_name",
             "u.last_name",
@@ -58,8 +59,8 @@ class Transactionrecords extends Component
                 "u.department_id",
                 "d.name as department_name",
                 "u.is_active",
-                "u.date_created",
-                "u.date_updated",
+                "o.date_created",
+                "o.date_updated",
             )
             ->join('order_status as os','os.id','o.status')
             ->join('users as u','u.id','o.order_by')

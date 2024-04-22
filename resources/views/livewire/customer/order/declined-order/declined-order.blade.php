@@ -73,6 +73,17 @@
                                 </tbody>
                             </table>
                         </div>
+                        <div class="pagination-container mt-3">
+                            <ul class="pagination">
+                                <li><a href="{{ $customer_order->previousPageUrl() }}">Previous</a></li>
+                                @foreach ($customer_order->getUrlRange(1, $customer_order->lastPage()) as $page => $url)
+                                    <li class="{{ $page == $customer_order->currentPage() ? 'active' : '' }}">
+                                        <a href="{{ $url }}">{{ $page }}</a>
+                                    </li>
+                                @endforeach
+                                <li><a href="{{ $customer_order->nextPageUrl() }}">Next</a></li>
+                            </ul>
+                        </div>
                         <br>
                     </div>
                 </div>
