@@ -21,6 +21,7 @@
                         <i class="link-icon" data-feather="box"></i>
                         <span class="link-title">Dashboard</span>
                     </a>
+                </li>
                     <li class="nav-item nav-category">
                         Components
                     </li>
@@ -75,9 +76,12 @@
                                 <li class="nav-item">
                                     <a href="{{route('admin-servicelist')}}" class="nav-link @if( Route::is('admin-servicelist')) active @endif">Service Lists</a>
                                 </li>
-                                <li class="nav-item">
-                                    <a href="{{route('admin-pending-services')}}" class="nav-link @if( Route::is('admin-pending-services')) active @endif">Pending Services</a>
+
+                                <li class="nav-item" id="pending-services">
+                                    <a href="{{ route('admin-pending-services') }}" class="nav-link @if(Route::is('admin-pending-services')) active @endif">Pending Services</a>
                                 </li>
+                                
+
                                 <li class="nav-item">
                                     <a href="{{route ('admin-approved-services')}}" class="nav-link @if( Route::is('admin-approved-services')) active @endif">Approved Services</a>
                                 </li>
@@ -101,9 +105,11 @@
                                 <li class="nav-item">
                                     <a href="{{ route('admin-declined-order') }}" class="nav-link @if( Route::is('admin-declined-order')) active @endif">Declined Orders</a>
                                 </li>
-                                <li class="nav-item">
-                                    <a href="{{ route('admin-pending-order') }}" class="nav-link @if( Route::is('admin-pending-order')) active @endif">Pending Orders</a>
+
+                                <li class="nav-item" id="pending-order">
+                                    <a href="{{ route('admin-pending-order') }}" class="nav-link @if(Route::is('admin-pending-order')) active @endif">Pending Orders</a>
                                 </li>
+                                
                                 <li class="nav-item">
                                     <a href="{{ route('admin-confirmed-order') }}" class="nav-link @if( Route::is('admin-confirmed-order')) active @endif">Confirmed Orders</a>
                                 </li>

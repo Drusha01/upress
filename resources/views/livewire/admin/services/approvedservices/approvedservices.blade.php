@@ -3,8 +3,10 @@
         <div class="row">
             <div class="col-md-12 grid-margin">
                 <div class="card border rounded">
+                    <div class="card-header bg-dark text-white">
+                        <h3 class="text-center">Approved Services</h3>
+                    </div>
                     <div class="card-body">
-                        <h4 class="mb-1">Approved Services</h4>
                         <div class="d-flex justify-content-end mb-1">
                             <!-- <button type="button" class="btn btn-success float-end mb-2" data-bs-toggle="modal" data-bs-target="#addServiceModal">
                                 Add Service
