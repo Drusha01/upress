@@ -16,6 +16,7 @@ class Cart extends Component
         'Customer Detail' =>NULL,
         'customer_cart' => NULL,
     ];
+    public $product_stock_id = NULL;
     public function mount(Request $request){
         $data = $request->session()->all();
         $this->customer_cart = DB::table('customer_cart as cc')
@@ -122,7 +123,113 @@ class Cart extends Component
             }
         }
     }
-    public function add_order(){
-        
+    public function remove_item_default($id,$modal_id){
+        $this->product_stock_id = $id;
+        $this->dispatch('openModal',$modal_id);
+    }
+    public function remove_item(Request $request,$id,$modal_id){
+        $data = $request->session()->all();
+        if($customer_product_cart = DB::table('customer_cart as cc')
+        ->select('*')
+        ->where('cc.customer_id','=',$data['id'])
+        ->where('cc.product_stock_id','=',$id)
+        ->get()
+        ->toArray()){
+            foreach ($customer_product_cart as $key => $value) {
+                DB::table('customer_cart as cc') 
+                ->where('id','=',$value->id)
+                ->where('cc.customer_id','=',$data['id'])
+                ->where('cc.product_stock_id','=',$id)
+                ->delete();
+            }
+          
+        }
+        $this->dispatch('closeModal',$modal_id);
+        $this->customer_cart = DB::table('customer_cart as cc')
+            ->select(
+                'product_stock_id',
+                DB::raw('SUM(cc.quantity) as quantity'),
+                'ps.product_id' ,
+                'p.image as product_image' ,
+                'p.code as product_code' ,
+                'p.price as product_price' ,
+                'p.name as product_name' ,
+                'ps.product_size_id' ,
+                'psz.name as product_size' ,
+                'ps.product_color_id' ,
+                'pc.name as product_color' ,
+                'ps.quantity as product_quantity' ,
+                'ps.is_active',
+                )
+            ->join('product_stocks as ps','ps.id','cc.product_stock_id')
+            ->join('products as p','p.id','ps.product_id')
+            ->join('product_sizes as psz','psz.id','ps.product_size_id')
+            ->join('product_colors as pc','pc.id','ps.product_color_id')
+            ->where('cc.customer_id','=',$data['id'])
+            ->groupby('product_stock_id')
+            ->get()
+            ->toArray();
+    }
+    public function add_order(Request $request,$modal_id){
+        $data = $request->session()->all();
+        $cart = DB::table('customer_cart as cc')
+        ->select(
+            'product_stock_id',
+            DB::raw('SUM(cc.quantity) as quantity'),
+            'ps.product_id' ,
+            'p.image as product_image' ,
+            'p.code as product_code' ,
+            'p.price as product_price' ,
+            'p.name as product_name' ,
+            'ps.product_size_id' ,
+            'psz.name as product_size' ,
+            'ps.product_color_id' ,
+            'pc.name as product_color' ,
+            'ps.quantity as product_quantity' ,
+            'ps.is_active',
+            )
+        ->join('product_stocks as ps','ps.id','cc.product_stock_id')
+        ->join('products as p','p.id','ps.product_id')
+        ->join('product_sizes as psz','psz.id','ps.product_size_id')
+        ->join('product_colors as pc','pc.id','ps.product_color_id')
+        ->where('cc.customer_id','=',$data['id'])
+        ->groupby('product_stock_id')
+        ->get()
+        ->toArray();
+
+        // validation
+        $order = [
+            'order_by' =>$data['id'],
+            'valid'=> true,
+        ];
+        foreach ($cart  as $key => $value) {
+            if($value->quantity > $value->product_quantity){
+                $order['valid'] = false;
+            }   
+        }
+        if( $order['valid'] ){
+            DB::table('orders')
+                ->insert([
+                    'order_by' =>$order['order_by'],
+                ]);
+            $current_order = DB::table('orders as o')
+                ->where('order_by','=',$order['order_by'])
+                ->orderBy('o.id')
+                ->first();
+            foreach ($cart  as $key => $value) {
+                DB::table('order_items')
+                    ->insert([
+                    'order_id' => $current_order->id,
+                    'order_by' => $order['order_by'],
+                    'product_stock_id' => $value->product_stock_id,
+                    'quantity' => $value->quantity,
+                ]);
+                DB::table('customer_cart as cc')
+                ->where('cc.customer_id','=',$data['id'])
+                ->where('cc.product_stock_id','=',$value->product_stock_id)
+                ->delete();
+            }
+            $this->dispatch('closeModal',$modal_id);
+        }
     }
 }

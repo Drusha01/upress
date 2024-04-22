@@ -132,19 +132,30 @@ class Dashboard extends Component
                 $this->current_cart['error'] = "Please quantity must be less than or equal to ".$stocks->quantity;
                 return;
             }
-            // check cart
-          
         }
-       
-        // add to cart now
-        if(DB::table('customer_cart')
+        $customer_cart = DB::table('customer_cart as cc')
+            ->select(DB::raw('SUM(quantity) as quantity'))
+            ->where('cc.customer_id','=',$data['id'])
+            ->where('cc.product_stock_id','=',$stocks->id)
+            ->first();
+        if($customer_cart->quantity){
+            DB::table('customer_cart as cc')
+            ->select(DB::raw('SUM(quantity) as quantity'))
+            ->where('cc.customer_id','=',$data['id'])
+            ->where('cc.product_stock_id','=',$stocks->id)
+            ->update([
+                'quantity' => $customer_cart->quantity+$this->current_cart['quantity']
+            ]);
+        }else{
+            DB::table('customer_cart')
             ->insert([
                 'customer_id' => $data['id'],
                 'product_stock_id' => $stocks->id,
                 'quantity' => $this->current_cart['quantity'],
-        ])){
-            $this->dispatch('closeModal',$modal_id);
+            ]);
         }
+        $this->dispatch('closeModal',$modal_id);
+        
         
     }
     public function update_max_stock(Request $request){
