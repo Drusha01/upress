@@ -33,8 +33,8 @@
                                             <td data-th="Price" class="align-middle">{{$value->first_name.' '.$value->middle_name.' '.$value->last_name}}</td>
                                             <td data-th="Price" class="align-middle text-center">{{$value->order_status}}</td>
                                             <td class="align-middle text-center">
-                                                <button class="btn btn-primary btn-sm">
-                                                    <i class="fa fa-pencil-square-o" aria-hidden="true"></i> View
+                                                <button class="btn btn-primary btn-sm" wire:click="view_order({{$value->id}},'viewModalToggler')">
+                                                    <i class="fa fa-pencil-square-o" aria-hidden="true"></i> View Order
                                                 </button>
                                             </td>
                                         </tr>
@@ -64,76 +64,99 @@
         </div>
     </div>
 
-    <!-- <div class="modal fade" id="viewTransactionModal" tabindex="-1" role="dialog" aria-labelledby="viewTransactionModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg" role="document">
+    <button class="btn btn-success me-md-2" data-bs-toggle="modal" data-bs-target="#viewModal" id="viewModalToggler" style="display:none">Add</button>
+    <div wire:ignore.self class="modal fade" id="viewModal" tabindex="-1" role="dialog" aria-labelledby="viewModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-xl" role="document">
             <div class="modal-content">
-              
                 <div class="modal-header bg-dark text-white">
-                    <h5 class="modal-title" id="viewTransactionModalLabel">Transaction Details</h5>
-                    <button type="button" class="close text-light" data-dismiss="modal" aria-label="Close">
+                    <h5 class="modal-title" id="viewModalLabel">Order Details</h5>
+                    <button type="button" class="close text-light" data-bs-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-
-           
                 <div class="modal-body bg-white text-black">
                     <div class="container-fluid">
-                  
-                    <div class="row justify-content-center align-items-center mb-4">
-                  
-                        <div class="col-6 col-md-3 text-center">
-                            <img class="img-fluid rounded-circle mb-2" src="../landingpage/assets/images/wmsu.png" alt="University Logo" style="max-width: 100px;">
+                        <div class="row justify-content-center align-items-center mb-4">
+                            <div class="col-6 col-md-3 text-center">
+                                <img class="img-fluid rounded-circle mb-2" src="{{url('landingpage')}}/assets/images/wmsu.png" alt="University Logo" style="max-width: 100px;">
+                            </div>
+                            <div class="col-6 col-md-3 text-center">
+                                <span>Western Mindanao State University</span><br>
+                                <h5>UNIVERSITY PRESS</h5>
+                                <span>Zamboanga City</span>
+                            </div>
+                            <div class="col-6 col-md-3 text-center">
+                                <img class="img-fluid rounded-circle mb-2" src="{{url('assets')}}/logo/upress-logo.png" alt="University Logo" style="max-width: 100px;">
+                            </div>
                         </div>
-
-                      
-                        <div class="col-6 col-md-3 text-center">
-                            <span>Western Mindanao State University</span><br>
-                            <h5>UNIVERSITY PRESS</h5>
-                            <span>Zamboanga City</span>
-                        </div>
-
-                      
-                        <div class="col-6 col-md-3 text-center">
-                            <img class="img-fluid rounded-circle mb-2" src="../assets/logo/upress-logo.png" alt="University Logo" style="max-width: 100px;">
-                        </div>
-                    </div>
-
-                     
                         <div class="row">
-              
                             <div class="col-md-6 mt-3">
                                 <div class="mb-2">
-                                    <p><strong>Order ID:</strong> 1</p>
+                                    <p><strong>Order ID:</strong> @if($order_details['customer_order']) {{str_pad($order_details['customer_order']->id, 8, '0', STR_PAD_LEFT)}} @endif</p>
                                 </div>
                                 <div class="mb-2">
-                                    <p><strong>Customer Name:</strong> John Doe</p>
+                                    <p><strong>Order Status:</strong> @if($order_details['customer_order']) {{$order_details['customer_order']->order_status}} @endif</p>
                                 </div>
                                 <div class="mb-2">
-                                    <p><strong>College:</strong>College of Computing Studies</p>
+                                    <p><strong>Customer Name:</strong> @if($order_details['customer_order']){{$order_details['customer_order']->first_name.' '.$order_details['customer_order']->middle_name.' '.$order_details['customer_order']->last_name}}@endif</p>
                                 </div>
                                 <div class="mb-2">
-                                    <p><strong>Department :</strong>Computer Science</p>
+                                    <p><strong>College:</strong>@if($order_details['customer_order']) {{$order_details['customer_order']->college_name}} @endif</p>
                                 </div>
                                 <div class="mb-2">
-                                    <p><strong>Product:</strong> Lanyard (Red, Large)</p>
+                                    <p><strong>Department :</strong>@if($order_details['customer_order']) {{$order_details['customer_order']->department_name}} @endif</p>
                                 </div>
                                 <div class="mb-2">
-                                    <p><strong>Unit Price:</strong> 300</p>
-                                </div>
-                                <div class="mb-2">
-                                    <p><strong>Quantity:</strong> 3</p>
-                                </div>
-                                <div class="mb-2">
-                                    <p><strong>Total Amount:</strong> 900</p>
+                                    <p><strong>Total Amount:</strong> @if($order_details['customer_order']) {{$order_details['customer_order']->total_price}} @endif</p>
                                 </div>
                             </div>
-
-                         
-                            <div class="col-md-6 text-center">
-                                <div class="mb-0">
-                                    <p><strong>Payment Proof:</strong></p>
-                                    <img src="https://via.placeholder.com/300" class="img-fluid" alt="Payment Proof">
-                                </div>
+                        </div>
+                        <div class="row">
+                            <div class="table-responsive">
+                                <table id="" class="table border border-dark">
+                                    <thead>
+                                        <tr>
+                                            <th>#</th>
+                                            <th class="text-center">Image</th>
+                                            <th>Product Code</th>
+                                            <th>Product Name</th>
+                                            <th>Product Size</th>
+                                            <th>Product Color</th>
+                                            <th>Product Qty</th>
+                                            <th>Order Qty</th>
+                                            <th>Price</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <?php 
+                                            $total = 0;
+                                            $valid_cart = true;
+                                        ?>
+                                        @forelse($order_details['order_items']  as $key => $value )
+                                        <?php if($valid_cart && $value->quantity > $value->product_quantity || !$value->is_active) {$valid_cart = false;}?>
+                                        <tr @if($value->quantity > $value->product_quantity || !$value->is_active) class="bg-danger" @endif >
+                                            <th scope="row" class="align-middle">{{$key+1 }}</th>
+                                            <td class="text-center align-middle">
+                                                <img src="{{asset('storage/content/products/'.$value->product_image)}}" alt="Product Image"  style="object-fit: cover;width:150px; height: 150px;">
+                                            </td>
+                                            <td class="align-middle">{{$value->product_code}}</td>
+                                            <td class="align-middle">{{$value->product_name}}</td>
+                                            <td class="align-middle">{{$value->product_size}}</td>
+                                            <td class="align-middle">{{$value->product_color}}</td>
+                                            <td class="align-middle">{{$value->product_quantity}}</td>
+                                            <td class="align-middle">
+                                               {{$value->quantity}}
+                                            </td>
+                                            <td class="align-middle">{{$value->product_price}}</td>
+                                        </tr>
+                                        <?php $total += ($value->quantity *$value->product_price)?>
+                                        @empty
+                                            <tr>
+                                                <td colspan="42" class="text-center text-dark">NO DATA</td>
+                                            </tr>
+                                        @endforelse
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
                     </div>
@@ -143,12 +166,12 @@
                 <div class="modal-footer bg-white text-black">
                     <a href="#" class="btn btn-primary">Download PDF</a>
                     <a href="#" class="btn btn-secondary">Print</a>
-                    <button type="button" class="btn btn-light" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-light" data-bs-dismiss="modal">Close</button>
                 </div>
 
             </div>
         </div>
-    </div> -->
+    </div> 
 
 </div>
 

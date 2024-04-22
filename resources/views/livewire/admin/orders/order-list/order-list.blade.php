@@ -30,7 +30,6 @@
                                             <th style="width:20%">Track No.</th>
                                             <th style="width:12%">Account Name</th>
                                             <th style="width:12%" class="text-center">Status</th>
-                                            <th style="width:12%" class="align-middle text-center">Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -39,11 +38,6 @@
                                             <td data-th="Price" class="align-middle">{{str_pad($value->id, 8, '0', STR_PAD_LEFT)}}</td>
                                             <td data-th="Price" class="align-middle">{{$value->first_name.' '.$value->middle_name.' '.$value->last_name}}</td>
                                             <td data-th="Price" class="align-middle text-center">{{$value->order_status}}</td>
-                                            <td class="align-middle text-center">
-                                                <button class="btn btn-primary btn-sm">
-                                                    <i class="fa fa-pencil-square-o" aria-hidden="true"></i> View
-                                                </button>
-                                            </td>
                                         </tr>
                                         @empty
                                             <tr>
@@ -77,7 +71,7 @@
               
                 <div class="modal-header bg-dark text-white">
                     <h5 class="modal-title" id="viewTransactionModalLabel">Transaction Details</h5>
-                    <button type="button" class="close text-light" data-dismiss="modal" aria-label="Close">
+                    <button type="button" class="close text-light" data-bs-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
@@ -150,7 +144,7 @@
                 <div class="modal-footer bg-white text-black">
                     <a href="#" class="btn btn-primary">Download PDF</a>
                     <a href="#" class="btn btn-secondary">Print</a>
-                    <button type="button" class="btn btn-light" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-light" data-bs-dismiss="modal">Close</button>
                 </div>
 
             </div>

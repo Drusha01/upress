@@ -23,6 +23,7 @@
                                         <th>Product Color</th>
                                         <th>Stock In Qty</th>
                                         <th>Stocked In By</th>
+                                        <th>Stocked In Date</th>
                                     </tr>
                                 </thead>
                                 <tbody class="text-dark">
@@ -38,7 +39,7 @@
                                             <td class="align-middle">{{$value->product_color}}</td>
                                             <td class="align-middle">{{$value->stock_quantity}}</td>
                                             <td class="align-middle">{{$value->first_name.' '.$value->middle_name.' '.$value->last_name }}</td>
-                                          
+                                            <td class="align-middle">{{date_format(date_create($value->date_created),"M d, Y h:i a")}}</td>
                                         </tr>
                                     @empty
                                         <tr>
