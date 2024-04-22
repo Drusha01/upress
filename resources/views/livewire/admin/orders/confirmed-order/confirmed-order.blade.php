@@ -22,6 +22,7 @@
                                             <th style="width:20%">Track No.</th>
                                             <th style="width:12%">Account Name</th>
                                             <th style="width:12%" class="text-center">Status</th>
+                                            <th style="width:12%" class="">Price</th>
                                             <th style="width:12%" class="align-middle text-center">Action</th>
                                         </tr>
                                     </thead>
@@ -31,6 +32,7 @@
                                             <td data-th="Price" class="align-middle">{{str_pad($value->id, 8, '0', STR_PAD_LEFT)}}</td>
                                             <td data-th="Price" class="align-middle">{{$value->first_name.' '.$value->middle_name.' '.$value->last_name}}</td>
                                             <td data-th="Price" class="align-middle text-center">{{$value->order_status}}</td>
+                                            <td data-th="Price" class="align-middle ">PHP {{number_format($value->total_price, 2, '.', ',')}}</td>
                                             <td class="align-middle text-center">
                                                 <button class="btn btn-warning btn-sm" wire:click="view_order({{$value->id}},'pendingModalToggler')">
                                                     Return to Pending Order
@@ -115,7 +117,7 @@
                                     <p><strong>Order Date :</strong>@if($order_details['customer_order']) {{date_format(date_create($order_details['customer_order']->date_created),"M d, Y h:i a")}} @endif</p>
                                 </div>
                                 <div class="mb-2">
-                                    <p><strong>Total Amount:</strong> @if($order_details['customer_order']) {{$order_details['customer_order']->total_price}} @endif</p>
+                                    <p><strong>Total Amount:</strong> @if($order_details['customer_order']) {{number_format($order_details['customer_order']->total_price, 2, '.', ',')}} @endif</p>
                                 </div>
                             </div>
                         </div>

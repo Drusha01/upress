@@ -30,6 +30,7 @@
                                             <th style="width:20%">Track No.</th>
                                             <th style="width:12%">Account Name</th>
                                             <th style="width:12%" class="text-center">Status</th>
+                                            <th style="width:12%" class="">Price</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -38,6 +39,7 @@
                                             <td data-th="Price" class="align-middle">{{str_pad($value->id, 8, '0', STR_PAD_LEFT)}}</td>
                                             <td data-th="Price" class="align-middle">{{$value->first_name.' '.$value->middle_name.' '.$value->last_name}}</td>
                                             <td data-th="Price" class="align-middle text-center">{{$value->order_status}}</td>
+                                            <td data-th="Price" class="align-middle ">PHP {{number_format($value->total_price, 2, '.', ',')}}</td>
                                         </tr>
                                         @empty
                                             <tr>
