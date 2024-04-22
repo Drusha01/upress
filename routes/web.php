@@ -41,7 +41,13 @@ use App\Livewire\Admin\Orders\Revieworders\Revieworders as AdminRevieworders;
 use App\Livewire\Customer\Cart\Cart as CustomerCart;
 use App\Livewire\Customer\Contact\Contact as CustomerContact;
 use App\Livewire\Customer\Dashboard\Dashboard as CustomerDashboard;
-use App\Livewire\Customer\OrderList\OrderList as CustomerOrderList;
+use App\Livewire\Customer\Order\CompleteOrder\CompleteOrder as CustomerCompleteOrder;
+use App\Livewire\Customer\Order\ConfirmedOrder\ConfirmedOrder as CustomerConfirmedOrder;
+use App\Livewire\Customer\Order\DeclinedOrder\DeclinedOrder as CustomerDeclinedOrder;
+use App\Livewire\Customer\Order\Orderlist\Orderlist as CustomerOrderList;
+use App\Livewire\Customer\Order\PendingOrder\PendingOrder as CustomerPendingOrder;
+use App\Livewire\Customer\Order\ReadyForPickup\ReadyForPickup as CustomerReadyForPickup;
+
 use App\Livewire\Customer\Products\Products as CustomerProducts;
 use App\Livewire\Customer\Profile\Profile as CustomerProfile;
 use App\Livewire\Customer\Services\Services as CustomerServices;
@@ -126,7 +132,15 @@ Route::middleware([Unauthenticated::class,isCustomer::class])->group(function ()
     Route::prefix('customer')->group(function () {
         Route::get('cart', CustomerCart::class)->name('customer-cart');
         Route::get('dashboard', CustomerDashboard::class)->name('customer-dashboard');
-        Route::get('orderlist', CustomerOrderList::class)->name('customer-order-list');
+
+        Route::prefix('orders')->group(function () {
+            Route::get('completed', CustomerCompleteOrder::class)->name('customer-order-completed');
+            Route::get('confirmed', CustomerConfirmedOrder::class)->name('customer-order-confirmed');
+            Route::get('declined', CustomerDeclinedOrder::class)->name('customer-order-declined');
+            Route::get('orderlist', CustomerOrderList::class)->name('customer-order-list');
+            Route::get('pending', CustomerPendingOrder::class)->name('customer-order-pending');
+            Route::get('ready-for-pickup', CustomerReadyForPickup::class)->name('customer-order-ready-for-pickup');
+        });
         Route::get('products', CustomerProducts::class)->name('customer-product');
         Route::get('profile', CustomerProfile::class)->name('customer-profile');
         Route::get('services', CustomerServices::class)->name('customer-services');

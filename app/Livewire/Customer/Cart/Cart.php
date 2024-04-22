@@ -201,16 +201,25 @@ class Cart extends Component
         $order = [
             'order_by' =>$data['id'],
             'valid'=> true,
+            'total_price'=> 0,
         ];
-        foreach ($cart  as $key => $value) {
-            if($value->quantity > $value->product_quantity){
-                $order['valid'] = false;
-            }   
+        if( $cart ){
+            foreach ($cart  as $key => $value) {
+                if($value->quantity > $value->product_quantity){
+                    $order['valid'] = false;
+                }  
+                $order['total_price'] += $value->quantity * $value->product_price;
+    
+            }
+        }else{
+            $order['valid'] = false;
         }
+      
         if( $order['valid'] ){
             DB::table('orders')
                 ->insert([
                     'order_by' =>$order['order_by'],
+                    'total_price'=>$order['total_price']
                 ]);
             $current_order = DB::table('orders as o')
                 ->where('order_by','=',$order['order_by'])

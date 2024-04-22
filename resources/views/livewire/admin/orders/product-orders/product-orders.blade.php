@@ -15,10 +15,11 @@
                                     <label for="stockTypeFilter" class="form-label">Filter:</label>
                                 </div>
                                 <div class="col-auto">
-                                    <select class="form-select form-select-sm" id="stockTypeFilter">
-                                        <option value="all">All</option>
-                                        <option value="stock-in">2</option>
-                                        <option value="stock-out">1</option>
+                                    <select class="form-select form-select-sm" id="stockTypeFilter" wire:model.live.debounce.250ms="filters.status_id">
+                                        <option value="">All</option>
+                                        @foreach($order_status as $key =>$value)
+                                        <option value="{{$value->id}}">{{$value->name}}</option>
+                                        @endforeach
                                     </select>
                                 </div>
                         </div>
@@ -26,38 +27,42 @@
                                 <table class="table table-bordered table-lg"> 
                                     <thead>
                                         <tr>
-                                            <th>Order ID</th>
-                                            <th>Customer Name</th>
-                                            <th>Product Name</th>
-                                            <th>Color</th>
-                                            <th>Size</th>
-                                            <th>Unit Price</th>
-                                            <th>Quantity</th>
-                                            <th>Total Amount</th>
-                                            <th>Order Status</th>
-                                            <th>Order Date</th>
-                                            <th>Action</th>
+                                            <th style="width:20%">Track No.</th>
+                                            <th style="width:12%">Account Name</th>
+                                            <th style="width:12%" class="text-center">Status</th>
+                                            <th style="width:12%" class="align-middle text-center">Action</th>
                                         </tr>
                                     </thead>
-                                    <tbody class="text-dark">
+                                    <tbody>
+                                        @forelse($customer_order as $key =>$value)
                                         <tr>
-                                            <td>1</td>
-                                            <td>Bryan Tingkasan</td>
-                                            <td>WMSU Lanyard</td>
-                                            <td>Red</td>
-                                            <td>Medium</td>
-                                            <td>Php 100.00</td>
-                                            <td>2</td>
-                                            <td>Php 200.00</td>
-                                            <td>Pending</td>
-                                            <td>January 21,2024</td>                                            
-                                            <td>
-                                                <a href="{{ route('admin-revieworders') }}" class="btn btn-primary">Review Order</a>
+                                            <td data-th="Price" class="align-middle">{{str_pad($value->id, 8, '0', STR_PAD_LEFT)}}</td>
+                                            <td data-th="Price" class="align-middle">{{$value->first_name.' '.$value->middle_name.' '.$value->last_name}}</td>
+                                            <td data-th="Price" class="align-middle text-center">{{$value->order_status}}</td>
+                                            <td class="align-middle text-center">
+                                                <button class="btn btn-primary btn-sm">
+                                                    <i class="fa fa-pencil-square-o" aria-hidden="true"></i> View
+                                                </button>
                                             </td>
                                         </tr>
-                                     
+                                        @empty
+                                            <tr>
+                                                <td colspan="42" class="text-center text-dark">NO DATA</td>
+                                            </tr>
+                                        @endforelse
                                     </tbody>
                                 </table>
+                            </div>
+                            <div class="pagination-container mt-3">
+                                <ul class="pagination">
+                                    <li><a href="{{ $customer_order->previousPageUrl() }}">Previous</a></li>
+                                    @foreach ($customer_order->getUrlRange(1, $customer_order->lastPage()) as $page => $url)
+                                        <li class="{{ $page == $customer_order->currentPage() ? 'active' : '' }}">
+                                            <a href="{{ $url }}">{{ $page }}</a>
+                                        </li>
+                                    @endforeach
+                                    <li><a href="{{ $customer_order->nextPageUrl() }}">Next</a></li>
+                                </ul>
                             </div>
                         </div>
                     </div>

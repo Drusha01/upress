@@ -1,24 +1,21 @@
 <?php
 
-namespace App\Livewire\Admin\Orders\ProductOrders;
+namespace App\Livewire\Customer\Order\CompleteOrder;
 
 use Livewire\Component;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
-use Livewire\WithPagination; 
+use Livewire\WithPagination;
 
-class ProductOrders extends Component
+class CompleteOrder extends Component
 {
     use WithPagination;
-    public $filters = [
-        'status_id' => NULL,
-    ];
-    public function render()
-    {
-        $order_status = DB::table('order_status')
-            ->get()
-            ->toArray();
+    public function render(Request $request){
+        $data = $request->session()->all();
+        $order_status = DB::table('order_status as os')
+            ->where('name','=','Completed')
+            ->first();
         $customer_order = DB::table('orders as o')
         ->select(
             'o.id as id',
@@ -30,16 +27,15 @@ class ProductOrders extends Component
             "u.last_name",
             "u.email" ,
         )
-        ->where('o.status','like',$this->filters['status_id'].'%')
+        ->where('order_by','=',$data['id'])
+        ->where('status','=',$order_status->id)
         ->join('order_status as os','os.id','o.status')
         ->join('users as u','u.id','o.order_by')
         ->orderBy('o.date_created')
         ->paginate(10);
-
-        return view('livewire.admin.orders.product-orders.product-orders',[
-            'customer_order'=>$customer_order,
-            'order_status'=>$order_status
+        return view('livewire.customer.order.complete-order.complete-order',[
+            'customer_order'=>$customer_order
         ])
-        ->layout('components.layouts.admin');
+        ->layout('components.layouts.customer');
     }
 }

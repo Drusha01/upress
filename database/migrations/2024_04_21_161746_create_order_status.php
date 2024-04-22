@@ -41,6 +41,10 @@ return new class extends Migration
         (NULL,
         "Completed",
         NOW(),
+        NOW()),
+        (NULL,
+        "Declined",
+        NOW(),
         NOW());');
     }
 

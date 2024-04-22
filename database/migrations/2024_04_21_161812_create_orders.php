@@ -15,6 +15,7 @@ return new class extends Migration
             id INT PRIMARY KEY AUTO_INCREMENT,
             order_by INT NOT NULL ,
             status INT DEFAULT 1 NOT NULL,
+            total_price double ,
             is_active BOOL DEFAULT 1,
             date_created DATETIME DEFAULT CURRENT_TIMESTAMP,
             date_updated DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
