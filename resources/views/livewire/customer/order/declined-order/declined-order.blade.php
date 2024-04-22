@@ -53,7 +53,7 @@
                             <tbody>
                                 @forelse($customer_order as $key =>$value)
                                 <tr>
-                                    <td data-th="Price" class="align-middle">{{str_pad($value->id, 8, '0', STR_PAD_LEFT)}}</td>
+                                    <td data-th="Price" class="align-middle">Track No: {{str_pad($value->id, 8, '0', STR_PAD_LEFT)}}</td>
                                     <td data-th="Price" class="align-middle">{{$value->first_name.' '.$value->middle_name.' '.$value->last_name}}</td>
                                     <td data-th="Price" class="align-middle text-center">{{$value->order_status}}</td>
                                     <td class="align-middle text-center">

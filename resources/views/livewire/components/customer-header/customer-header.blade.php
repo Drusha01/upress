@@ -22,25 +22,25 @@
                         <li class="nav-item" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Cart">
                             <a class="nav-link @if( Route::is('customer-cart')) active @endif" href="{{route('customer-cart')}}">
                                 <i class="fas fa-shopping-cart"></i>
-                                <span class="badge bg-primary">2</span>
+                                <span class="badge bg-primary">{{$header_info['cart_items']}}</span>
                             </a>
                         </li>
                         <li class="nav-item" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Orders">
                             <a class="nav-link @if( Route::is('customer-order-list')) active @endif" href="{{route('customer-order-list')}}">
                                 <i class="fas fa-shopping-bag"></i>
-                                <span class="badge bg-primary">2</span>
+                                <span class="badge bg-primary">{{$header_info['pending_order']}}</span>
                             </a>
                         </li>
-                        <li class="nav-item" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Track Orders">
+                        <!-- <li class="nav-item" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Track Orders">
                             <a class="nav-link @if( Route::is('customer-track-order')) active @endif" href="{{route('customer-track-order')}}">
                                 <i class="fas fa-truck"></i>
                                 <span class="badge bg-primary">3</span>
                             </a>
-                        </li>
+                        </li> -->
                         <li class="nav-item dropdown" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Notifications">
                             <a class="nav-link dropdown-toggle" href="#" id="notificationDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <i class="far fa-bell"></i>
-                                <span class="badge bg-primary" id="notificationCount">0</span>
+                                <span class="badge bg-primary" id="notificationCount">{{$header_info['notification_items']}}</span>
                             </a>
                             <div class="dropdown-menu p-0" aria-labelledby="notificationDropdown" id="notificationDropdownMenu">
                             </div>

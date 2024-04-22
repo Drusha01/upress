@@ -37,6 +37,13 @@ use App\Livewire\Admin\Users\Customers\Customers as AdminCustomers;
 use App\Livewire\Admin\Users\Staff\Staff as AdminStaff;
 use App\Livewire\Admin\Orders\Revieworders\Revieworders as AdminRevieworders;
 
+use App\Livewire\Admin\Orders\CompletedOrder\CompletedOrder as AdminCompletedOrder;
+use App\Livewire\Admin\Orders\ConfirmedOrder\ConfirmedOrder as AdminConfirmedOrder;
+use App\Livewire\Admin\Orders\DeclinedOrder\DeclinedOrder as AdminDeclinedOrder;
+use App\Livewire\Admin\Orders\OrderList\OrderList as AdminOrderList;
+use App\Livewire\Admin\Orders\PendingOrder\PendingOrder as AdminPendingOrder;
+use App\Livewire\Admin\Orders\ReadyForPickup\ReadyForPickup as AdminReadyForPickup;
+
 // customer
 use App\Livewire\Customer\Cart\Cart as CustomerCart;
 use App\Livewire\Customer\Contact\Contact as CustomerContact;
@@ -106,13 +113,22 @@ Route::middleware([Unauthenticated::class,IsAdmin::class])->group(function () {
         Route::prefix('orders')->group(function () {
             Route::get('product-orders',AdminProductOrders::class)->name('admin-product-orders');
             Route::get('revieworders',AdminRevieworders::class)->name('admin-revieworders');
+
+            Route::get('completed',AdminCompletedOrder::class)->name('admin-completed-order');
+            Route::get('confirmed',AdminConfirmedOrder::class)->name('admin-confirmed-order');
+            Route::get('declined',AdminDeclinedOrder::class)->name('admin-declined-order');
+            Route::get('order-list',AdminOrderList::class)->name('admin-order-list');
+            Route::get('pending',AdminPendingOrder::class)->name('admin-pending-order');
+            Route::get('ready-for-pickup',AdminReadyForPickup::class)->name('admin-ready-for-pickup-order');
+            
+
         });
 
         Route::prefix('services')->group(function () {
             Route::get('servicelist',AdminServicelist::class)->name('admin-servicelist');
-            Route::get('pendingservices',AdminPendingservices::class)->name('admin-pendingservices');
-            Route::get('approvedservices',AdminApprovedservices::class)->name('admin-approvedservices');
-            Route::get('completedservices',AdminCompletedservices::class)->name('admin-completedservices');
+            Route::get('pendingservices',AdminPendingservices::class)->name('admin-pending-services');
+            Route::get('approvedservices',AdminApprovedservices::class)->name('admin-approved-services');
+            Route::get('completedservices',AdminCompletedservices::class)->name('admin-completed-services');
         });
 
     });
