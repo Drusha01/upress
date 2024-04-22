@@ -31,6 +31,12 @@
                                 <span class="badge bg-primary">{{$header_info['pending_order']}}</span>
                             </a>
                         </li>
+                        <li class="nav-item" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Services">
+                            <a class="nav-link @if( Route::is('customer-order-list')) active @endif" href="{{route('customer-order-list')}}">
+                                <i class="link-icon" data-feather="layers"></i>    
+                                <span class="badge bg-primary">12</span>
+                            </a>
+                        </li>
                         <!-- <li class="nav-item" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Track Orders">
                             <a class="nav-link @if( Route::is('customer-track-order')) active @endif" href="{{route('customer-track-order')}}">
                                 <i class="fas fa-truck"></i>

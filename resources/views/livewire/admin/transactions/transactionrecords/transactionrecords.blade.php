@@ -6,7 +6,7 @@
                 <div class="col-md-15"> 
                     <div class="card">
                         <div class="card-header bg-dark text-white">
-                            <h3 class="text-center">Transaction Records</h3>
+                            <h3 class="text-center">Order Transaction Records</h3>
                         </div>
                         <div class="card-body">
                             <div class="row mb-3 justify-content-end">
