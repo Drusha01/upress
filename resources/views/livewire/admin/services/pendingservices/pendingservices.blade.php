@@ -84,9 +84,9 @@
                 </div>
                 <div class="modal-body bg-white text-black">
                     <!-- Approval Form or Confirmation Message -->
-                    <p>To approve, Upload the Payment OR</p>
-                    <label for="imageUpload">Upload OR</label>
-                    <input type="file" class="form-control-file border" id="imageUpload" accept="image/*" required>
+                    <h5 style="font-weight: 500; font-size: 15px;margin-bottom: 7px;">Upload Payment OR</h5>
+                    <label for="imageUpload" style="font-weight: 400"></label>
+                    <input type="file" class="form-control-file border" id="imageUpload" accept="image/*" style="padding: 6px; border-radius: 8px; width: 80%;" required>
                     
                 </div>
         
