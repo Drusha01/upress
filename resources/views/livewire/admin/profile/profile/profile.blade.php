@@ -10,7 +10,7 @@
                             <h2 class="card-title">Profile</h2>
                             <div class="profile-info text-center">
                                 <div class="mb-3">
-                                    <img src="{{asset('storage/content/profile/'.$profile_details['image']) }}"alt="Profile Image" style="border-radius: 50%;" class="img-fluid">
+                                    <img src="{{asset('storage/content/profile/'.$profile_details['image']) }}"alt="Profile Image"  class="img-fluid">
                                 </div>
                                 <div class="mb-3">
                                     <button id="modifyButtonProfile" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modifyModal">Edit Profile</button>
