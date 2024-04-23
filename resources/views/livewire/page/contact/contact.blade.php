@@ -29,9 +29,15 @@
                 <div class="col-md-4">
                     <div class="left-content">
                         <h4>About our office</h4>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisic elit. Sed voluptate nihil eumester consectetur similiqu consectetur.<br><br>Lorem ipsum dolor sit amet, consectetur adipisic elit. Et, consequuntur, modi mollitia corporis ipsa voluptate
-                            corrupti.
+                        <p>The UPRESS office, nestled within the vibrant West Mindanao State University campus, is a dynamic hub for scholarly and creative publishing. 
+                            Equipped with cutting-edge printing technology and staffed by dedicated professionals,
+                             our office is committed to excellence in producing academic journals, textbooks, research papers, and literary works.
+                             
+                             With a welcoming atmosphere conducive to collaboration and innovation, we provide personalized support to clients, fostering a culture where ideas come to life.
+                            Visit us to experience the synergy of creativity and expertise driving our publishing endeavors. 
+
                         </p>
+
                         <ul class="social-icons">
                             <li><a href="#"><i class="fa fa-facebook"></i></a></li>
                             <li><a href="#"><i class="fa fa-twitter"></i></a></li>
