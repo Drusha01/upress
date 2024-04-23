@@ -112,27 +112,26 @@
                                     </div>
                                 </div>
                             </div>
-                            <div wire:ignore.self class="modal fade" id="confirmModal" tabindex="-1" aria-labelledby="confirmModalLabel" aria-hidden="true">
+                            {{-- modal --}}
+                            <div wire:ignore.self class="modal fade" id="confirmModal" tabindex="-1" aria-labelledby="confirmModalLabel" aria-hidden="true" style="margin-top:60px;">
                                 <div class="modal-dialog modal-md">
                                     <div class="modal-content">
-                                        <div class="col-md-12 ">
-                                            <span class="btn btn" data-bs-toggle="modal" style="display: flex; justify-content:end; font-size:32px">
-                                                &times;
-                                            </span> 
-                                            <form wire:submit.prevent="add_order('confirmModal')">
-                                                <div>
-                                                    <p> Are you sure you want to order?</p>
-                                                </div>
-                                                <div class="modal-footer bg-white">
-                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" style="border-radius: 8px">Cancel</button>
-                                                    <button  class="btn btn-success" type="submit" style="border-radius: 8px">Confirm</button>
-                                                </div>
-                                            </form>
-                                    
-                                        </div>
+                                        <form wire:submit.prevent="add_order('confirmModal')">
+                                            <div class="modal-header bg-dark">
+                                                <h5 class="modal-title text-white" id="confirmModalLabel">Confirmation</h5>
+                                            </div>
+                                            <div class="modal-body">
+                                                <p class="text-bold"> Are you sure you want to order?</p>
+                                            </div>
+                                            <div class="modal-footer bg-white">
+                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" style="border-radius: 8px">Cancel</button>
+                                                <button  class="btn btn-success" type="submit" style="border-radius: 8px">Confirm</button>
+                                            </div>
+                                        </form>
                                     </div>
                                 </div>
                             </div>
+
                         </div>
                     </div>
                 </div>

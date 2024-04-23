@@ -92,20 +92,19 @@
         </div>
     </div>
     <button class="btn btn-success me-md-2" data-bs-toggle="modal" data-bs-target="#viewModal" id="viewModalToggler" style="display:none">Add</button>
+    
     <div wire:ignore.self class="modal fade" id="viewModal" tabindex="-1" role="dialog" aria-labelledby="viewModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-xl" role="document">
+        <div class="modal-dialog modal-xl" role="document" style="margin-top: -100px;">
             <div class="modal-content" >
                 <div class="modal-header bg-dark text-white">
                     <h5 class="modal-title" id="viewModalLabel">Order Details</h5>
-                    <button type="button" class="close text-light" data-bs-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
+                    <button type="button" class="btn-close bg-white" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body bg-white text-black">
                     <div class="container-fluid">
                         <div class="row justify-content-center align-items-center mb-4">
                             <div class="col-6 col-md-3 text-center">
-                                <img class="img-fluid rounded-circle mb-2" src="{{url('landingpage')}}/assets/images/wmsu.png" alt="University Logo" style="max-width: 100px;">
+                                <img class="img-fluid rounded-circle mb-2" src="{{url('landingpage')}}/assets/images/wmsu.png" alt="University Logo" style="width: 100px; height:100px;">
                             </div>
                             <div class="col-6 col-md-3 text-center">
                                 <span>Western Mindanao State University</span><br>
@@ -113,7 +112,7 @@
                                 <span>Zamboanga City</span>
                             </div>
                             <div class="col-6 col-md-3 text-center">
-                                <img class="img-fluid rounded-circle mb-2" src="{{url('assets')}}/logo/upress-logo.png" alt="University Logo" style="max-width: 100px;">
+                                <img class="img-fluid rounded-circle mb-2" src="{{url('assets')}}/logo/upress-logo.png" alt="University Logo" style="width: 100px; height:100px;">
                             </div>
                         </div>
                         <div class="row">
@@ -191,14 +190,13 @@
                     </div>
                     
                 </div>
-            
                 <div class="modal-footer bg-white text-black">
                     <a href="#" class="btn btn-primary">Download PDF</a>
                     <a href="#" class="btn btn-secondary">Print</a>
                     <button type="button" class="btn btn-light" data-bs-dismiss="modal">Close</button>
                 </div>
-
             </div>
         </div>
     </div> 
+
 </div>

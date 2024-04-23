@@ -76,19 +76,19 @@
                     <div wire:ignore.self class="modal fade" id="cartModal" tabindex="-1" aria-labelledby="cartModalLabel" aria-hidden="true">
                         <div class="modal-dialog modal-md">
                             <div class="modal-content">
-                                <div class="col-md-12 ">
-                                    <span class="btn btn" data-bs-toggle="modal" style="display: flex; justify-content:end; font-size:32px">
-                                        &times;
-                                    </span> 
                                     <form wire:submit.prevent="save_add_to_cart('cartModalToggler')">
-                                        <div class="modal-body bg-white">
-                                            <div class="mb-3">
-                                                <h4>
-                                                    @if($current_cart['product'])
-                                                        {{$current_cart['product']->name}}
-                                                    @endif
-                                                </h4>
-                                            </div>
+                                        <div class="modal-header bg-dark text-white">
+                                            <h5>Add to Cart</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" arial-label="Close"></button>
+                                        </div>
+                                        <div class="mb-2 mt-2">
+                                            <h4>
+                                                @if($current_cart['product'])
+                                                    {{$current_cart['product']->name}}
+                                                @endif
+                                            </h4>
+                                        </div>
+                                        <div class="modal-body bg-white d-flex justify-content-between">
                                             <div class="mb-3">
                                                 <label for="productCode" class="form-label text-black">Size:</label>
                                                 <select class="form-select"  wire:model="current_cart.product_size_id" wire:change="update_product_color_details()" name="role" required id="role" aria-label="Select Role">
@@ -122,8 +122,6 @@
                                             <button  class="btn btn-success" type="submit" style="border-radius: 8px">Add to cart</button>
                                         </div>
                                     </form>
-                              
-                                </div>
                             </div>
                         </div>
                     </div>
@@ -189,6 +187,7 @@
                             @endforeach
                         </div>
                     </div>
+
                 </div>
             </div>
         </div>
