@@ -148,7 +148,7 @@ class Approvedservices extends Component
                     ->update([
                         'quantity' => intval($this->service_availed['availed_service_items'][$key]->quantity),
                         'price_per_unit' =>floatval($this->service_availed['availed_service_items'][$key]->price_per_unit) ,
-                        'total_price' => floatval($this->service_availed['availed_service_items'][$key]->price_per_unit) * floatval($this->service_availed['availed_service_items'][$key]->price_per_unit) ,
+                        'total_price' => floatval($this->service_availed['availed_service_items'][$key]->quantity) * floatval($this->service_availed['availed_service_items'][$key]->price_per_unit) ,
                         'remarks' => $this->service_availed['availed_service_items'][$key]->remarks,
                 ]);
             }
