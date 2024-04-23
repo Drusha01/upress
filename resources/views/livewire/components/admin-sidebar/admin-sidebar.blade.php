@@ -150,13 +150,13 @@
                                 <div class="collapse" id="generalpages">
                                     <ul class="nav sub-menu">
                                         <li class="nav-item" id="adminuseradmin">
-                                            <a href="{{route('admin-user-admin')}}" class="nav-link @if( Route::is('admin-user-admin')) active @endif">Admins</a>
+                                            <a href="{{route('admin-user-admin')}}" class="nav-link Route::is('admin-user-admin')">Admins</a>
                                         </li>
                                         <li class="nav-item" id="adminuserstaff">
-                                            <a href="{{route('admin-user-staff')}}" class="nav-link @if( Route::is('admin-user-admin')) active @endif">Staffs</a>
+                                            <a href="{{route('admin-user-staff')}}" class="nav-link Route::is('admin-user-admin')">Staffs</a>
                                         </li>
                                         <li class="nav-item" id="adminusercustomer">
-                                            <a href="{{route('admin-user-customer')}}" class="nav-link @if( Route::is('admin-user-admin')) active @endif">Customers</a>
+                                            <a href="{{route('admin-user-customer')}}" class="nav-link @Route::is('admin-user-admin')" >Customers</a>
 
                                         </li>
                                     </ul>

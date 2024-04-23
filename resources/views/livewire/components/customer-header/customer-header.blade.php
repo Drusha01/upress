@@ -6,8 +6,9 @@
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <div class="collapse navbar-collapse" id="navbarResponsive">
-                    <ul class="navbar-nav ml-auto">
+                <!-- <div class="collapse navbar-collapse" id="navbarResponsive"  wire:poll.1000ms="update_header_info()"> -->
+                <div class="collapse navbar-collapse" id="navbarResponsive"  >
+                    <ul class="navbar-nav ml-auto" wire:ignore.self>
                         <li class="nav-item">
                             <a class="nav-link @if( Route::is('customer-dashboard')) active @endif" href="{{route('customer-dashboard')}}">Home
                                 <span class="sr-only">(current)</span>
@@ -33,7 +34,7 @@
                         </li>
                         <li class="nav-item" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Services">
                             <a class="nav-link @if( Route::is('customer-service-cart')) active @endif" href="{{route('customer-service-cart')}}">
-                                <i class="link-icon" data-feather="layers"></i>    
+                                <i class="link-icon"  data-feather="layers"></i>    
                                 <span class="badge bg-primary">{{$header_info['service_items']}}</span>
                             </a>
                         </li>

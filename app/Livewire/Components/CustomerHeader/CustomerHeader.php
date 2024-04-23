@@ -53,6 +53,13 @@ class CustomerHeader extends Component
         ->where('order_by','=',$session['id'])
         ->where('status','=',$order_status->id)
         ->first();
+        $service_items = DB::table('services_cart')
+            ->select(DB::raw('count(* ) as quantity'))
+            ->where('customer_id','=',$session['id'])
+            ->first();
+        if($service_items->quantity){
+            $header_info['service_items'] = $service_items->quantity;
+        }
 
         if($pending_orders->pending_order_count){
             $header_info['pending_order'] = $pending_orders->pending_order_count;
@@ -61,5 +68,38 @@ class CustomerHeader extends Component
             'user_info'=>$user_info,
             'header_info'=>$header_info
         ]);
+    }
+    public function update_header_info(Request $request){
+        $session = $request->session()->all();
+        $cart_items = DB::table('customer_cart as cc')
+            ->select(DB::raw('SUM(quantity) as quantity'))
+            ->where('cc.customer_id','=',$session['id'])
+            ->first();
+        if($cart_items->quantity){
+            $header_info['cart_items'] = $cart_items->quantity;
+        }
+
+        $order_status = DB::table('order_status as os')
+            ->where('name','=','Pending')
+            ->first();
+
+        $pending_orders = DB::table('orders as o')
+            ->select(
+                DB::raw('count(*) as pending_order_count')
+            )
+            ->where('order_by','=',$session['id'])
+            ->where('status','=',$order_status->id)
+            ->first();
+        $service_items = DB::table('services_cart')
+            ->select(DB::raw('count(* ) as quantity'))
+            ->where('customer_id','=',$session['id'])
+            ->first();
+        if($service_items->quantity){
+            $header_info['service_items'] = $service_items->quantity;
+        }
+
+        if($pending_orders->pending_order_count){
+            $header_info['pending_order'] = $pending_orders->pending_order_count;
+        }
     }
 }
