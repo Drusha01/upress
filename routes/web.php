@@ -33,6 +33,7 @@ use App\Livewire\Admin\Stocks\Stocklist\Stocklist as AdminStocklist;
 use App\Livewire\Admin\Stocks\StockInRecords\StockInRecords as AdminStockInRecords;
 use App\Livewire\Admin\Stocks\StockOutRecords\StockOutRecords as AdminStockOutRecords;
 use App\Livewire\Admin\Transactions\Transactionrecords\Transactionrecords as AdminTransactionrecords;
+use App\Livewire\Admin\Transactions\ServiceTransactionRecords\ServiceTransactionRecords as AdminServiceTransactionRecords;
 use App\Livewire\Admin\Users\Admin\Admin as AdminUsers;
 use App\Livewire\Admin\Users\Customers\Customers as AdminCustomers;
 use App\Livewire\Admin\Users\Staff\Staff as AdminStaff;
@@ -117,7 +118,8 @@ Route::middleware([Unauthenticated::class,IsAdmin::class])->group(function () {
         });
 
         Route::prefix('transactions')->group(function () {
-            Route::get('transactionrecord',AdminTransactionrecords::class)->name('admin-transactionrecords');
+            Route::get('ordertransactionrecord',AdminTransactionrecords::class)->name('admin-order-transactionrecords');
+            Route::get('servicetransactionrecord',AdminServiceTransactionRecords::class)->name('admin-service-transactionrecords');
         });
 
         Route::prefix('orders')->group(function () {

@@ -131,10 +131,10 @@
                         <div class="collapse" id="transaction">
                             <ul class="nav sub-menu">
                                 <li class="nav-item">
-                                    <a href="{{ route('admin-transactionrecords') }}" class="nav-link">Order Transaction Records</a>
+                                    <a href="{{ route('admin-order-transactionrecords') }}" class="nav-link">Order Transaction Records</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="{{ route('admin-transactionrecords') }}" class="nav-link">Services Transaction Records</a>
+                                    <a href="{{ route('admin-service-transactionrecords') }}" class="nav-link">Services Transaction Records</a>
                                 </li>
                             </ul>
                         </div>
