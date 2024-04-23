@@ -6,10 +6,10 @@
                 <h4 class="mb-3 mb-md-0">Welcome to Dashboard</h4>
             </div>
             <div class="d-flex align-items-center flex-wrap text-nowrap">
-                <div class="input-group flatpickr wd-200 me-2 mb-2 mb-md-0" id="dashboardDate">
+                {{-- <div class="input-group flatpickr wd-200 me-2 mb-2 mb-md-0" id="dashboardDate">
                     <span class="input-group-text bg-transparent border-primary"><i data-feather="calendar" class="text-primary"></i></span>
                     <input type="text" class="form-control bg-transparent border-primary" placeholder="Select date" data-input>
-                </div>
+                </div> --}}
                 <button type="button" class="btn btn-outline-primary me-2 mb-2 mb-md-0" onclick="printReport()">
                     <i data-feather="printer"></i>
                     Print
