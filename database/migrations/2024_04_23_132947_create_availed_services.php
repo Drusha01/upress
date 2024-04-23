@@ -11,16 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        DB::statement('CREATE TABLE services_cart(
+        DB::statement('CREATE TABLE availed_services(
             id INT PRIMARY KEY AUTO_INCREMENT,
+            service_status_id INT NOT NULL,
             customer_id INT NOT NULL,
-            service_id INT NOT NULL,
             date_created DATETIME DEFAULT CURRENT_TIMESTAMP,
             date_updated DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
         );');
-
-        DB::statement('CREATE INDEX idx_services_cart_service_id ON services_cart(service_id);');
-        DB::statement('CREATE INDEX idx_services_cart_customer_id ON services_cart(customer_id);');
+        DB::statement('CREATE INDEX idx_availed_services_customer_id ON availed_services(customer_id);');
+        DB::statement('CREATE INDEX idx_availed_services_service_status_id ON availed_services(service_status_id);');
     }
 
     /**
@@ -28,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('services_cart');
+        Schema::dropIfExists('availed_services');
     }
 };

@@ -26,6 +26,7 @@ use App\Livewire\Admin\Products\Sizes\Sizes as AdminProductSizes;
 use App\Livewire\Admin\Profile\Profile\Profile as AdminProfile;
 use App\Livewire\Admin\Services\Approvedservices\Approvedservices as AdminApprovedservices;
 use App\Livewire\Admin\Services\Completedservices\Completedservices as AdminCompletedservices;
+use App\Livewire\Admin\Services\Declinedservices\Declinedservices as AdminDeclinedservices;
 use App\Livewire\Admin\Services\Pendingservices\Pendingservices as AdminPendingservices;
 use App\Livewire\Admin\Services\Servicelist\Servicelist as AdminServicelist;
 use App\Livewire\Admin\Stocks\Stocklist\Stocklist as AdminStocklist;
@@ -58,8 +59,16 @@ use App\Livewire\Customer\Order\ReadyForPickup\ReadyForPickup as CustomerReadyFo
 
 use App\Livewire\Customer\Products\Products as CustomerProducts;
 use App\Livewire\Customer\Profile\Profile as CustomerProfile;
-use App\Livewire\Customer\Services\Services as CustomerServices;
 use App\Livewire\Customer\TrackOrder\TrackOrder as CustomerTrackOrder;
+use App\Livewire\Customer\Services\ServicesCart\ServicesCart as CustomerServicesCart; 
+use App\Livewire\Customer\Services\ServicesList\ServicesList as CustomerServicesList;
+
+use App\Livewire\Customer\Services\ServicesAll\ServicesAll as CustomerServicesAll;
+use App\Livewire\Customer\Services\ServicesApproved\ServicesApproved as CustomerServicesApproved;
+use App\Livewire\Customer\Services\ServicesCancelled\ServicesCancelled as CustomerServicesCancelled;
+use App\Livewire\Customer\Services\ServicesCompleted\ServicesCompleted as CustomerServicesCompleted;
+use App\Livewire\Customer\Services\ServicesDeclined\ServicesDeclined as CustomerServicesDeclined;
+use App\Livewire\Customer\Services\ServicesPending\ServicesPending as CustomerServicesPending;
 
 // pages
 use App\Livewire\Page\About\About;
@@ -128,6 +137,7 @@ Route::middleware([Unauthenticated::class,IsAdmin::class])->group(function () {
         Route::prefix('services')->group(function () {
             Route::get('servicelist',AdminServicelist::class)->name('admin-servicelist');
             Route::get('pendingservices',AdminPendingservices::class)->name('admin-pending-services');
+            Route::get('declinedservices',AdminDeclinedservices::class)->name('admin-declined-services');
             Route::get('approvedservices',AdminApprovedservices::class)->name('admin-approved-services');
             Route::get('completedservices',AdminCompletedservices::class)->name('admin-completed-services');
         });
@@ -149,7 +159,8 @@ Route::middleware([Unauthenticated::class,isCustomer::class])->group(function ()
     Route::prefix('customer')->group(function () {
         Route::get('cart', CustomerCart::class)->name('customer-cart');
         Route::get('dashboard', CustomerDashboard::class)->name('customer-dashboard');
-
+        Route::get('service-cart', CustomerServicesCart::class)->name('customer-service-cart');
+        Route::get('services', CustomerServicesList::class)->name('customer-services');
         Route::prefix('orders')->group(function () {
             Route::get('cancelled', CustomerCancelledOrder::class)->name('customer-order-cancelled');
             Route::get('completed', CustomerCompleteOrder::class)->name('customer-order-completed');
@@ -161,7 +172,15 @@ Route::middleware([Unauthenticated::class,isCustomer::class])->group(function ()
         });
         Route::get('products', CustomerProducts::class)->name('customer-product');
         Route::get('profile', CustomerProfile::class)->name('customer-profile');
-        Route::get('services', CustomerServices::class)->name('customer-services');
+        Route::prefix('services')->group(function () {
+            Route::get('service-list', CustomerServicesAll::class)->name('customer-service-list');
+            Route::get('approved', CustomerServicesApproved::class)->name('customer-service-approved');
+            Route::get('cancelled', CustomerServicesCancelled::class)->name('customer-service-cancelled');
+            Route::get('completed', CustomerServicesCompleted::class)->name('customer-service-completed');
+            Route::get('declined', CustomerServicesDeclined::class)->name('customer-service-declined');
+            Route::get('pending', CustomerServicesPending::class)->name('customer-service-pending');
+
+        });
         Route::get('trackorder', CustomerTrackOrder::class)->name('customer-track-order');
         Route::get('/contact',CustomerContact::class)->name('customer-contact');
     });

@@ -127,29 +127,6 @@
                     </div>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="pagination-container mt-3">
-                        <ul class="pagination">
-                            <li>
-                                <a href="{{ $stocks_data->previousPageUrl() }}">
-                                    Previous
-                                </a>
-                            </li>
-                            @foreach ($stocks_data->getUrlRange(1, $stocks_data->lastPage()) as $page => $url)
-                                <li class="{{ $page == $stocks_data->currentPage() ? 'active' : '' }}">
-                                    <a href="{{ $url }}">{{ $page }}</a>
-                                </li>
-                            @endforeach
-                            <li>
-                                <a href="{{ $stocks_data->nextPageUrl() }}">
-                                    Next
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
         </div>
     </div>
 
@@ -160,34 +137,43 @@
                 <div class="col-md-12">
                     <div class="section-heading">
                     <h2>Latest Servicess</h2>
-                    <a href="{{route('page-services')}}">view all services <i class="fa fa-angle-right"></i></a>
+                    <a href="{{route('customer-service-list')}}">View All Services <i class="fa fa-angle-right"></i></a>
                     </div>
                 </div>
-
                 <div class="col-md-12">
                     <div class="filters-content">
                         <div class="row grid">
-                            @foreach ([] as $service)
-                                <div class="col-lg-4 col-md-4 all des">
+                            @foreach ($service_data as $key =>$value)
+                                <div class="col-lg-4 col-md-4 " >
                                     <div class="product-item">
-                                        <a href="#"><img src="/servicesimages/{{$service->image}}" alt="" style="width: 100%; height: 200px;bservice-radius: 10px;"></a>
+                                        <a href="#">
+                                            <img src="{{asset('storage/content/services/'.$value->image)}}" alt="" style="object-fit:contain; height: 200px; border-radius: 10px;">
+                                        </a>
                                         <div class="down-content">
-                                            <a href="#">
-                                                <h4 class="">{{$service->category}}</h4>
-                                            </a>
-                                            <div class="" style="gap:5px;"><h6>Php {{$service->unit_price}}</h6></div>
-                                            
-                                            <h4>Description:<p>{{$service->descritpion}}</p></h4>
-                                            <p>Stocks: {{$service->stocks}}</p>
-                                            <p>Status: {{$service->status}}</p>
-                                            <button class="btn btn-primary" onclick="openModal('{{$service->product_name}}', '{{$service->unit_price}}', '{{$service->image}}')">Add Cart</button> --}}
+                                            <div class="row mx-2">
+                                                <a href="#">
+                                                    <h4>{{ $value->name }}</h4>
+                                                </a>
+                                            </div>
+                                            <div class="row mx-2">
+                                                <p>Status: @if($value->is_active ) Available @else Unavailable @endif</p>
+                                            </div>
+                                            <div class="row mx-2 my-2" style="height:80px">
+                                                @if($value->description)
+                                                <h4 >
+                                                    Description:<p>{{ $value->description }}</p>
+                                                </h4>
+                                                @endif
+                                            </div>
+                                            <div class="row mx-2 mt-4 ">
+                                                <button class="btn btn-success" wire:click="add_to_service_cart({{$value->id}})" >Avail Service</button>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             @endforeach
                         </div>
                     </div>
-
                 </div>
             </div>
         </div>

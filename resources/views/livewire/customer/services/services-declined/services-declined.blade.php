@@ -1,18 +1,46 @@
 <div>
-    <div class="page-content">
-        <div class="row">
-            <div class="col-md-12 grid-margin">
-                <div class="card border rounded">
-                    <div class="card-header bg-dark text-white">
-                        <h3 class="text-center">Completed Services</h3>
+    <div class="page-heading products-heading header-text" style="background-image: url('{{url('landingpage')}}/assets/images/products-heading.jpg');">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="text-content">
+                        <h4>View</h4>
+                        <h2>Services</h2>
                     </div>
-                    
-                    <div class="card-body">
-                        <div class="d-flex justify-content-end mb-1">
-                            <!-- <button type="button" class="btn btn-success float-end mb-2" data-bs-toggle="modal" data-bs-target="#addServiceModal">
-                                Add Service
-                            </button> -->
-                        </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="products vh-100">
+        <div class="container">
+            @livewire('components.customer-service-filters.customer-service-filters')
+            <div class="card card-body border rounded">
+                <div class="row">
+                    <div class="col-lg-12 col-md-12 col-12">
+                        <article class="card">
+                            <div class="card-body row">
+                                <div class="col-12">
+                                    <img class="rounded-circles d-block mx-auto mb-4" style="max-width: 200%; height: auto; max-height: 300px;" src="{{url('landingpage')}}/assets/images/wmsu.png" alt="University Logo">
+                                    <div class="text-center">
+                                        <span>Western Mindanao State University</span><br>
+                                        <h5>UNIVERSITY PRESS</h5>
+                                        <span>Zamboanga City</span>
+                                    </div>
+                                    <div class="text-center d-none d-md-block">
+                                        <h5>SERVICE AVAIL SLIP</h5>
+                                    </div>
+                                    <div class="d-flex justify-content-md-between flex-column flex-md-row text-center">
+                                        <div class="mb-md-0">
+                                            <p>
+                                                WMSU-UPRESS
+                                            </p>
+                                        </div>
+                                        <div class="mb-md-0">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </article>
                         <div class="table-responsive">
                             <table id="shoppingCart" class="table-condensed table">
                                 <thead>
@@ -54,6 +82,7 @@
                                 <li><a href="{{ $availed_services->nextPageUrl() }}">Next</a></li>
                             </ul>
                         </div>
+                        <br>
                     </div>
                 </div>
             </div>
@@ -118,10 +147,6 @@
                                                 <th class="text-center">Image</th>
                                                 <th>Service Name</th>
                                                 <th >Service Desc</th>
-                                                <th >Quantity</th>
-                                                <th >Price / Unit</th>
-                                                <th >Partial Price</th>
-                                                <th >Remarks</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -130,25 +155,14 @@
                                                 $valid_cart = true;
                                             ?>
                                             @forelse($service_availed['availed_service_items']  as $key => $value )
-                                                <tr>
+                                                <?php if(!$value->is_active) {$valid_cart = false;}?>
+                                                <tr @if(!$value->is_active) class="bg-danger" @endif>
                                                     <th scope="row" class="align-middle">{{$key +1 }}</th>
                                                     <td class="text-center align-middle">
                                                         <img src="{{asset('storage/content/services/'.$value->service_image)}}" alt="Product Image"  style="object-fit: cover;width:100px; max-height: 100px;">
                                                     </td>
                                                     <td class="align-middle">{{$value->service_name}}</td>
                                                     <td class="align-middle">{{$value->service_description}}</td>
-                                                    <td class="align-middle">
-                                                        <input type="number"  class="form-control" wire:change="update_total_price()" wire:model="service_availed.availed_service_items.{{$key}}.quantity">
-                                                    </td>
-                                                    <td class="align-middle">
-                                                        <input type="number"  class="form-control" wire:change="update_total_price()" step="0.01" wire:model="service_availed.availed_service_items.{{$key}}.price_per_unit">
-                                                    </td>
-                                                    <td class="align-middle">
-                                                        <input type="text"  class="form-control bg-white" disabled wire:model="service_availed.availed_service_items.{{$key}}.total_price">
-                                                    </td>
-                                                    <td class="align-middle" class="form-control" >
-                                                        <textarea type="text" value="{{$value->remarks}}" wire:model="service_availed.availed_service_items.{{$key}}.remarks"></textarea>
-                                                    </td>
                                                 </tr>
                                             @empty
                                                 <tr>
@@ -172,6 +186,4 @@
             </div>
         </div>
     </div> 
-    </div>
-    
 </div>

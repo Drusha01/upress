@@ -76,12 +76,12 @@
                                 <li class="nav-item">
                                     <a href="{{route('admin-servicelist')}}" class="nav-link @if( Route::is('admin-servicelist')) active @endif">Service Lists</a>
                                 </li>
-
+                                <li class="nav-item" id="declined-services">
+                                    <a href="{{ route('admin-declined-services') }}" class="nav-link @if(Route::is('admin-declined-services')) active @endif">Declined Services</a>
+                                </li>
                                 <li class="nav-item" id="pending-services">
                                     <a href="{{ route('admin-pending-services') }}" class="nav-link @if(Route::is('admin-pending-services')) active @endif">Pending Services</a>
                                 </li>
-                                
-
                                 <li class="nav-item">
                                     <a href="{{route ('admin-approved-services')}}" class="nav-link @if( Route::is('admin-approved-services')) active @endif">Approved Services</a>
                                 </li>

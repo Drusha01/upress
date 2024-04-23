@@ -13,38 +13,51 @@
                             </button> -->
                         </div>
                         <div class="table-responsive">
-                            <table class="table table-bordered text-black">
-                                <thead class="thead-dark">
+                            <table id="shoppingCart" class="table-condensed table">
+                                <thead>
                                     <tr>
-                                        <th>Customer Name</th>
-                                        <th>Service Type</th>
-                                        <th>Details</th>
-                                        <th>Status</th>
-                                        <th>Action</th>
+                                        <th style="width:20%">Track No.</th>
+                                        <th style="width:12%">Account Name</th>
+                                        <th style="width:12%" class="text-center">Status</th>
+                                        <th style="width:12%" class="align-middle text-center">Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <!-- Example Service Row (Replace with dynamic data) -->
+                                    @forelse($availed_services as $key =>$value)
                                     <tr>
-                                        <td>John Doe</td>
-                                        <td>Printing</td>
-                                        <td>
-                                            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#pendingServiceModal1">
-                                                View Details
+                                        <td data-th="Price" class="align-middle">Track No: {{str_pad($value->id, 8, '0', STR_PAD_LEFT)}}</td>
+                                        <td data-th="Price" class="align-middle">{{$value->first_name.' '.$value->middle_name.' '.$value->last_name}}</td>
+                                        <td data-th="Price" class="align-middle text-center">{{$value->service_status}}</td>
+                                        <td class="align-middle text-center">
+                                            <button class="btn btn-danger btn-sm" wire:click="view_availed_service({{$value->id}},'declineModalToggler')">
+                                                Decline
                                             </button>
-                                        </td>
-                                        <td>Pending</td>
-                                        <td>
-                                            <!-- Button to Approve Service Modal -->
-                                            <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#approveServiceModal1">
+                                            <button class="btn btn-success btn-sm" wire:click="view_availed_service({{$value->id}},'approveModalToggler')">
                                                 Approve
+                                            </button>
+                                            <button class="btn btn-primary btn-sm" wire:click="view_availed_service({{$value->id}},'viewModalToggler')">
+                                                View
                                             </button>
                                         </td>
                                     </tr>
-                                    <!-- Add more rows for other pending services -->
-
+                                    @empty
+                                        <tr>
+                                            <td colspan="42" class="text-center text-dark">NO DATA</td>
+                                        </tr>
+                                    @endforelse
                                 </tbody>
                             </table>
+                        </div>
+                        <div class="pagination-container mt-3">
+                            <ul class="pagination">
+                                <li><a href="{{ $availed_services->previousPageUrl() }}">Previous</a></li>
+                                @foreach ($availed_services->getUrlRange(1, $availed_services->lastPage()) as $page => $url)
+                                    <li class="{{ $page == $availed_services->currentPage() ? 'active' : '' }}">
+                                        <a href="{{ $url }}">{{ $page }}</a>
+                                    </li>
+                                @endforeach
+                                <li><a href="{{ $availed_services->nextPageUrl() }}">Next</a></li>
+                            </ul>
                         </div>
                     </div>
                 </div>
@@ -52,50 +65,157 @@
         </div>
     </div>
 
-    <!-- View Details Modal for Pending Service -->
-    <div class="modal fade" id="pendingServiceModal1" tabindex="-1" aria-labelledby="pendingServiceModal1Label" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title text-white" id="pendingServiceModal1Label">Service Details - Printing</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+    <button class="btn btn-success me-md-2" data-bs-toggle="modal" data-bs-target="#viewModal" id="viewModalToggler" style="display:none">Add</button>
+    <div wire:ignore.self class="modal fade" id="viewModal" tabindex="-1" role="dialog" aria-labelledby="viewModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-xl" role="document">
+            <div class="modal-content" >
+                <div class="modal-header bg-dark text-white">
+                    <h5 class="modal-title" id="viewModalLabel">Service Details</h5>
+                    <button type="button" class="close text-light" data-bs-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
                 </div>
                 <div class="modal-body bg-white text-black">
-                    <p><strong>Customer Name:</strong> John Doe</p>
-                    <p><strong>Service Type:</strong> Printing</p>
-                    <p><strong>Details:</strong> Brochure Printing, A4, 100 copies, Full Color</p>
-                    <!-- Additional service details can be included here -->
-                </div>
-                
-                <div class="modal-footer bg-white text-black">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Approve Service under pending Modal -->
-    <div class="modal fade" id="approveServiceModal1" tabindex="-1" aria-labelledby="approveServiceModal1Label" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title text-white" id="approveServiceModal1Label">Approve Service - Printing</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body bg-white text-black">
-                    <!-- Approval Form or Confirmation Message -->
-                    <label for="imageUpload" style="font-weight: 400">
-                        <h5 style="font-weight: 500; font-size: 15px;margin-bottom: 7px;">Upload Payment OR</h5>
-                    </label>
-                    <input type="file" class="form-control-file border" id="imageUpload" accept="image/*" style="padding: 6px; border-radius: 8px; width: 80%;" required>
+                    <div class="container-fluid">
+                        <div class="row justify-content-center align-items-center mb-4">
+                            <div class="col-6 col-md-3 text-center">
+                                <img class="img-fluid rounded-circle mb-2" src="{{url('landingpage')}}/assets/images/wmsu.png" alt="University Logo" style="max-width: 100px;">
+                            </div>
+                            <div class="col-6 col-md-3 text-center">
+                                <span>Western Mindanao State University</span><br>
+                                <h5>UNIVERSITY PRESS</h5>
+                                <span>Zamboanga City</span>
+                            </div>
+                            <div class="col-6 col-md-3 text-center">
+                                <img class="img-fluid rounded-circle mb-2" src="{{url('assets')}}/logo/upress-logo.png" alt="University Logo" style="max-width: 100px;">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 mt-3 text-start">
+                                <div class="mb-2">
+                                    <p><strong>Service ID:</strong> @if($service_availed['availed_services']) {{str_pad($service_availed['availed_services']->id, 8, '0', STR_PAD_LEFT)}} @endif</p>
+                                </div>
+                                <div class="mb-2">
+                                    <p><strong>Service Status:</strong> @if($service_availed['availed_services']) {{$service_availed['availed_services']->service_status}} @endif</p>
+                                </div>
+                                <div class="mb-2">
+                                    <p><strong>Customer Name:</strong> @if($service_availed['availed_services']){{$service_availed['availed_services']->first_name.' '.$service_availed['availed_services']->middle_name.' '.$service_availed['availed_services']->last_name}}@endif</p>
+                                </div>
+                                <div class="mb-2">
+                                    <p><strong>College:</strong>@if($service_availed['availed_services']) {{$service_availed['availed_services']->college_name}} @endif</p>
+                                </div>
+                                <div class="mb-2">
+                                    <p><strong>Department :</strong>@if($service_availed['availed_services']) {{$service_availed['availed_services']->department_name}} @endif</p>
+                                </div>
+                                <div class="mb-2">
+                                    <p><strong>Avail Service Date :</strong>@if($service_availed['availed_services']) {{date_format(date_create($service_availed['availed_services']->date_created),"M d, Y h:i a")}} @endif</p>
+                                </div>
+                                <div class="mb-2">
+                                    <p><strong>Total Amount:</strong> @if(isset($service_availed['availed_services']->total_price)) {{number_format($service_availed['availed_services']->total_price, 2, '.', ',')}} @endif</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="table-responsive">
+                                <table id="" class="table ">
+                                        <thead>
+                                            <tr>
+                                                <th>#</th>
+                                                <th class="text-center">Image</th>
+                                                <th>Service Name</th>
+                                                <th >Service Desc</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <?php 
+                                                $total = 0;
+                                                $valid_cart = true;
+                                            ?>
+                                            @forelse($service_availed['availed_service_items']  as $key => $value )
+                                                <?php if(!$value->is_active) {$valid_cart = false;}?>
+                                                <tr @if(!$value->is_active) class="bg-danger" @endif>
+                                                    <th scope="row" class="align-middle">{{$key +1 }}</th>
+                                                    <td class="text-center align-middle">
+                                                        <img src="{{asset('storage/content/services/'.$value->service_image)}}" alt="Product Image"  style="object-fit: cover;width:100px; max-height: 100px;">
+                                                    </td>
+                                                    <td class="align-middle">{{$value->service_name}}</td>
+                                                    <td class="align-middle">{{$value->service_description}}</td>
+                                                </tr>
+                                            @empty
+                                                <tr>
+                                                    <td colspan="42" class="text-center text-dark">NO DATA</td>
+                                                </tr>
+                                            @endforelse
+                                        </tbody>
+                                    </table>
+                            </div>
+                        </div>
+                    </div>
                     
                 </div>
-        
+            
                 <div class="modal-footer bg-white text-black">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                    <button type="button" class="btn btn-success">Approve</button>
+                    <a href="#" class="btn btn-primary">Download PDF</a>
+                    <a href="#" class="btn btn-secondary">Print</a>
+                    <button type="button" class="btn btn-light" data-bs-dismiss="modal">Close</button>
                 </div>
+
             </div>
         </div>
-    </div>
+    </div> 
+    <button class="btn btn-success me-md-2" data-bs-toggle="modal" data-bs-target="#approveModal" id="approveModalToggler" style="display:none">Add</button>
+    <div  wire:ignore.self class="modal fade" id="approveModal" tabindex="-1" role="dialog" aria-labelledby="approveModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-xl" role="document">
+            <div class="modal-content">
+                <div class="modal-header bg-dark text-white">
+                    <h5 class="modal-title" id="approveModalLabel">Approve Service</h5>
+                    <button type="button" class="close text-light" data-bs-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form wire:submit.prevent="save_approve_availed_service(@if($service_availed['availed_services']) {{$service_availed['availed_services']->id}} @endif,'approveModalToggler')">
+                    <div class="modal-body bg-white text-black">
+                        <p class="text-success text-center">
+                            Are you sure you want to return this to Approve Service?
+                        </p>
+                    </div>
+                    @if($error)
+                    <div class="modal-body bg-white text-black">
+                        <p class="text-danger text-center">
+                            {{$error}}
+                        </p>
+                    </div>
+                    @endif
+                    <div class="modal-footer bg-white text-black">
+                        <button type="button" class="btn btn-light" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-success" >Approve Service</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div> 
+    <button class="btn btn-success me-md-2" data-bs-toggle="modal" data-bs-target="#declineModal" id="declineModalToggler" style="display:none">Add</button>
+    <div  wire:ignore.self class="modal fade" id="declineModal" tabindex="-1" role="dialog" aria-labelledby="declineModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-xl" role="document">
+            <div class="modal-content">
+                <div class="modal-header bg-dark text-white">
+                    <h5 class="modal-title" id="declineModalLabel">Decline Service</h5>
+                    <button type="button" class="close text-light" data-bs-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form wire:submit.prevent="save_decline_availed_service(@if($service_availed['availed_services']) {{$service_availed['availed_services']->id}} @endif,'declineModalToggler')">
+                    <div class="modal-body bg-white text-black">
+                        <p class="text-danger text-center">
+                            Are you sure you want to return this to Decline Service?
+                        </p>
+                    </div>
+                    <div class="modal-footer bg-white text-black">
+                        <button type="button" class="btn btn-light" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-danger" >Decline Service</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div> 
 </div>

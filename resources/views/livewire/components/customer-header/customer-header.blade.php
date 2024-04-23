@@ -1,5 +1,5 @@
 <div>
-<header class="">
+    <header class="">
         <nav class="navbar navbar-expand-lg">
             <div class="container">
                 <a class="navbar-brand" href="{{route('customer-dashboard')}}"><h2>WMSU <em>UPRESS</em></h2></a>
@@ -32,9 +32,15 @@
                             </a>
                         </li>
                         <li class="nav-item" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Services">
-                            <a class="nav-link @if( Route::is('customer-order-list')) active @endif" href="{{route('customer-order-list')}}">
+                            <a class="nav-link @if( Route::is('customer-service-cart')) active @endif" href="{{route('customer-service-cart')}}">
                                 <i class="link-icon" data-feather="layers"></i>    
-                                <span class="badge bg-primary">12</span>
+                                <span class="badge bg-primary">{{$header_info['service_items']}}</span>
+                            </a>
+                        </li>
+                        <li class="nav-item" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Availed Services">
+                            <a class="nav-link @if( Route::is('customer-service-list')) active @endif" href="{{route('customer-service-list')}}">
+                            <i class="fas fa-shopping-bag"><i class="link-icon" data-feather="layers"></i> </i>   
+                                <span class="badge bg-primary">{{$header_info['pending_service']}}</span>
                             </a>
                         </li>
                         <!-- <li class="nav-item" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Track Orders">

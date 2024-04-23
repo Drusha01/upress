@@ -18,6 +18,8 @@ class CustomerHeader extends Component
             'cart_items' => 0,
             'notification_items'=> 0,
             'pending_order' => 0,
+            'service_items' => 0,
+            'pending_service' => 0,
         ];
         if(isset($session['id'])){
             $user_info  = DB::table('users as u')

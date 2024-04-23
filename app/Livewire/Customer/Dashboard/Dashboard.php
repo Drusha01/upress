@@ -27,6 +27,11 @@ class Dashboard extends Component
     public $stock = [
         
     ];
+    public $user_id;
+    public function mount(Request $request){
+        $data = $request->session()->all();
+        $this->user_id = $data['id'];
+    }
     public function render()
     {
         $stocks_data = DB::table('products as p')
@@ -42,8 +47,11 @@ class Dashboard extends Component
         ->rightjoin('product_stocks as ps','p.id','ps.product_id')
         ->groupby('p.id')
         ->paginate(10);
+        $service_data = DB::table('services')
+        ->paginate(10);
         return view('livewire.customer.dashboard.dashboard',[
-            'stocks_data'=>$stocks_data 
+            'stocks_data'=>$stocks_data ,
+            'service_data'=>$service_data 
         ])
         ->layout('components.layouts.customer');
     }
@@ -189,6 +197,36 @@ class Dashboard extends Component
                 $this->current_cart['error'] = "Please quantity must be less than or equal to ".$stocks->quantity;
                 return;
             }
+        }
+    }
+    public function add_to_service_cart($id){
+        if( DB::table('services_cart')
+            ->where('customer_id','=',$this->user_id)
+            ->where('service_id','=',$id)
+            ->first()){
+            $this->dispatch('swal:redirect',
+                position         									: 'center',
+                icon              									: '',
+                title             									: 'Service is already added!',
+                showConfirmButton 									: 'true',
+                timer             									: '1000',
+                link              									: '#'
+            );
+        }else{
+            if(DB::table('services_cart')
+            ->insert([
+                'customer_id' =>  $this->user_id,
+                'service_id' =>$id , 
+           ])){
+            $this->dispatch('swal:redirect',
+                position         									: 'center',
+                icon              									: '',
+                title             									: 'Service added!',
+                showConfirmButton 									: 'true',
+                timer             									: '1000',
+                link              									: '#'
+            );
+           }
         }
     }
 }
