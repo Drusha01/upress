@@ -14,11 +14,13 @@
                     <i data-feather="download-cloud"></i>
                     Download Report
                 </button> -->
-                <!-- <div class="col">
-                    <select name="" id="" class="form-select">
-                        <option value="">Select Year</option>
+                <div class="col">
+                    <select name="" id="" class="form-select" wire:model.live="dashboard.current_year">
+                        @foreach($dashboard['years'] as $key => $value)
+                            <option value="{{ $value->year}}">Year {{ $value->year}}</option>
+                        @endforeach
                     </select>
-                </div> -->
+                </div>
             </div>
         </div>
 
@@ -214,11 +216,51 @@
             var productRevenueChart = new Chart(productRevenueCtx, {
                 type: 'bar',
                 data: {
-                    labels: ['Week 1', 'Week 2', 'Week 3', 'Week 4'],
+                    labels: [
+                        <?php 
+                        foreach($dashboard['product_revenue'] as $key =>$value){
+                            if ($key === array_key_last($dashboard['product_revenue'])) {
+                            echo "'".$value->month."'";
+                            }else{
+                                echo "'".$value->month."',";
+                            }
+                        }
+                        ?>
+                    ],
                     datasets: [{
-                        label: 'Month Of April',
-                        data: productRevenueData,
-                        backgroundColor: 'rgba(54, 162, 235, 0.5)'
+                        label: [
+                            <?php 
+                            foreach($dashboard['product_revenue'] as $key =>$value){
+                                if ($key === array_key_last($dashboard['product_revenue'])) {
+                                echo "'".$value->month."'";
+                                }else{
+                                    echo "'".$value->month."',";
+                                }
+                            }
+                            ?>
+                        ],
+                        data: [
+                            <?php 
+                            foreach($dashboard['product_revenue'] as $key =>$value){
+                                if ($key === array_key_last($dashboard['product_revenue'])) {
+                                echo "".$value->total."";
+                                }else{
+                                    echo "".$value->total.",";
+                                }
+                            }
+                            ?>
+                        ],
+                        backgroundColor: [
+                            <?php 
+                            foreach($dashboard['product_revenue'] as $key =>$value){
+                                if ($key === array_key_last($dashboard['product_revenue'])) {
+                                    echo "'rgba(".rand(100,255).",".rand(100,255).",".rand(100,255).",0.5)'";
+                                }else{
+                                    echo "'rgba(".rand(100,255).",".rand(100,255).",".rand(100,255).",0.5)',";
+                                }
+                            }
+                            ?>
+                        ]
                     }]
                 },
                 options: {
@@ -236,11 +278,43 @@
             var orderStatusDataChart = new Chart(orderStatusDataCtx, {
                 type: 'doughnut',
                 data: {
-                    labels: ['Pending Order'],
+                    labels: [
+                        
+                        <?php 
+                        foreach($dashboard['order_status'] as $key =>$value){
+                            if ($key === array_key_last($dashboard['order_status'])) {
+                            echo "'".$value->name."'";
+                            }else{
+                                echo "'".$value->name."',";
+                            }
+                        }
+                        ?>
+                        
+                    ],
                     datasets: [{
-                        label: 'Pending Order',
-                        data: [orderStatusData],
-                        backgroundColor: 'rgba(255, 255, 0, 0.5)'
+                        label: 'Order Status',
+                        data: [
+                            <?php 
+                            foreach($dashboard['order_status'] as $key =>$value){
+                                if ($key === array_key_last($dashboard['order_status'])) {
+                                echo "".$value->count."";
+                                }else{
+                                    echo "".$value->count.",";
+                                }
+                            }
+                            ?>
+                        ],
+                        backgroundColor: [
+                            <?php 
+                            foreach($dashboard['order_status'] as $key =>$value){
+                                if ($key === array_key_last($dashboard['order_status'])) {
+                                    echo "'rgba(".rand(100,255).",".rand(100,255).",".rand(100,255).",0.5)'";
+                                }else{
+                                    echo "'rgba(".rand(100,255).",".rand(100,255).",".rand(100,255).",0.5)',";
+                                }
+                            }
+                            ?>
+                        ]
                     }]
                 },
                 options: {
@@ -259,9 +333,39 @@
                 data: {
                     labels: ['Service Status'],
                     datasets: [{
-                        label: 'Total Service Status',
-                        data: [availServiceStatusData],
-                        backgroundColor: ['#ff6384']
+                        label: [
+                            <?php 
+                            foreach($dashboard['avail_service_status'] as $key =>$value){
+                                if ($key === array_key_last($dashboard['avail_service_status'])) {
+                                    echo "'".$value->name."'";
+                                }else{
+                                    echo "'".$value->name."',";
+                                }
+                            }
+                            ?>
+                        ],
+                        data: [
+                            <?php 
+                            foreach($dashboard['avail_service_status'] as $key =>$value){
+                                if ($key === array_key_last($dashboard['avail_service_status'])) {
+                                    echo "".$value->count."";
+                                }else{
+                                    echo "".$value->count.",";
+                                }
+                            }
+                            ?>
+                        ],
+                        backgroundColor: [
+                            <?php 
+                            foreach($dashboard['avail_service_status'] as $key =>$value){
+                                if ($key === array_key_last($dashboard['avail_service_status'])) {
+                                    echo "'rgba(".rand(100,255).",".rand(100,255).",".rand(100,255).",0.5)'";
+                                }else{
+                                    echo "'rgba(".rand(100,255).",".rand(100,255).",".rand(100,255).",0.5)',";
+                                }
+                            }
+                            ?>
+                        ]
                     }]
                 },
                 options: {
