@@ -29,7 +29,6 @@ class StockInRecords extends Component
                 'ps.product_color_id' ,
                 'pc.name as product_color' ,
                 'stio.quantity as stock_quantity' ,
-                'ps.price as product_price' ,
 
                 'st.name as stock_type_name',
                 'stio.date_created',

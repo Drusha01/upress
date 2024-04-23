@@ -35,12 +35,27 @@ use App\Livewire\Admin\Transactions\Transactionrecords\Transactionrecords as Adm
 use App\Livewire\Admin\Users\Admin\Admin as AdminUsers;
 use App\Livewire\Admin\Users\Customers\Customers as AdminCustomers;
 use App\Livewire\Admin\Users\Staff\Staff as AdminStaff;
+use App\Livewire\Admin\Orders\Revieworders\Revieworders as AdminRevieworders;
+
+use App\Livewire\Admin\Orders\CompletedOrder\CompletedOrder as AdminCompletedOrder;
+use App\Livewire\Admin\Orders\ConfirmedOrder\ConfirmedOrder as AdminConfirmedOrder;
+use App\Livewire\Admin\Orders\DeclinedOrder\DeclinedOrder as AdminDeclinedOrder;
+use App\Livewire\Admin\Orders\OrderList\OrderList as AdminOrderList;
+use App\Livewire\Admin\Orders\PendingOrder\PendingOrder as AdminPendingOrder;
+use App\Livewire\Admin\Orders\ReadyForPickup\ReadyForPickup as AdminReadyForPickup;
 
 // customer
 use App\Livewire\Customer\Cart\Cart as CustomerCart;
 use App\Livewire\Customer\Contact\Contact as CustomerContact;
 use App\Livewire\Customer\Dashboard\Dashboard as CustomerDashboard;
-use App\Livewire\Customer\OrderList\OrderList as CustomerOrderList;
+use App\Livewire\Customer\Order\CancelledOrder\CancelledOrder as CustomerCancelledOrder;
+use App\Livewire\Customer\Order\CompleteOrder\CompleteOrder as CustomerCompleteOrder;
+use App\Livewire\Customer\Order\ConfirmedOrder\ConfirmedOrder as CustomerConfirmedOrder;
+use App\Livewire\Customer\Order\DeclinedOrder\DeclinedOrder as CustomerDeclinedOrder;
+use App\Livewire\Customer\Order\Orderlist\Orderlist as CustomerOrderList;
+use App\Livewire\Customer\Order\PendingOrder\PendingOrder as CustomerPendingOrder;
+use App\Livewire\Customer\Order\ReadyForPickup\ReadyForPickup as CustomerReadyForPickup;
+
 use App\Livewire\Customer\Products\Products as CustomerProducts;
 use App\Livewire\Customer\Profile\Profile as CustomerProfile;
 use App\Livewire\Customer\Services\Services as CustomerServices;
@@ -98,12 +113,23 @@ Route::middleware([Unauthenticated::class,IsAdmin::class])->group(function () {
 
         Route::prefix('orders')->group(function () {
             Route::get('product-orders',AdminProductOrders::class)->name('admin-product-orders');
+            Route::get('revieworders',AdminRevieworders::class)->name('admin-revieworders');
+
+            Route::get('completed',AdminCompletedOrder::class)->name('admin-completed-order');
+            Route::get('confirmed',AdminConfirmedOrder::class)->name('admin-confirmed-order');
+            Route::get('declined',AdminDeclinedOrder::class)->name('admin-declined-order');
+            Route::get('order-list',AdminOrderList::class)->name('admin-order-list');
+            Route::get('pending',AdminPendingOrder::class)->name('admin-pending-order');
+            Route::get('ready-for-pickup',AdminReadyForPickup::class)->name('admin-ready-for-pickup-order');
+            
+
         });
 
         Route::prefix('services')->group(function () {
             Route::get('servicelist',AdminServicelist::class)->name('admin-servicelist');
-            Route::get('pendingservices',AdminPendingservices::class)->name('admin-pendingservices');
-            Route::get('approvedservices',AdminApprovedservices::class)->name('admin-approvedservices');
+            Route::get('pendingservices',AdminPendingservices::class)->name('admin-pending-services');
+            Route::get('approvedservices',AdminApprovedservices::class)->name('admin-approved-services');
+            Route::get('completedservices',AdminCompletedservices::class)->name('admin-completed-services');
         });
 
     });
@@ -123,7 +149,16 @@ Route::middleware([Unauthenticated::class,isCustomer::class])->group(function ()
     Route::prefix('customer')->group(function () {
         Route::get('cart', CustomerCart::class)->name('customer-cart');
         Route::get('dashboard', CustomerDashboard::class)->name('customer-dashboard');
-        Route::get('orderlist', CustomerOrderList::class)->name('customer-order-list');
+
+        Route::prefix('orders')->group(function () {
+            Route::get('cancelled', CustomerCancelledOrder::class)->name('customer-order-cancelled');
+            Route::get('completed', CustomerCompleteOrder::class)->name('customer-order-completed');
+            Route::get('confirmed', CustomerConfirmedOrder::class)->name('customer-order-confirmed');
+            Route::get('declined', CustomerDeclinedOrder::class)->name('customer-order-declined');
+            Route::get('orderlist', CustomerOrderList::class)->name('customer-order-list');
+            Route::get('pending', CustomerPendingOrder::class)->name('customer-order-pending');
+            Route::get('ready-for-pickup', CustomerReadyForPickup::class)->name('customer-order-ready-for-pickup');
+        });
         Route::get('products', CustomerProducts::class)->name('customer-product');
         Route::get('profile', CustomerProfile::class)->name('customer-profile');
         Route::get('services', CustomerServices::class)->name('customer-services');

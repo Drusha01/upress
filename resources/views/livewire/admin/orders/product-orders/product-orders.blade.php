@@ -15,10 +15,11 @@
                                     <label for="stockTypeFilter" class="form-label">Filter:</label>
                                 </div>
                                 <div class="col-auto">
-                                    <select class="form-select form-select-sm" id="stockTypeFilter">
-                                        <option value="all">All</option>
-                                        <option value="stock-in">2</option>
-                                        <option value="stock-out">1</option>
+                                    <select class="form-select form-select-sm" id="stockTypeFilter" wire:model.live.debounce.250ms="filters.status_id">
+                                        <option value="">All</option>
+                                        @foreach($order_status as $key =>$value)
+                                        <option value="{{$value->id}}">{{$value->name}}</option>
+                                        @endforeach
                                     </select>
                                 </div>
                         </div>
@@ -26,38 +27,42 @@
                                 <table class="table table-bordered table-lg"> 
                                     <thead>
                                         <tr>
-                                            <th>Order ID</th>
-                                            <th>Customer Name</th>
-                                            <th>Product Name</th>
-                                            <th>Color</th>
-                                            <th>Size</th>
-                                            <th>Unit Price</th>
-                                            <th>Quantity</th>
-                                            <th>Total Amount</th>
-                                            <th>Order Status</th>
-                                            <th>Order Date</th>
-                                            <th>Action</th>
+                                            <th style="width:20%">Track No.</th>
+                                            <th style="width:12%">Account Name</th>
+                                            <th style="width:12%" class="text-center">Status</th>
+                                            <th style="width:12%" class="align-middle text-center">Action</th>
                                         </tr>
                                     </thead>
-                                    <tbody class="text-dark">
+                                    <tbody>
+                                        @forelse($customer_order as $key =>$value)
                                         <tr>
-                                            <th>1</th>
-                                            <th>Bryan Tingkasan</th>
-                                            <th>WMSU Lanyard</th>
-                                            <th>Red</th>
-                                            <th>Medium</th>
-                                            <th>Php 100.00</th>
-                                            <th>2</th>
-                                            <th>Php 200.00</th>
-                                            <th>Pending</th>
-                                            <th>January 21,2024</th>                                            
-                                            <td>
-                                                <a href="{{ url('admin-order-review') }}" class="btn btn-primary">Review Order</a>
+                                            <td data-th="Price" class="align-middle">{{str_pad($value->id, 8, '0', STR_PAD_LEFT)}}</td>
+                                            <td data-th="Price" class="align-middle">{{$value->first_name.' '.$value->middle_name.' '.$value->last_name}}</td>
+                                            <td data-th="Price" class="align-middle text-center">{{$value->order_status}}</td>
+                                            <td class="align-middle text-center">
+                                                <button class="btn btn-primary btn-sm">
+                                                    <i class="fa fa-pencil-square-o" aria-hidden="true"></i> View
+                                                </button>
                                             </td>
                                         </tr>
-                                     
+                                        @empty
+                                            <tr>
+                                                <td colspan="42" class="text-center text-dark">NO DATA</td>
+                                            </tr>
+                                        @endforelse
                                     </tbody>
                                 </table>
+                            </div>
+                            <div class="pagination-container mt-3">
+                                <ul class="pagination">
+                                    <li><a href="{{ $customer_order->previousPageUrl() }}">Previous</a></li>
+                                    @foreach ($customer_order->getUrlRange(1, $customer_order->lastPage()) as $page => $url)
+                                        <li class="{{ $page == $customer_order->currentPage() ? 'active' : '' }}">
+                                            <a href="{{ $url }}">{{ $page }}</a>
+                                        </li>
+                                    @endforeach
+                                    <li><a href="{{ $customer_order->nextPageUrl() }}">Next</a></li>
+                                </ul>
                             </div>
                         </div>
                     </div>
@@ -67,10 +72,10 @@
     </div>
 
     <!-- View Transaction Modal -->
-    <div class="modal fade" id="viewTransactionModal" tabindex="-1" role="dialog" aria-labelledby="viewTransactionModalLabel" aria-hidden="true">
+    <!-- <div class="modal fade" id="viewTransactionModal" tabindex="-1" role="dialog" aria-labelledby="viewTransactionModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
-                <!-- Modal Header -->
+              
                 <div class="modal-header bg-dark text-white">
                     <h5 class="modal-title" id="viewTransactionModalLabel">Transaction Details</h5>
                     <button type="button" class="close text-light" data-dismiss="modal" aria-label="Close">
@@ -78,32 +83,32 @@
                     </button>
                 </div>
 
-                <!-- Modal Body -->
+           
                 <div class="modal-body bg-white text-black">
                     <div class="container-fluid">
-                    <!-- Header Section -->
+                  
                     <div class="row justify-content-center align-items-center mb-4">
-                        <!-- University Logo 1 -->
+                  
                         <div class="col-6 col-md-3 text-center">
                             <img class="img-fluid rounded-circle mb-2" src="../landingpage/assets/images/wmsu.png" alt="University Logo" style="max-width: 100px;">
                         </div>
 
-                        <!-- University Details -->
+                      
                         <div class="col-6 col-md-3 text-center">
                             <span>Western Mindanao State University</span><br>
                             <h5>UNIVERSITY PRESS</h5>
                             <span>Zamboanga City</span>
                         </div>
 
-                        <!-- University Logo 2 -->
+                      
                         <div class="col-6 col-md-3 text-center">
                             <img class="img-fluid rounded-circle mb-2" src="../assets/logo/upress-logo.png" alt="University Logo" style="max-width: 100px;">
                         </div>
                     </div>
 
-                        <!-- Transaction Details and Payment Proof -->
+                     
                         <div class="row">
-                            <!-- Left Column (Transaction Information) -->
+              
                             <div class="col-md-6 mt-3">
                                 <div class="mb-2">
                                     <p><strong>Order ID:</strong> 1</p>
@@ -131,7 +136,7 @@
                                 </div>
                             </div>
 
-                            <!-- Right Column (Payment Proof Image) -->
+                         
                             <div class="col-md-6 text-center">
                                 <div class="mb-0">
                                     <p><strong>Payment Proof:</strong></p>
@@ -142,7 +147,7 @@
                     </div>
                     
                 </div>
-                <!-- Modal Footer -->
+            
                 <div class="modal-footer bg-white text-black">
                     <a href="#" class="btn btn-primary">Download PDF</a>
                     <a href="#" class="btn btn-secondary">Print</a>
@@ -151,7 +156,7 @@
 
             </div>
         </div>
-    </div>
+    </div> -->
 
 </div>
 

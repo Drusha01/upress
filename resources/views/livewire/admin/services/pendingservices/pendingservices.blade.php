@@ -3,8 +3,10 @@
         <div class="row">
             <div class="col-md-12 grid-margin">
                 <div class="card border rounded">
+                    <div class="card-header bg-dark text-white">
+                        <h3 class="text-center">Pending Services</h3>
+                    </div>
                     <div class="card-body">
-                        <h4 class="mb-1">Pending Services</h4>
                         <div class="d-flex justify-content-end mb-1">
                             <!-- <button type="button" class="btn btn-success float-end mb-2" data-bs-toggle="modal" data-bs-target="#addServiceModal">
                                 Add Service
@@ -82,9 +84,10 @@
                 </div>
                 <div class="modal-body bg-white text-black">
                     <!-- Approval Form or Confirmation Message -->
-                    <p>To approve, Upload the Payment OR</p>
-                    <label for="imageUpload">Upload OR</label>
-                    <input type="file" class="form-control-file border" id="imageUpload" accept="image/*" required>
+                    <label for="imageUpload" style="font-weight: 400">
+                        <h5 style="font-weight: 500; font-size: 15px;margin-bottom: 7px;">Upload Payment OR</h5>
+                    </label>
+                    <input type="file" class="form-control-file border" id="imageUpload" accept="image/*" style="padding: 6px; border-radius: 8px; width: 80%;" required>
                     
                 </div>
         

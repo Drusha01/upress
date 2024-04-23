@@ -48,7 +48,7 @@
                                                         <i class="fa fa-pencil-square-o" aria-hidden="true"></i> Activate
                                                     </button>
                                                 @endif
-                                        </td>
+                                            </td>
                                         </tr>
                                     @empty
                                         <tr>

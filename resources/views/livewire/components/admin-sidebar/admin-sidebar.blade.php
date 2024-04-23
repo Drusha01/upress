@@ -21,6 +21,7 @@
                         <i class="link-icon" data-feather="box"></i>
                         <span class="link-title">Dashboard</span>
                     </a>
+                </li>
                     <li class="nav-item nav-category">
                         Components
                     </li>
@@ -65,24 +66,27 @@
                         </div>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" data-bs-toggle="collapse" href="#advancedUI" role="button" aria-expanded="false" aria-controls="advancedUI">
+                        <a class="nav-link" data-bs-toggle="collapse" href="#services" role="button" aria-expanded="false" aria-controls="advancedUI">
                             <i class="link-icon" data-feather="layers"></i>
                             <span class="link-title">Services</span>
                             <i class="link-arrow" data-feather="chevron-down"></i>
                         </a>
-                        <div class="collapse" id="advancedUI">
+                        <div class="collapse" id="services">
                             <ul class="nav sub-menu">
                                 <li class="nav-item">
-                                    <a href="{{route('admin-servicelist')}}" class="nav-link">Service Lists</a>
+                                    <a href="{{route('admin-servicelist')}}" class="nav-link @if( Route::is('admin-servicelist')) active @endif">Service Lists</a>
+                                </li>
+
+                                <li class="nav-item" id="pending-services">
+                                    <a href="{{ route('admin-pending-services') }}" class="nav-link @if(Route::is('admin-pending-services')) active @endif">Pending Services</a>
+                                </li>
+                                
+
+                                <li class="nav-item">
+                                    <a href="{{route ('admin-approved-services')}}" class="nav-link @if( Route::is('admin-approved-services')) active @endif">Approved Services</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="{{route('admin-pendingservices')}}"class="nav-link">Pending Services</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="{{route ('admin-approvedservices')}}" class="nav-link">Approved Services</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="" class="nav-link">Completed Services</a>
+                                    <a href="{{route('admin-completed-services')}}" class="nav-link @if( Route::is('admin-completed-services')) active @endif">Completed Services</a>
                                 </li>
                             </ul>
                         </div>
@@ -95,9 +99,26 @@
                         </a>
                         <div class="collapse" id="orders">
                             <ul class="nav sub-menu">
-                            <li class="nav-item">
-                                <a href="{{ route('admin-product-orders') }}" class="nav-link">Product Ordering</a>
-                            </li>
+                                <li class="nav-item">
+                                    <a href="{{ route('admin-order-list') }}" class="nav-link @if( Route::is('admin-order-list')) active @endif">All Orders</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="{{ route('admin-declined-order') }}" class="nav-link @if( Route::is('admin-declined-order')) active @endif">Declined Orders</a>
+                                </li>
+
+                                <li class="nav-item" id="pending-order">
+                                    <a href="{{ route('admin-pending-order') }}" class="nav-link @if(Route::is('admin-pending-order')) active @endif">Pending Orders</a>
+                                </li>
+                                
+                                <li class="nav-item">
+                                    <a href="{{ route('admin-confirmed-order') }}" class="nav-link @if( Route::is('admin-confirmed-order')) active @endif">Confirmed Orders</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="{{ route('admin-ready-for-pickup-order') }}" class="nav-link @if( Route::is('admin-ready-for-pickup-order')) active @endif">Ready for Pickup Orders</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="{{ route('admin-completed-order') }}" class="nav-link @if( Route::is('admin-completed-order')) active @endif">Completed Orders</a>
+                                </li>
                             </ul>
                         </div>
                     </li>
@@ -110,7 +131,10 @@
                         <div class="collapse" id="transaction">
                             <ul class="nav sub-menu">
                                 <li class="nav-item">
-                                    <a href="{{ route('admin-transactionrecords') }}" class="nav-link">Transaction Records</a>
+                                    <a href="{{ route('admin-transactionrecords') }}" class="nav-link">Order Transaction Records</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="{{ route('admin-transactionrecords') }}" class="nav-link">Services Transaction Records</a>
                                 </li>
                             </ul>
                         </div>
