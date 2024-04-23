@@ -25,6 +25,14 @@
             <div class="col-md-4">
                 <div class="card mb-3">
                     <div class="card-body">
+                        <h5 class="card-title">Sales Weekly Overview</h5>
+                        <canvas id="salesWeeklyChart" width="100%" height="30"></canvas>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card mb-3">
+                    <div class="card-body">
                         <h5 class="card-title">Sales Overview</h5>
                         <canvas id="salesOverviewChart" width="100%" height="30"></canvas>
                     </div>
@@ -54,22 +62,22 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-4">
+            <!-- <div class="col-md-4">
                 <div class="card mb-3">
                     <div class="card-body">
                         <h5 class="card-title">Total Product Sales</h5>
                         <canvas id="totalProductSalesChart" width="100%" height="50"></canvas>
                     </div>
                 </div>
-            </div>
-            <div class="col-md-4">
+            </div> -->
+            <!-- <div class="col-md-4">
                 <div class="card mb-3">
                     <div class="card-body">
                         <h5 class="card-title">Total Service Sales</h5>
                         <canvas id="totalServiceSalesChart" width="100%" height="50"></canvas>
                     </div>
                 </div>
-            </div>
+            </div> -->
         </div>
 
         <script>
@@ -91,6 +99,28 @@
                         labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul'],
                         datasets: [{
                             label: 'Sales Overview',
+                            data: salesData,
+                            borderColor: 'rgb(75, 192, 192)',
+                            tension: 0.1
+                        }]
+                    },
+                    options: {
+                        scales: {
+                            y: {
+                                beginAtZero: true
+                            }
+                        }
+                    }
+                });
+
+                // Sales Overview Chart
+                var salesOverviewCtx = document.getElementById('salesWeeklyChart').getContext('2d');
+                var salesOverviewChart = new Chart(salesOverviewCtx, {
+                    type: 'line',
+                    data: {
+                        labels: ['Week 1', 'Week 2', 'Week 3', 'Week 4',],
+                        datasets: [{
+                            label: 'Sales this month of April',
                             data: salesData,
                             borderColor: 'rgb(75, 192, 192)',
                             tension: 0.1
@@ -148,38 +178,38 @@
                 });
 
                 // Total Product Sales Chart
-                var totalProductSalesCtx = document.getElementById('totalProductSalesChart').getContext('2d');
-                var totalProductSalesChart = new Chart(totalProductSalesCtx, {
-                    type: 'doughnut',
-                    data: {
-                        labels: ['Total Product Sales'],
-                        datasets: [{
-                            label: 'Total Product Sales',
-                            data: [totalProductSalesData],
-                            backgroundColor: ['#36a2eb']
-                        }]
-                    },
-                    options: {
-                        responsive: true
-                    }
-                });
+                // var totalProductSalesCtx = document.getElementById('totalProductSalesChart').getContext('2d');
+                // var totalProductSalesChart = new Chart(totalProductSalesCtx, {
+                //     type: 'doughnut',
+                //     data: {
+                //         labels: ['Total Product Sales'],
+                //         datasets: [{
+                //             label: 'Total Product Sales',
+                //             data: [totalProductSalesData],
+                //             backgroundColor: ['#36a2eb']
+                //         }]
+                //     },
+                //     options: {
+                //         responsive: true
+                //     }
+                // });
 
                 // Total Service Sales Chart
-                var totalServiceSalesCtx = document.getElementById('totalServiceSalesChart').getContext('2d');
-                var totalServiceSalesChart = new Chart(totalServiceSalesCtx, {
-                    type: 'doughnut',
-                    data: {
-                        labels: ['Total Service Sales'],
-                        datasets: [{
-                            label: 'Total Service Sales',
-                            data: [totalServiceSalesData],
-                            backgroundColor: ['#ff6384']
-                        }]
-                    },
-                    options: {
-                        responsive: true
-                    }
-                });
+                // var totalServiceSalesCtx = document.getElementById('totalServiceSalesChart').getContext('2d');
+                // var totalServiceSalesChart = new Chart(totalServiceSalesCtx, {
+                //     type: 'doughnut',
+                //     data: {
+                //         labels: ['Total Service Sales'],
+                //         datasets: [{
+                //             label: 'Total Service Sales',
+                //             data: [totalServiceSalesData],
+                //             backgroundColor: ['#ff6384']
+                //         }]
+                //     },
+                //     options: {
+                //         responsive: true
+                //     }
+                // });
 
                 // Pending Orders Chart
                 var pendingOrdersCtx = document.getElementById('pendingOrdersChart').getContext('2d');
