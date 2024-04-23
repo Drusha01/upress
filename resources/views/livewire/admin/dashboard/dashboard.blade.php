@@ -174,7 +174,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <canvas id="orderStatusChart" width="100%" height="50%"></canvas>
+                            <canvas id="orderStatusChart" width="100%" height="18"></canvas>
 
                         </div>
                 </div>
@@ -191,7 +191,7 @@
                                 </div>
                             </div>
                         </div>
-                        <canvas id="availServiceStatusChart" width="100%" height="30"></canvas>
+                        <canvas id="availServiceStatusChart" width="100%" height="18"></canvas>
 
                     </div>
             </div>
@@ -240,7 +240,7 @@
                     datasets: [{
                         label: 'Pending Order',
                         data: [orderStatusData],
-                        backgroundColor: 'rgba(54, 162, 235, 0.5)'
+                        backgroundColor: 'rgba(255, 255, 0, 0.5)'
                     }]
                 },
                 options: {
