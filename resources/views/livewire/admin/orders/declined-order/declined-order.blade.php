@@ -1,8 +1,6 @@
-
 <div>
-
     <div class="page-content">
-        <div class="container">
+        <div class="">
             <div class="row justify-content-center">
                 <div class="col-md-15"> 
                     <div class="card">
@@ -11,6 +9,9 @@
                         </div>
                         <div class="card-body">
                             <div class="row mb-3 justify-content-end">
+                                <div class="col-auto">
+                                    <label for="stockTypeFilter" class="form-label">Filter:</label>
+                                </div>
                             </div>
                             <div class="table-responsive">
                                 <table class="table table-bordered table-lg"> 
