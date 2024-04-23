@@ -145,16 +145,13 @@
                     </div>
                 </div>
             </div>
-            <div class="col-12 col-xl-12 grid-margin stretch-card">
-                <div class="card overflow-hidden">
+            <div class="col-md-12 grid-margin stretch-card">
+                <div class="card">
                     <div class="card-body">
                         <div class="d-flex justify-content-between align-items-baseline mb-4 mb-md-3">
                             <h6 class="card-title mb-0">Product Revenue</h6>
                         </div>
                         <div class="row align-items-start">
-                            <div class="col-md-7" style="margin-bottom: 40px;">
-                                <p class="text-muted tx-13 mb-md-0 fw-bold ">Track the weekly sales of WMSU UPRESS Monthly Product Revenue.</p>
-                            </div>
                             <div class="col-md-5 d-flex justify-content-md-end mb-10">
                                 <div class="btn-group mb-3 mb-md-0" role="group" aria-label="Basic example">
                                 </div>
@@ -163,8 +160,43 @@
                         <canvas id="productRevenueChart" width="100%" height="30"></canvas>
 
                     </div>
-                </div>
             </div>
+        </div>    
+                <div class="col-md-6 grid-margin stretch-card">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between align-items-baseline mb-4 mb-md-3">
+                                <h6 class="card-title mb-0">Order Status</h6>
+                            </div>
+                            <div class="row align-items-start">
+                                <div class="col-md-5 d-flex justify-content-md-end mb-10">
+                                    <div class="btn-group mb-3 mb-md-0" role="group" aria-label="Basic example">
+                                    </div>
+                                </div>
+                            </div>
+                            <canvas id="orderStatusChart" width="100%" height="18"></canvas>
+
+                        </div>
+                </div>
+            </div>                
+            <div class="col-md-6 grid-margin stretch-card">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-baseline mb-4 mb-md-3">
+                            <h6 class="card-title mb-0">Avail Service Status</h6>
+                        </div>
+                        <div class="row align-items-start">
+                            <div class="col-md-5 d-flex justify-content-md-end mb-10">
+                                <div class="btn-group mb-3 mb-md-0" role="group" aria-label="Basic example">
+                                </div>
+                            </div>
+                        </div>
+                        <canvas id="availServiceStatusChart" width="100%" height="18"></canvas>
+
+                    </div>
+            </div>
+        </div>    
+
         </div>
     </div>
     <script>
@@ -172,6 +204,9 @@
         document.addEventListener('DOMContentLoaded', function() {
             // Sample static data for charts
             const productRevenueData = [1000, 1500, 800, 920];
+            const orderStatusData = 80;
+            const availServiceStatusData = 100;
+
 
 
             // Service Overview Chart
@@ -184,6 +219,49 @@
                         label: 'Month Of April',
                         data: productRevenueData,
                         backgroundColor: 'rgba(54, 162, 235, 0.5)'
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+            
+            // Service Overview Chart
+            var orderStatusDataCtx = document.getElementById('orderStatusChart').getContext('2d');
+            var orderStatusDataChart = new Chart(orderStatusDataCtx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Pending Order'],
+                    datasets: [{
+                        label: 'Pending Order',
+                        data: [orderStatusData],
+                        backgroundColor: 'rgba(255, 255, 0, 0.5)'
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+            // Service Overview Chart
+            var availServiceStatusCtx = document.getElementById('availServiceStatusChart').getContext('2d');
+            var availServiceStatusChart = new Chart(availServiceStatusCtx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Service Status'],
+                    datasets: [{
+                        label: 'Total Service Status',
+                        data: [availServiceStatusData],
+                        backgroundColor: ['#ff6384']
                     }]
                 },
                 options: {
