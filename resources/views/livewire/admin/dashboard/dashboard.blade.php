@@ -22,218 +22,184 @@
         </div>
 
         <div class="row">
-            <div class="col-md-4">
-                <div class="card mb-3">
+            <div class="col-12 col-xl-12 stretch-card">
+                <div class="row flex-grow-1">
+                    <div class="col-md-4 grid-margin stretch-card">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between align-items-baseline">
+                                <h6 class="card-title mb-0">No. of Customers</h6>
+                            </div>
+                            <div class="row">
+                                <div class="col-6 col-md-12 col-xl-5"><br>
+                                    <h5 class="mb-2">{{number_format(2.23,2)}}</h5>
+                                    <div class="d-flex align-items-baseline">
+                                    </div>
+                                </div>
+                                <div class="col-6 col-md-12 col-xl-7">
+                                    <div id="customersChart" class="mt-md-3 mt-xl-0">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 grid-margin stretch-card">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between align-items-baseline">
+                                <h6 class="card-title mb-0">No. of Orders</h6>
+                            </div>
+                            <div class="row">
+                                <div class="col-6 col-md-12 col-xl-5"><br>
+                                    <h5 class="mb-2">{{number_format(2.23,2)}}</h5>
+                                <div class="d-flex align-items-baseline">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>            
+            <div class="col-md-4 grid-margin stretch-card">
+                <div class="card">
                     <div class="card-body">
-                        <h5 class="card-title">Sales Weekly Overview</h5>
-                        <canvas id="salesWeeklyChart" width="100%" height="30"></canvas>
+                        <div class="d-flex justify-content-between align-items-baseline">
+                            <h6 class="card-title mb-0">Total Product Purchase</h6>
+                        </div>
+                        <div class="row">
+                            <div class="col-6 col-md-12 col-xl-5"><br>
+                                <h5 class="mb-2">{{number_format(  2.23,2)}}</h5>
+                                <div class="d-flex align-items-baseline">
+                                </div>
+                            </div>
+                            <div class="col-6 col-md-12 col-xl-7">
+                                <div id="growthChart" class="mt-md-3 mt-xl-0">
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
-            <div class="col-md-4">
-                <div class="card mb-3">
-                    <div class="card-body">
-                        <h5 class="card-title">Sales Overview</h5>
-                        <canvas id="salesOverviewChart" width="100%" height="30"></canvas>
+            <div class="col-12 col-xl-12 stretch-card">
+                <div class="row flex-grow-1">
+                <div class="col-md-4 grid-margin stretch-card">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="d-flex justify-content-between align-items-baseline">
+                                    <h6 class="card-title mb-0">Total Services Purchase</h6>
+                                </div>
+                                <div class="row">
+                                    <div class="col-6 col-md-12 col-xl-5"><br>
+                                        <h5 class="mb-2">{{number_format(2.23,2)}}</h5>
+                                        <div class="d-flex align-items-baseline">
+                                        </div>
+                                    </div>
+                                    <div class="col-6 col-md-12 col-xl-7">
+                                        <div id="customersChart" class="mt-md-3 mt-xl-0">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 grid-margin stretch-card">
+                        <div class="card">
+                                <div class="card-body">
+                                    <div class="d-flex justify-content-between align-items-baseline">
+                                        <h6 class="card-title mb-0">Total Amount Purchase(Php)</h6>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-6 col-md-12 col-xl-5"><br>
+                                            <h5 class="mb-2">{{number_format( 2.23,2)}}</h5>
+                                            <div class="d-flex align-items-baseline">
+                                            </div>
+                                        </div>
+                                        <div class="col-6 col-md-12 col-xl-7">
+                                            <div id="ordersChart" class="mt-md-3 mt-xl-0">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 grid-margin stretch-card">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="d-flex justify-content-between align-items-baseline">
+                                    <h6 class="card-title mb-0">Average Profits</h6>
+ 
+                                </div>
+                                <div class="row">
+                                    <div class="col-6 col-md-12 col-xl-5"><br>
+                                        <h5 class="mb-2">{{number_format(2.23,2)}}</h5>
+                                        <div class="d-flex align-items-baseline">
+                                        </div>
+                                    </div>
+                                    <div class="col-6 col-md-12 col-xl-7">
+                                        <div id="customersChart" class="mt-md-3 mt-xl-0">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
-            <div class="col-md-4">
-                <div class="card mb-3">
+            <div class="col-12 col-xl-12 grid-margin stretch-card">
+                <div class="card overflow-hidden">
                     <div class="card-body">
-                        <h5 class="card-title">Product Overview</h5>
-                        <canvas id="productOverviewChart" width="100%" height="30"></canvas>
+                        <div class="d-flex justify-content-between align-items-baseline mb-4 mb-md-3">
+                            <h6 class="card-title mb-0">Product Revenue</h6>
+                        </div>
+                        <div class="row align-items-start">
+                            <div class="col-md-7" style="margin-bottom: 40px;">
+                                <p class="text-muted tx-13 mb-md-0 fw-bold ">Track the weekly sales of WMSU UPRESS Monthly Product Revenue.</p>
+                            </div>
+                            <div class="col-md-5 d-flex justify-content-md-end mb-10">
+                                <div class="btn-group mb-3 mb-md-0" role="group" aria-label="Basic example">
+                                </div>
+                            </div>
+                        </div>
+                        <canvas id="productRevenueChart" width="100%" height="30"></canvas>
+
                     </div>
                 </div>
             </div>
-            <div class="col-md-4">
-                <div class="card mb-3">
-                    <div class="card-body">
-                        <h5 class="card-title">Service Overview</h5>
-                        <canvas id="serviceOverviewChart" width="100%" height="30"></canvas>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="card mb-3">
-                    <div class="card-body">
-                        <h5 class="card-title">Pending Orders</h5>
-                        <canvas id="pendingOrdersChart" width="100%" height="30"></canvas>
-                    </div>
-                </div>
-            </div>
-            <!-- <div class="col-md-4">
-                <div class="card mb-3">
-                    <div class="card-body">
-                        <h5 class="card-title">Total Product Sales</h5>
-                        <canvas id="totalProductSalesChart" width="100%" height="50"></canvas>
-                    </div>
-                </div>
-            </div> -->
-            <!-- <div class="col-md-4">
-                <div class="card mb-3">
-                    <div class="card-body">
-                        <h5 class="card-title">Total Service Sales</h5>
-                        <canvas id="totalServiceSalesChart" width="100%" height="50"></canvas>
-                    </div>
-                </div>
-            </div> -->
         </div>
+    </div>
 
-        <script>
-            document.addEventListener('DOMContentLoaded', function() {
-                // Sample static data for charts
-                const salesData = [300, 450, 600, 800, 700, 900, 1000];
-                const productOverviewData = [150, 200, 250, 300, 350, 400, 450];
-                const serviceOverviewData = [100, 150, 200, 250, 300, 350, 400];
-                const totalProductSalesData = 1200;
-                const totalServiceSalesData = 800;
-                const pendingOrdersData = 30;
-                const userAccountsData = [500, 200]; // Active, Inactive
-
-                // Sales Overview Chart
-                var salesOverviewCtx = document.getElementById('salesOverviewChart').getContext('2d');
-                var salesOverviewChart = new Chart(salesOverviewCtx, {
-                    type: 'line',
-                    data: {
-                        labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul'],
-                        datasets: [{
-                            label: 'Sales Overview',
-                            data: salesData,
-                            borderColor: 'rgb(75, 192, 192)',
-                            tension: 0.1
-                        }]
-                    },
-                    options: {
-                        scales: {
-                            y: {
-                                beginAtZero: true
-                            }
-                        }
-                    }
-                });
-
-                // Sales Overview Chart
-                var salesOverviewCtx = document.getElementById('salesWeeklyChart').getContext('2d');
-                var salesOverviewChart = new Chart(salesOverviewCtx, {
-                    type: 'line',
-                    data: {
-                        labels: ['Week 1', 'Week 2', 'Week 3', 'Week 4',],
-                        datasets: [{
-                            label: 'Sales this month of April',
-                            data: salesData,
-                            borderColor: 'rgb(75, 192, 192)',
-                            tension: 0.1
-                        }]
-                    },
-                    options: {
-                        scales: {
-                            y: {
-                                beginAtZero: true
-                            }
-                        }
-                    }
-                });
-
-                // Product Overview Chart
-                var productOverviewCtx = document.getElementById('productOverviewChart').getContext('2d');
-                var productOverviewChart = new Chart(productOverviewCtx, {
-                    type: 'bar',
-                    data: {
-                        labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul'],
-                        datasets: [{
-                            label: 'Product Overview',
-                            data: productOverviewData,
-                            backgroundColor: 'rgba(255, 99, 132, 0.5)'
-                        }]
-                    },
-                    options: {
-                        scales: {
-                            y: {
-                                beginAtZero: true
-                            }
-                        }
-                    }
-                });
-
-                // Service Overview Chart
-                var serviceOverviewCtx = document.getElementById('serviceOverviewChart').getContext('2d');
-                var serviceOverviewChart = new Chart(serviceOverviewCtx, {
-                    type: 'bar',
-                    data: {
-                        labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul'],
-                        datasets: [{
-                            label: 'Service Overview',
-                            data: serviceOverviewData,
-                            backgroundColor: 'rgba(54, 162, 235, 0.5)'
-                        }]
-                    },
-                    options: {
-                        scales: {
-                            y: {
-                                beginAtZero: true
-                            }
-                        }
-                    }
-                });
-
-                // Total Product Sales Chart
-                // var totalProductSalesCtx = document.getElementById('totalProductSalesChart').getContext('2d');
-                // var totalProductSalesChart = new Chart(totalProductSalesCtx, {
-                //     type: 'doughnut',
-                //     data: {
-                //         labels: ['Total Product Sales'],
-                //         datasets: [{
-                //             label: 'Total Product Sales',
-                //             data: [totalProductSalesData],
-                //             backgroundColor: ['#36a2eb']
-                //         }]
-                //     },
-                //     options: {
-                //         responsive: true
-                //     }
-                // });
-
-                // Total Service Sales Chart
-                // var totalServiceSalesCtx = document.getElementById('totalServiceSalesChart').getContext('2d');
-                // var totalServiceSalesChart = new Chart(totalServiceSalesCtx, {
-                //     type: 'doughnut',
-                //     data: {
-                //         labels: ['Total Service Sales'],
-                //         datasets: [{
-                //             label: 'Total Service Sales',
-                //             data: [totalServiceSalesData],
-                //             backgroundColor: ['#ff6384']
-                //         }]
-                //     },
-                //     options: {
-                //         responsive: true
-                //     }
-                // });
-
-                // Pending Orders Chart
-                var pendingOrdersCtx = document.getElementById('pendingOrdersChart').getContext('2d');
-                var pendingOrdersChart = new Chart(pendingOrdersCtx, {
-                    type: 'bar',
-                    data: {
-                        labels: ['Pending Orders'],
-                        datasets: [{
-                            label: 'Pending Orders',
-                            data: [pendingOrdersData],
-                            backgroundColor: 'rgba(255, 206, 86, 0.5)'
-                        }]
-                    },
-                    options: {
-                        scales: {
-                            y: {
-                                beginAtZero: true
-                            }
-                        }
-                    }
-                });
-
-                // User Accounts Chart
-            
-            });
-        </script>
 </div>
+
+<script>
+
+    document.addEventListener('DOMContentLoaded', function() {
+    // Sample static data for charts
+    const productRevenueData = [1000, 1500, 800, 920];
+
+
+    // Service Overview Chart
+    var productRevenueCtx = document.getElementById('productRevenueChart').getContext('2d');
+    var productRevenueChart = new Chart(productRevenueCtx, {
+        type: 'bar',
+        data: {
+            labels: ['Week 1', 'Week 2', 'Week 3', 'Week 4'],
+            datasets: [{
+                label: 'Month Of April',
+                data: productRevenueData,
+                backgroundColor: 'rgba(54, 162, 235, 0.5)'
+            }]
+        },
+        options: {
+            responsive: true,
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+
+});
+
+</script>
+
