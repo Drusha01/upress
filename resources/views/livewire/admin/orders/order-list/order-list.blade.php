@@ -1,8 +1,6 @@
-
 <div>
-
     <div class="page-content">
-        <div class="container">
+        <div class="">
             <div class="row justify-content-center">
                 <div class="col-md-15"> 
                     <div class="card">
