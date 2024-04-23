@@ -119,9 +119,11 @@ class Dashboard extends Component
                 DB::raw('MONTHNAME(o.date_updated) as month'),
                 DB::raw('sum(total_price) as total')
             )
+            ->join('order_status as os','os.id','o.status')
             ->groupBy(DB::raw('MONTHNAME(o.date_updated)'))
             ->orderBy(DB::raw('MONTHNAME(o.date_updated)'),'asc')
             ->where(DB::raw('YEAR(o.date_updated)'),'=',$this->dashboard['current_year']) 
+            ->where('os.name','=','Completed')
             ->get()
             ->toArray();
         if($product_revenue){
