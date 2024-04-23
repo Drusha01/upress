@@ -157,6 +157,7 @@
                                         </li>
                                         <li class="nav-item" id="adminusercustomer">
                                             <a href="{{route('admin-user-customer')}}" class="nav-link @if( Route::is('admin-user-admin')) active @endif">Customers</a>
+
                                         </li>
                                     </ul>
                                 </div>
