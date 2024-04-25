@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire\Customer\Services\ServicesDeclined;
+namespace App\Livewire\Customer\Services\ServicesReadyToPickUp;
 
 use Livewire\Component;
 use Illuminate\Http\Request;
@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Livewire\WithPagination;
 
-class ServicesDeclined extends Component
+class ServicesReadyToPickUp extends Component
 {
     use WithPagination;
     public $user_id;
@@ -24,7 +24,7 @@ class ServicesDeclined extends Component
     public function render()
     {
         $service_status = DB::table('service_status')
-            ->where('name','=','Declined')
+            ->where('name','=','Ready for Pickup')
             ->first();
         $availed_services = DB::table('availed_services as avs')
             ->select(
@@ -41,7 +41,7 @@ class ServicesDeclined extends Component
             ->where('service_status_id','=',$service_status->id)
             ->orderBy('avs.date_created','desc')
             ->paginate(10);
-        return view('livewire.customer.services.services-declined.services-declined',[
+        return view('livewire.customer.services.services-ready-to-pick-up.services-ready-to-pick-up',[
             'availed_services'=>$availed_services
         ])
         ->layout('components.layouts.customer');

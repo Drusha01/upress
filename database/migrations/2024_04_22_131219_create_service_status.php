@@ -37,7 +37,12 @@ return new class extends Migration
             (NULL,
             "Cancelled",
             NOW(),
+            NOW()),
+            (NULL,
+            "Ready for Pickup",
+            NOW(),
             NOW());');
+           
     }
 
     /**

@@ -25,19 +25,32 @@ class Dashboard extends Component
     ];
     public function mount(){
         $years = DB::table('orders')
-            ->select(DB::raw('YEAR(date_created) as year'))
+            ->select(
+                DB::raw('YEAR(date_created) as year')
+                )
             ->orderBy(DB::raw('YEAR(date_created)'),'desc')
+            ->groupBy(DB::raw('YEAR(date_created)'))
             ->get()
             ->toArray();
         $current_year = DB::table('orders')
             ->select(DB::raw('YEAR(date_created) as current_year'))
+            ->orderBy(DB::raw('YEAR(date_created)'),'desc')
             ->first();
         if($years){
-            $this->dashboard['years'] = $years;
+            $temp_year = [];
+            foreach($years as $key =>$value){
+                array_push($temp_year,['year'=>$value->year]);
+            }
+            $this->dashboard['years'] = $temp_year;
+        }else{
+            $this->dashboard['years'] = [0=>['year'=>date('Y',strtotime('now'))]];
         }
-        if($current_year->current_year){
+        if(isset($current_year->current_year)){
             $this->dashboard['current_year'] = $current_year->current_year;
+        }else{
+            $this->dashboard['current_year'] = date('Y',strtotime('now'));
         }
+        // dd($this->dashboard['current_year'] );
     }
     public function render()
     {

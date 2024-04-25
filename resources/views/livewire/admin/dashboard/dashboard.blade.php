@@ -17,7 +17,7 @@
                 <div class="col">
                     <select name="" id="" class="form-select" wire:model.live="dashboard.current_year">
                         @foreach($dashboard['years'] as $key => $value)
-                            <option value="{{ $value->year}}">Year {{ $value->year}}</option>
+                            <option value="{{ $value['year']}}">Year {{  $value['year']}}</option>
                         @endforeach
                     </select>
                 </div>

@@ -29,6 +29,7 @@ use App\Livewire\Admin\Services\Completedservices\Completedservices as AdminComp
 use App\Livewire\Admin\Services\Declinedservices\Declinedservices as AdminDeclinedservices;
 use App\Livewire\Admin\Services\Pendingservices\Pendingservices as AdminPendingservices;
 use App\Livewire\Admin\Services\Servicelist\Servicelist as AdminServicelist;
+use App\Livewire\Admin\Services\ServicesReadyToPickUp\ServicesReadyToPickUp as AdminServicesReadyToPickUp;
 use App\Livewire\Admin\Stocks\Stocklist\Stocklist as AdminStocklist;
 use App\Livewire\Admin\Stocks\StockInRecords\StockInRecords as AdminStockInRecords;
 use App\Livewire\Admin\Stocks\StockOutRecords\StockOutRecords as AdminStockOutRecords;
@@ -45,6 +46,8 @@ use App\Livewire\Admin\Orders\DeclinedOrder\DeclinedOrder as AdminDeclinedOrder;
 use App\Livewire\Admin\Orders\OrderList\OrderList as AdminOrderList;
 use App\Livewire\Admin\Orders\PendingOrder\PendingOrder as AdminPendingOrder;
 use App\Livewire\Admin\Orders\ReadyForPickup\ReadyForPickup as AdminReadyForPickup;
+use App\Livewire\Admin\Colleges\Colleges\Colleges as AdminColleges;
+use App\Livewire\Admin\Colleges\Departments\Departments as AdminDepartments;
 
 // customer
 use App\Livewire\Customer\Cart\Cart as CustomerCart;
@@ -65,6 +68,7 @@ use App\Livewire\Customer\Services\ServicesCart\ServicesCart as CustomerServices
 use App\Livewire\Customer\Services\ServicesList\ServicesList as CustomerServicesList;
 
 use App\Livewire\Customer\Services\ServicesAll\ServicesAll as CustomerServicesAll;
+use App\Livewire\Customer\Services\ServicesReadyToPickUp\ServicesReadyToPickUp as CustomerServicesReadyToPickUp;
 use App\Livewire\Customer\Services\ServicesApproved\ServicesApproved as CustomerServicesApproved;
 use App\Livewire\Customer\Services\ServicesCancelled\ServicesCancelled as CustomerServicesCancelled;
 use App\Livewire\Customer\Services\ServicesCompleted\ServicesCompleted as CustomerServicesCompleted;
@@ -121,6 +125,11 @@ Route::middleware([Unauthenticated::class,IsAdmin::class])->group(function () {
             Route::get('ordertransactionrecord',AdminTransactionrecords::class)->name('admin-order-transactionrecords');
             Route::get('servicetransactionrecord',AdminServiceTransactionRecords::class)->name('admin-service-transactionrecords');
         });
+        Route::prefix('colleges')->group(function () {
+            Route::get('/',AdminColleges::class)->name('admin-colleges');
+            Route::get('{id}',AdminDepartments::class)->name('admin-departments');
+            Route::get('{id}',AdminDepartments::class)->name('admin-colleges-departments');
+        });
 
         Route::prefix('orders')->group(function () {
             Route::get('product-orders',AdminProductOrders::class)->name('admin-product-orders');
@@ -141,6 +150,7 @@ Route::middleware([Unauthenticated::class,IsAdmin::class])->group(function () {
             Route::get('pendingservices',AdminPendingservices::class)->name('admin-pending-services');
             Route::get('declinedservices',AdminDeclinedservices::class)->name('admin-declined-services');
             Route::get('approvedservices',AdminApprovedservices::class)->name('admin-approved-services');
+            Route::get('ready-to-pick-up',AdminServicesReadyToPickUp::class)->name('admin-rtpi-services');
             Route::get('completedservices',AdminCompletedservices::class)->name('admin-completed-services');
         });
 
@@ -180,6 +190,7 @@ Route::middleware([Unauthenticated::class,isCustomer::class])->group(function ()
             Route::get('cancelled', CustomerServicesCancelled::class)->name('customer-service-cancelled');
             Route::get('completed', CustomerServicesCompleted::class)->name('customer-service-completed');
             Route::get('declined', CustomerServicesDeclined::class)->name('customer-service-declined');
+            Route::get('ready-to-pick-up',CustomerServicesReadyToPickUp::class)->name('customer-service-rtpi');
             Route::get('pending', CustomerServicesPending::class)->name('customer-service-pending');
 
         });

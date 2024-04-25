@@ -18,6 +18,9 @@ class Cart extends Component
     ];
     public $product_stock_id = NULL;
     public function mount(Request $request){
+        self::update_cart_data($request);
+    }
+    public function update_cart_data(Request $request){
         $data = $request->session()->all();
         $this->customer_cart = DB::table('customer_cart as cc')
             ->select(
@@ -239,6 +242,7 @@ class Cart extends Component
                 ->delete();
             }
             $this->dispatch('closeModal',$modal_id);
+            self::update_cart_data($request);
         }
     }
 }

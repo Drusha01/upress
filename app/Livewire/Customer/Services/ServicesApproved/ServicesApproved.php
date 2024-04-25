@@ -17,6 +17,7 @@ class ServicesApproved extends Component
         $this->user_id = $data['id'];
     }
     public $service_availed = [
+        'image_proof'=>NULL,
         'availed_services'=>[],
         'availed_service_items'=> []
     ];
@@ -60,6 +61,7 @@ class ServicesApproved extends Component
             "u.department_id",
             "d.name as department_name",
             "u.is_active",
+            "avs.image_proof",   
             "avs.date_created",
             "avs.date_updated",
         )
@@ -90,6 +92,7 @@ class ServicesApproved extends Component
             ->get()
             ->toArray();
             $this->service_availed = [
+                'image_proof'=>$availed_services->image_proof,
                 'availed_services'=>$availed_services,
                 'availed_service_items'=> $availed_service_items
             ];

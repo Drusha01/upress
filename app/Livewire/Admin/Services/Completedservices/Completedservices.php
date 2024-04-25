@@ -15,6 +15,7 @@ class Completedservices extends Component
         $data = $request->session()->all();
     }
     public $service_availed = [
+        'image_proof'=>NULL,
         'availed_services'=>[],
         'availed_service_items'=> []
     ];
@@ -55,6 +56,7 @@ class Completedservices extends Component
             "u.department_id",
             "d.name as department_name",
             "u.is_active",
+            "avs.image_proof",           
             "avs.date_created",
             "avs.date_updated",
         )
@@ -83,6 +85,7 @@ class Completedservices extends Component
             ->get()
             ->toArray();
             $this->service_availed = [
+                'image_proof'=>$availed_services->image_proof,
                 'availed_services'=>$availed_services,
                 'availed_service_items'=> $availed_service_items
             ];

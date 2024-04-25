@@ -14,7 +14,7 @@
                             </button> -->
                         </div>
                         <div class="table-responsive">
-                            <table id="shoppingCart" class="table-condensed table">
+                            <table id="shoppingCart" class="table-condensed table text-black">
                                 <thead>
                                     <tr>
                                         <th style="width:20%">Track No.</th>
@@ -159,8 +159,12 @@
                                     </table>
                             </div>
                         </div>
+                        <div class="row">
+                            <div class="col">
+                                <img src="@if(isset($service_availed['image_proof'])){{asset('storage/content/services/proof/'.$service_availed['image_proof'])}} @endif" alt="" class="img-fluid">
+                            </div>
+                        </div>
                     </div>
-                    
                 </div>
             
                 <div class="modal-footer bg-white text-black">
@@ -172,6 +176,5 @@
             </div>
         </div>
     </div> 
-    </div>
     
 </div>

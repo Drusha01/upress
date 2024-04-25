@@ -15,6 +15,7 @@ class Approvedservices extends Component
         $data = $request->session()->all();
     }
     public $service_availed = [
+        'image_proof'=>NULL,
         'availed_services'=>[],
         'availed_service_items'=> []
     ];
@@ -55,6 +56,7 @@ class Approvedservices extends Component
             "c.name as college_name",
             "u.department_id",
             "d.name as department_name",
+            "avs.image_proof",   
             "u.is_active",
             "avs.date_created",
             "avs.date_updated",
@@ -110,49 +112,18 @@ class Approvedservices extends Component
             $this->service_availed['availed_service_items'][$key]->total_price = ($value->quantity * $value->price_per_unit);
         }
     }
-    public function save_complete_availed_service($id,$modal_id){
-        $valid = true;
-        $this->error = NULL;
-        foreach ($this->service_availed['availed_service_items'] as $key => $value) {
-            if(!floatval($value->quantity) || !floatval($value->price_per_unit)){
-                if(!floatval($value->quantity)){
-                    $this->error = 'Item no.'.($key +1).' please input quantity, it is requred!';
-                    $valid =false;
-                    return;
-                }
-                if(!floatval($value->price_per_unit)){
-                    $this->error = 'Item no.'.($key +1).' please input price per unit, it is requred!';
-                    $valid =false;
-                    return;
-                }
-                return;
+    public function save_rtpi_availed_service($id,$modal_id){
+        $service_status = DB::table('service_status')
+        ->where('name','=','Ready for Pickup')
+        ->first();
+        if($service_status){
+            if(DB::table('availed_services')
+                ->where('id','=',$id)
+                ->update([
+                    'service_status_id'=>$service_status->id
+                ])){
+                $this->dispatch('closeModal',$modal_id);
             }
         }
-        if($valid){
-            $service_status = DB::table('service_status')
-            ->where('name','=','Completed')
-            ->first();
-            if($service_status){
-                if(DB::table('availed_services')
-                    ->where('id','=',$id)
-                    ->update([
-                        'service_status_id'=>$service_status->id
-                    ])){
-                    $this->dispatch('closeModal',$modal_id);
-                }
-            }
-            // update price, p/u, remarks
-            foreach ($this->service_availed['availed_service_items'] as $key => $value) {
-                DB::table('availed_service_items as asi')
-                    ->where('asi.id','=',$value->id)
-                    ->update([
-                        'quantity' => intval($this->service_availed['availed_service_items'][$key]->quantity),
-                        'price_per_unit' =>floatval($this->service_availed['availed_service_items'][$key]->price_per_unit) ,
-                        'total_price' => floatval($this->service_availed['availed_service_items'][$key]->quantity) * floatval($this->service_availed['availed_service_items'][$key]->price_per_unit) ,
-                        'remarks' => $this->service_availed['availed_service_items'][$key]->remarks,
-                ]);
-            }
-        }
-        $this->dispatch('closeModal',$modal_id);
     }
 }

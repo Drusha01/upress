@@ -61,12 +61,6 @@
                                     </table>
                                 </div>
                                 <br>
-                                <!-- <div class="row mx-2">
-                                    <div class="mb-3 col-6">
-                                        <label for="productCode" class="form-label text-black">Customer Name :</label>
-                                        <input type="text" class="form-control">
-                                    </div>
-                                </div> -->
                                 <div class="row ">
                                     <div class="col  d-flex justify-content-end">
                                         <h5 class="">
@@ -112,11 +106,10 @@
                                     </div>
                                 </div>
                             </div>
-                            {{-- modal --}}
                             <div wire:ignore.self class="modal fade" id="confirmModal" tabindex="-1" aria-labelledby="confirmModalLabel" aria-hidden="true" style="margin-top:60px;">
                                 <div class="modal-dialog modal-md">
                                     <div class="modal-content">
-                                        <form wire:submit.prevent="add_order('confirmModal')">
+                                        <form wire:submit.prevent="add_order('confirmModalToggler')">
                                             <div class="modal-header bg-dark">
                                                 <h5 class="modal-title text-white" id="confirmModalLabel">Confirmation</h5>
                                             </div>
