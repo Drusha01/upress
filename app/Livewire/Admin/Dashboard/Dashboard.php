@@ -26,19 +26,23 @@ class Dashboard extends Component
     public function mount(){
         $years = DB::table('orders')
             ->select(DB::raw('YEAR(date_created) as year'))
-            ->orderBy(DB::raw('YEAR(date_created)'),'desc')
+            ->orderBy(DB::raw('YEAR(date_created)'), 'desc')
             ->get()
             ->toArray();
+        
         $current_year = DB::table('orders')
             ->select(DB::raw('YEAR(date_created) as current_year'))
             ->first();
+    
         if($years){
             $this->dashboard['years'] = $years;
         }
-        if($current_year->current_year){
+    
+        if($current_year){
             $this->dashboard['current_year'] = $current_year->current_year;
         }
     }
+    
     public function render()
     {
         $no_of_customer = DB::table('users as u')

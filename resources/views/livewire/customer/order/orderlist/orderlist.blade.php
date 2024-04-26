@@ -192,11 +192,25 @@
                 </div>
                 <div class="modal-footer bg-white text-black">
                     <a href="#" class="btn btn-primary">Download PDF</a>
-                    <a href="#" class="btn btn-secondary">Print</a>
+                    <button type="button" class="btn btn-outline-primary me-2 mb-2 mb-md-0" id="printButton" onclick="printOrder()">
+                        <i data-feather="printer"></i>
+                        Print
+                    </button>
                     <button type="button" class="btn btn-light" data-bs-dismiss="modal">Close</button>
                 </div>
             </div>
         </div>
     </div> 
+
+    <script>
+        var printButton = document.getElementById('printButton');
+    
+        printButton.addEventListener('click', function() {
+            window.print();
+        });
+    </script>
+    
+    
+    
 
 </div>
