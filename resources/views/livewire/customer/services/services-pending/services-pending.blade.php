@@ -58,6 +58,9 @@
                                         <td data-th="Price" class="align-middle">{{$value->first_name.' '.$value->middle_name.' '.$value->last_name}}</td>
                                         <td data-th="Price" class="align-middle text-center">{{$value->service_status}}</td>
                                         <td class="align-middle text-center">
+                                            <button class="btn btn-danger btn-sm" wire:click="view_availed_service({{$value->id}},'cancelModalToggler')">
+                                                Cancel
+                                            </button>
                                             <button class="btn btn-primary btn-sm" wire:click="view_availed_service({{$value->id}},'viewModalToggler')">
                                                 <i class="fa fa-pencil-square-o" aria-hidden="true"></i> View
                                             </button>
@@ -183,6 +186,30 @@
                     <button type="button" class="btn btn-light" data-bs-dismiss="modal">Close</button>
                 </div>
 
+            </div>
+        </div>
+    </div> 
+    <button class="btn btn-success me-md-2" data-bs-toggle="modal" data-bs-target="#cancelModal" id="cancelModalToggler" style="display:none">Add</button>
+    <div  wire:ignore.self class="modal fade" id="cancelModal" tabindex="-1" role="dialog" aria-labelledby="cancelModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-xl" role="document">
+            <div class="modal-content">
+                <div class="modal-header bg-dark text-white">
+                    <h5 class="modal-title" id="cancelModalLabel">Cancel Service</h5>
+                    <button type="button" class="close text-light" data-bs-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form wire:submit.prevent="save_cancel_availed_service(@if($service_availed['availed_services']) {{$service_availed['availed_services']->id}} @endif,'cancelModalToggler')">
+                    <div class="modal-body bg-white text-black">
+                        <p class="text-danger text-center">
+                            Are you sure you want to return this to cancel Service?
+                        </p>
+                    </div>
+                    <div class="modal-footer bg-white text-black">
+                        <button type="button" class="btn btn-light" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-danger" >Cancel Service</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div> 

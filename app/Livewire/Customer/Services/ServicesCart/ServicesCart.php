@@ -49,7 +49,7 @@ class ServicesCart extends Component
             $this->dispatch('closeModal',$modal_id);
         }
     }
-    public function avail_service(){
+    public function avail_service($modal_id){
         $service_cart = DB::table('services_cart as sc')
         ->select(
             'sc.id',
@@ -98,8 +98,8 @@ class ServicesCart extends Component
                         ->delete();
                     }
                 }
-
             }
+            $this->dispatch('closeModal',$modal_id);
         }
     }
 }

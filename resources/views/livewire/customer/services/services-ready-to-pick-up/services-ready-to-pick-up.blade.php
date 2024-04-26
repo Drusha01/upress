@@ -147,10 +147,6 @@
                                                 <th class="text-center">Image</th>
                                                 <th>Service Name</th>
                                                 <th >Service Desc</th>
-                                                <th >Quantity</th>
-                                                <th >Price / Unit</th>
-                                                <th >Partial Price</th>
-                                                <th >Remarks</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -159,25 +155,14 @@
                                                 $valid_cart = true;
                                             ?>
                                             @forelse($service_availed['availed_service_items']  as $key => $value )
-                                                <tr>
+                                                <?php if(!$value->is_active) {$valid_cart = false;}?>
+                                                <tr @if(!$value->is_active) class="bg-danger" @endif>
                                                     <th scope="row" class="align-middle">{{$key +1 }}</th>
                                                     <td class="text-center align-middle">
                                                         <img src="{{asset('storage/content/services/'.$value->service_image)}}" alt="Product Image"  style="object-fit: cover;width:100px; max-height: 100px;">
                                                     </td>
                                                     <td class="align-middle">{{$value->service_name}}</td>
                                                     <td class="align-middle">{{$value->service_description}}</td>
-                                                    <td class="align-middle">
-                                                        <input type="number"  class="form-control" wire:change="update_total_price()" wire:model="service_availed.availed_service_items.{{$key}}.quantity">
-                                                    </td>
-                                                    <td class="align-middle">
-                                                        <input type="number"  class="form-control" wire:change="update_total_price()" step="0.01" wire:model="service_availed.availed_service_items.{{$key}}.price_per_unit">
-                                                    </td>
-                                                    <td class="align-middle">
-                                                        <input type="text"  class="form-control bg-white" disabled wire:model="service_availed.availed_service_items.{{$key}}.total_price">
-                                                    </td>
-                                                    <td class="align-middle" class="form-control" >
-                                                        <textarea type="text" value="{{$value->remarks}}" wire:model="service_availed.availed_service_items.{{$key}}.remarks"></textarea>
-                                                    </td>
                                                 </tr>
                                             @empty
                                                 <tr>
@@ -188,12 +173,8 @@
                                     </table>
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="col">
-                                <img src="@if(isset($service_availed['image_proof'])){{asset('storage/content/services/proof/'.$service_availed['image_proof'])}} @endif" alt="" class="img-fluid">
-                            </div>
-                        </div>
                     </div>
+                    
                 </div>
             
                 <div class="modal-footer bg-white text-black">

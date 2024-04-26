@@ -104,12 +104,21 @@ class Admin extends Component
         $this->dispatch('openModal',$modal_id);
     }
     public function add_user($modal_id){
+        $this->user['error'] = NULL;
         if(strlen($this->user['first_name'])<= 0){
             $this->user['error'] = "Please Input firstname";
             return;
         }
         if(strlen($this->user['last_name'])<= 0){
             $this->user['error'] = "Please Input lastname";
+            return;
+        }
+        if(isset($this->user['contact_no']) && strlen($this->user['contact_no']) >0 && $this->user['contact_no'][0] !=0 ){
+            $this->user['error'] = "Contact number must start with 0";
+            return;
+        }
+        if(isset($this->user['contact_no']) && strlen($this->user['contact_no']) != 11){
+            $this->user['error'] = "Contact number must be 11 digits";
             return;
         }
         if(strlen($this->user['email'])<= 0){
@@ -128,11 +137,12 @@ class Admin extends Component
                 }
             }
         }
-        if(strlen($this->user['password'])<= 8){
+        return;
+        if(strlen($this->user['password'])< 8){
             $this->user['error'] = "Password must be at least 8";
             return;
         }
-        if(strlen($this->user['confirm_password'])<= 8){
+        if(strlen($this->user['confirm_password'])< 8){
             $this->user['error'] = "Password must be at least 8";
             return;
         }

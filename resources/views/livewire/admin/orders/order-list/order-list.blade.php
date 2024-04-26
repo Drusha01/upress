@@ -22,7 +22,7 @@
                                 </div>
                         </div>
                             <div class="table-responsive">
-                                <table class="table table-bordered table-lg"> 
+                                <table class="table table-bordered table-lg text-black"> 
                                     <thead>
                                         <tr>
                                             <th style="width:20%">Track No.</th>

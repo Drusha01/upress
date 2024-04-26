@@ -17,6 +17,7 @@ class ServicesPending extends Component
         $this->user_id = $data['id'];
     }
     public $service_availed = [
+        'image_proof'=>NULL,
         'availed_services'=>[],
         'availed_service_items'=> []
     ];
@@ -58,6 +59,7 @@ class ServicesPending extends Component
             "u.department_id",
             "d.name as department_name",
             "u.is_active",
+            "avs.image_proof",   
             "avs.date_created",
             "avs.date_updated",
         )
@@ -88,10 +90,25 @@ class ServicesPending extends Component
             ->get()
             ->toArray();
             $this->service_availed = [
+                'image_proof'=>$availed_services->image_proof,
                 'availed_services'=>$availed_services,
                 'availed_service_items'=> $availed_service_items
             ];
         }
         $this->dispatch('openModal',$modal_id);
+    }
+    public function save_cancel_availed_service($id,$modal_id){
+        $service_status = DB::table('service_status')
+        ->where('name','=','Cancelled')
+        ->first();
+        if($service_status){
+            if(DB::table('availed_services')
+                ->where('id','=',$id)
+                ->update([
+                    'service_status_id'=>$service_status->id
+                ])){
+                $this->dispatch('closeModal',$modal_id);
+            }
+        }
     }
 }

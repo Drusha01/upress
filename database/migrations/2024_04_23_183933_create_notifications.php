@@ -18,6 +18,7 @@ return new class extends Migration
             notification_link VARCHAR(100),
             notification_target INT NOT NULL,
             notification_creator INT NOT NULL,
+            notification_for_admin BOOL DEFAULT 0,
             is_read BOOL DEFAULT 0,
             date_created DATETIME DEFAULT CURRENT_TIMESTAMP,
             date_updated DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
