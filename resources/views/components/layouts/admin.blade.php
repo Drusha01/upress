@@ -12,7 +12,6 @@
      
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
         <!-- Styles -->
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
         <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
@@ -41,6 +40,9 @@
         <script src="{{url('assets')}}s/vendors/apexcharts/apexcharts.min.js"></script>
         <script src="{{url('assets')}}/vendors/feather-icons/feather.min.js"></script>
         <script src="{{url('assets')}}/js/template.js"></script>
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 
     </head>
     <body>

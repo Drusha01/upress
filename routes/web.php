@@ -17,6 +17,7 @@ use App\Http\Middleware\isCustomer;
 use App\Livewire\Authentication\Login;
 use App\Livewire\Authentication\Logout as AuthenticationLogout;
 
+use App\Http\Controllers\admindashboard as Conadmindashboard;
 // admin
 use App\Livewire\Admin\Dashboard\Dashboard as AdminDashboard;
 use App\Livewire\Admin\Orders\ProductOrders\ProductOrders  as AdminProductOrders; 
@@ -103,6 +104,8 @@ Route::middleware([Authenticated::class])->group(function () {
 Route::middleware([Unauthenticated::class,IsAdmin::class])->group(function () {
     Route::prefix('admin')->group(function () {
         Route::get('dashboard', AdminDashboard::class)->name('admin-dashboard');
+        Route::get('dashboard/product-revenue/{year}/{month}', [Conadmindashboard::class,'product_revenue'])->name('admin-dashboard-product-revenue');
+       
         Route::get('profile', AdminProfile::class)->name('admin-profile');
 
         Route::prefix('stock')->group(function () {
