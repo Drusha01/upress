@@ -50,6 +50,7 @@ class ServicesCart extends Component
         }
     }
     public function avail_service($modal_id){
+        $this->error = NULL;
         $service_cart = DB::table('services_cart as sc')
         ->select(
             'sc.id',
@@ -65,6 +66,10 @@ class ServicesCart extends Component
         ->toArray();
 
         $valid = true;
+        if(count($service_cart)<=0){
+            $this->error = 'No added service';
+            return;
+        }
         foreach ($service_cart as $key => $value) {
             if(!$value->is_active){
                 $valid = false;
