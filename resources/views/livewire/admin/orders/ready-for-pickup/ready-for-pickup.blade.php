@@ -214,7 +214,7 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <form wire:submit.prevent="save_complete_order(@if($order_details['customer_order']){{$order_details['customer_order']->id}}@endif,'completeModalToggler')">
+                <form class="bg-white" wire:submit.prevent="save_complete_order(@if($order_details['customer_order']){{$order_details['customer_order']->id}}@endif,'completeModalToggler')">
                     <div class="modal-body bg-white ">
                         <p class="text-danger text-center">
                             Are you sure you want to Complete order?
@@ -222,12 +222,8 @@
                             Note! once it is complete, you cannot undo the order.
                         </p>
                     </div>
-                    <div class="row my-4 d-flex justify-content-start">
-                        <div class="col-6 " style="background-color:white">
-                            <label for="file-proof" class="form-label text-black"> Proof</label>
-                            <input type="file" id="file-proof" wire:model="order_details.image_proof" class="form-control" required>
-                        </div>
-                    </div>
+                    <label for="file-proof" class="form-label text-black px-3"> Proof</label>
+                    <input type="file" id="file-proof" wire:model="order_details.image_proof" class="form-control mb-3" required>
                     <div class="modal-footer bg-white">
                         <button type="button" class="btn btn-light" data-bs-dismiss="modal">Close</button>
                         <button type="submit" class="btn btn-success" >Complete Order</button>
