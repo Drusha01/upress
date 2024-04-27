@@ -6,7 +6,7 @@
                 <h4 class="mb-3 mb-md-0">Welcome to Dashboard</h4>
             </div>
             <div class="d-flex align-items-center flex-wrap text-nowrap">
-                <button type="button" class="btn btn-outline-primary me-2 mb-2 mb-md-0" onclick="printReport()">
+                <button type="button" class="btn btn-outline-primary me-2 mb-2 mb-md-0" id="printButton" onclick="printReport()">
                     <i data-feather="printer"></i>
                     Print
                 </button>
@@ -344,11 +344,11 @@
         });
 
 
-        function printReport(){
-            var printContents = document.getElementById('printButton').innerHTML;
-            document.getElementById('printButton').printElement();
+        var printButton = document.getElementById('printButton');
 
-        }
+        printButton.addEventListener('click', function() {
+            window.print();
+        });
         function downloadPdf(){
             var doc = new jsPDF({
             orientation: 'landscape',
