@@ -17,6 +17,7 @@ class ServicesCancelled extends Component
         $this->user_id = $data['id'];
     }
     public $service_availed = [
+        'image_proof'=>NULL,
         'availed_services'=>[],
         'availed_service_items'=> []
     ];
@@ -57,6 +58,7 @@ class ServicesCancelled extends Component
             "c.name as college_name",
             "u.department_id",
             "d.name as department_name",
+            "avs.image_proof",   
             "u.is_active",
             "avs.date_created",
             "avs.date_updated",
@@ -88,6 +90,7 @@ class ServicesCancelled extends Component
             ->get()
             ->toArray();
             $this->service_availed = [
+                'image_proof'=>$availed_services->image_proof,
                 'availed_services'=>$availed_services,
                 'availed_service_items'=> $availed_service_items
             ];

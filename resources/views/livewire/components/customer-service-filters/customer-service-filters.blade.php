@@ -19,6 +19,9 @@
                 <a href="{{route('customer-service-approved')}}" style="text-decoration:none;">
                     <li data-status="Approved" @if( Route::is('customer-service-approved')) class="active" @endif">Approved</li>
                 </a>
+                <a href="{{route('customer-service-rtpi')}}" style="text-decoration:none;">
+                    <li data-status="rtpi" @if( Route::is('customer-service-rtpi')) class="active" @endif">Ready for Pickup</li>
+                </a>
                 <a href="{{route('customer-service-completed')}}" style="text-decoration:none;">
                     <li data-status="Completed" @if( Route::is('customer-service-completed')) class="active" @endif">Completed</li>
                 </a>

@@ -16,7 +16,7 @@
                                 </div>
                             </div>
                             <div class="table-responsive">
-                                <table class="table table-bordered table-lg"> 
+                                <table class="table table-bordered table-lg text-black"> 
                                     <thead>
                                         <tr>
                                             <th style="width:20%">Track No.</th>
@@ -40,7 +40,7 @@
                                                 <button class="btn btn-success btn-sm" wire:click="view_order({{$value->id}},'completeModalToggler')">
                                                     Complete Order
                                                 </button>
-                                                <button class="btn btn-primary btn-sm" wire:click="view_order({{$value->id}},viewModalToggler)">
+                                                <button class="btn btn-primary btn-sm" wire:click="view_order({{$value->id}},'viewModalToggler')">
                                                     <i class="fa fa-pencil-square-o" aria-hidden="true"></i> View Order
                                                 </button>
                                             </td>

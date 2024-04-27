@@ -45,6 +45,12 @@ class Servicelist extends Component
             $this->service['error'] = "Please input name";
             return;
         }
+        if(DB::table('services')
+            ->where('name','=',$this->service['name'])
+            ->first()){
+            $this->service['error'] = "Service Exist";
+            return;
+        }
         $service['image'] = NULL;
         if($this->service['image']){
             $service['image'] = self::save_image($this->service['image'],'services','services','image');
@@ -136,6 +142,13 @@ class Servicelist extends Component
             $this->service['error'] = "Please input name";
             return;
         }
+        if(DB::table('services')
+        ->where('name','=',$this->service['name'])
+        ->where('id','<>',$id)
+        ->first()){
+        $this->service['error'] = "Service Exist";
+        return;
+    }
         $service['image'] = NULL;
         if($this->service['image']){
             $service['image'] = self::save_image($this->service['image'],'services','services','image');

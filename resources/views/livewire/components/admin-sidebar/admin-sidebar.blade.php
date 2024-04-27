@@ -86,6 +86,9 @@
                                     <a href="{{route ('admin-approved-services')}}" class="nav-link @if( Route::is('admin-approved-services')) active @endif">Approved Services</a>
                                 </li>
                                 <li class="nav-item">
+                                    <a href="{{route('admin-rtpi-services')}}" class="nav-link @if( Route::is('admin-rtpi-services')) active @endif">Ready for Pickup</a>
+                                </li>
+                                <li class="nav-item">
                                     <a href="{{route('admin-completed-services')}}" class="nav-link @if( Route::is('admin-completed-services')) active @endif">Completed Services</a>
                                 </li>
                             </ul>
@@ -140,14 +143,14 @@
                         </div>
                     </li>
                     @if($user_info->role_name == 'admin')
-                        <li class="nav-item nav-category">Accounts</li>
+                        <li class="nav-item nav-category">Settings</li>
                             <li class="nav-item">
-                                <a class="nav-link" data-bs-toggle="collapse" href="#generalpages" role="button" aria-expanded="false" aria-controls="general-pages">
+                                <a class="nav-link" data-bs-toggle="collapse" href="#users" role="button" aria-expanded="false" aria-controls="general-pages">
                                     <i class="link-icon" data-feather="users"></i>
                                     <span class="link-title">Users</span>
                                     <i class="link-arrow" data-feather="chevron-down"></i>
                                 </a>
-                                <div class="collapse" id="generalpages">
+                                <div class="collapse" id="users">
                                     <ul class="nav sub-menu">
                                         <li class="nav-item" id="adminuseradmin">
                                             <a href="{{route('admin-user-admin')}}" class="nav-link Route::is('admin-user-admin')">Admins</a>
@@ -156,8 +159,25 @@
                                             <a href="{{route('admin-user-staff')}}" class="nav-link Route::is('admin-user-admin')">Staffs</a>
                                         </li>
                                         <li class="nav-item" id="adminusercustomer">
-                                            <a href="{{route('admin-user-customer')}}" class="nav-link @Route::is('admin-user-admin')" >Customers</a>
+                                            <a href="{{route('admin-user-customer')}}" class="nav-link Route::is('admin-user-admin')" >Customers</a>
 
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li> 
+                            <li class="nav-item">
+                                <a class="nav-link" data-bs-toggle="collapse" href="#colleges" role="button" aria-expanded="false" aria-controls="general-pages">
+                                    <i class="link-icon" data-feather="globe"></i>
+                                    <span class="link-title">Colleges</span>
+                                    <i class="link-arrow" data-feather="chevron-down"></i>
+                                </a>
+                                <div class="collapse" id="colleges">
+                                    <ul class="nav sub-menu">
+                                        <li class="nav-item" id="colleges-nav">
+                                            <a href="{{route('admin-colleges')}}" class="nav-link Route::is('admin-colleges')">Colleges</a>
+                                        </li>
+                                        <li class="nav-item" id="departments">
+                                            <a href="{{route('admin-colleges').'/departments'}}" class="nav-link Route::is('admin/colleges/*')">Departments</a>
                                         </li>
                                     </ul>
                                 </div>

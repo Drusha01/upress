@@ -28,8 +28,8 @@
                                         <th style="padding:20px; font-weight: bold; background-color: #343a40; color: white;">FirstName</th>
                                         <th style="padding:20px; font-weight: bold; background-color: #343a40; color: white;">Middle Name</th>
                                         <th style="padding:20px; font-weight: bold; background-color: #343a40; color: white;">LastName</th>
-                                        <th style="padding:20px; font-weight: bold; background-color: #343a40; color: white;">College</th>
-                                        <th style="padding:20px; font-weight: bold; background-color: #343a40; color: white;">Department</th>
+                                        <!-- <th style="padding:20px; font-weight: bold; background-color: #343a40; color: white;">College</th>
+                                        <th style="padding:20px; font-weight: bold; background-color: #343a40; color: white;">Department</th> -->
                                         <th style="padding:20px; font-weight: bold; background-color: #343a40; color: white;">Contact #</th>
                                         <th style="padding:20px; font-weight: bold; background-color: #343a40; color: white;">Action</th>
                                         </tr>
@@ -45,8 +45,8 @@
                                                  <td class="align-middle">{{ $value->first_name}}</td>
                                                  <td class="align-middle">{{ $value->middle_name}}</td>
                                                  <td class="align-middle">{{ $value->last_name}}</td>
-                                                 <td class="align-middle">{{ $value->college_name }}</td>
-                                                 <td class="align-middle">{{ $value->department_name}}</td>
+                                                 <!-- <td class="align-middle">{{ $value->college_name }}</td>
+                                                 <td class="align-middle">{{ $value->department_name}}</td> -->
                                                  <td class="align-middle">{{ $value->contact_no}}</td>
                                                  <td class="align-middle">
                                                     <a wire:click="edit_user({{$value->id}},'editAccountModalToggler')">
@@ -103,24 +103,7 @@
                                                         <label for="lastname" class="form-label text-dark">Last Name:</label>
                                                         <input type="text"  wire:model="user.last_name" class="form-control " required name="lastname" id="lastname" placeholder="Enter lastname" value="">
                                                     </div>
-                                                    <div class="col-md-12">
-                                                        <label for="college" class="form-label text-dark">College:</label>
-                                                        <select class="form-select "  wire:model.live="user.college_id"  required name="college" id="college" aria-label="Select College">
-                                                            <option selected="" value="">Select college</option>
-                                                            @foreach($colleges as $key =>$value)
-                                                            <option value="{{$value->id}}">{{$value->name}}</option>
-                                                            @endforeach
-                                                        </select>
-                                                    </div>
-                                                    <div class="col-md-6">
-                                                        <label for="college" class="form-label text-dark">Department:</label>
-                                                        <select class="form-select "  wire:model="user.department_id" required name="college" id="college" aria-label="Select College">
-                                                            <option selected="" value="" >Select department</option>
-                                                            @foreach($departments as $key =>$value)
-                                                            <option value="{{$value->id}}">{{$value->name}}</option>
-                                                            @endforeach
-                                                        </select>
-                                                    </div>
+                                               
                                                     <div class="col-md-6">
                                                         <label for="role" class="form-label text-dark">Role:</label>
                                                         <select class="form-select"  wire:model="user.role_id" name="role" required id="role" aria-label="Select Role">
@@ -183,24 +166,6 @@
                                                     <div class="col-md-12">
                                                         <label for="lastname" class="form-label">Last Name:</label>
                                                         <input type="text"  wire:model="user.last_name" class="form-control " required name="lastname" id="lastname" placeholder="Enter lastname" value="">
-                                                    </div>
-                                                    <div class="col-md-12">
-                                                        <label for="college" class="form-label">College:</label>
-                                                        <select class="form-select "  wire:model.live="user.college_id"  required name="college" id="college" aria-label="Select College">
-                                                            <option selected="" value="">Select college</option>
-                                                            @foreach($colleges as $key =>$value)
-                                                            <option value="{{$value->id}}">{{$value->name}}</option>
-                                                            @endforeach
-                                                        </select>
-                                                    </div>
-                                                    <div class="col-md-6">
-                                                        <label for="college" class="form-label">Department:</label>
-                                                        <select class="form-select "  wire:model="user.department_id" required name="college" id="college" aria-label="Select College">
-                                                            <option selected="" value="" >Select department</option>
-                                                            @foreach($departments as $key =>$value)
-                                                            <option value="{{$value->id}}">{{$value->name}}</option>
-                                                            @endforeach
-                                                        </select>
                                                     </div>
                                                     <div class="col-md-6">
                                                         <label for="role" class="form-label">Role:</label>

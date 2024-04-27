@@ -69,8 +69,8 @@ class Admin extends Component
                     "u.date_created",
                     "u.date_updated",
                 )
-                ->join('colleges as c','u.college_id','c.id')
-                ->join('departments as d','u.department_id','d.id')
+                ->leftjoin('colleges as c','u.college_id','c.id')
+                ->leftjoin('departments as d','u.department_id','d.id')
                 ->where('role_id','=',$roles->id)
                 ->paginate(10);
         }
@@ -104,12 +104,21 @@ class Admin extends Component
         $this->dispatch('openModal',$modal_id);
     }
     public function add_user($modal_id){
+        $this->user['error'] = NULL;
         if(strlen($this->user['first_name'])<= 0){
             $this->user['error'] = "Please Input firstname";
             return;
         }
         if(strlen($this->user['last_name'])<= 0){
             $this->user['error'] = "Please Input lastname";
+            return;
+        }
+        if(isset($this->user['contact_no']) && strlen($this->user['contact_no']) >0 && $this->user['contact_no'][0] !=0 ){
+            $this->user['error'] = "Contact number must start with 0";
+            return;
+        }
+        if(isset($this->user['contact_no']) && strlen($this->user['contact_no']) != 11){
+            $this->user['error'] = "Contact number must be 11 digits";
             return;
         }
         if(strlen($this->user['email'])<= 0){
@@ -128,11 +137,11 @@ class Admin extends Component
                 }
             }
         }
-        if(strlen($this->user['password'])<= 8){
+        if(strlen($this->user['password'])< 8){
             $this->user['error'] = "Password must be at least 8";
             return;
         }
-        if(strlen($this->user['confirm_password'])<= 8){
+        if(strlen($this->user['confirm_password'])< 8){
             $this->user['error'] = "Password must be at least 8";
             return;
         }
@@ -141,18 +150,18 @@ class Admin extends Component
             return;
         }
   
-        if(!DB::table('colleges')    
-            ->where('id','=',$this->user['college_id'])
-            ->first()){
-            $this->user['error'] = "Please select college";
-            return;
-        }
-        if(!DB::table('departments')    
-            ->where('id','=',$this->user['department_id'])
-            ->first()){
-            $this->user['error'] = "Please select department";
-            return;
-        }
+        // if(!DB::table('colleges')    
+        //     ->where('id','=',$this->user['college_id'])
+        //     ->first()){
+        //     $this->user['error'] = "Please select college";
+        //     return;
+        // }
+        // if(!DB::table('departments')    
+        //     ->where('id','=',$this->user['department_id'])
+        //     ->first()){
+        //     $this->user['error'] = "Please select department";
+        //     return;
+        // }
         if(DB::table('users')
             ->insert([
                 'first_name' => $this->user['first_name'],
@@ -161,8 +170,8 @@ class Admin extends Component
                 'email' => $this->user['email'],
                 'contact_no' => $this->user['contact_no'],
                 'role_id' => $this->user['role_id'],
-                'college_id' => $this->user['college_id'],
-                'department_id' => $this->user['department_id'],
+                'college_id' => 0,
+                'department_id' => 0,
                 'password' => bcrypt($this->user['password']),
         ])){
             $this->dispatch('closeModal',$modal_id);
@@ -233,21 +242,29 @@ class Admin extends Component
             $this->user['error'] = "Please Input lastname";
             return;
         }
+        if(isset($this->user['contact_no']) && strlen($this->user['contact_no']) >0 && $this->user['contact_no'][0] !=0 ){
+            $this->user['error'] = "Contact number must start with 0";
+            return;
+        }
+        if(isset($this->user['contact_no']) && strlen($this->user['contact_no']) != 11){
+            $this->user['error'] = "Contact number must be 11 digits";
+            return;
+        }
         
   
-        if(!DB::table('colleges')    
-            ->where('id','=',$this->user['college_id'])
-            ->first()){
-            $this->user['error'] = "Please select college";
-            return;
-        }
-        if(!DB::table('departments as d')    
-            ->where('d.id','=',$this->user['department_id'])
-            ->where('d.college_id','=',$this->user['college_id'])
-            ->first()){
-            $this->user['error'] = "Invalid department";
-            return;
-        }
+        // if(!DB::table('colleges')    
+        //     ->where('id','=',$this->user['college_id'])
+        //     ->first()){
+        //     $this->user['error'] = "Please select college";
+        //     return;
+        // }
+        // if(!DB::table('departments as d')    
+        //     ->where('d.id','=',$this->user['department_id'])
+        //     ->where('d.college_id','=',$this->user['college_id'])
+        //     ->first()){
+        //     $this->user['error'] = "Invalid department";
+        //     return;
+        // }
         if(DB::table('users as u')
             ->where('u.id','=',$id)
             ->where('u.role_id','=',$roles->id)

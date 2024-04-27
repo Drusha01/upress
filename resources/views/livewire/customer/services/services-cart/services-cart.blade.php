@@ -89,11 +89,10 @@
                                     </div>
                                 </div>
                             </div>
-                            {{-- modal --}}
                             <div wire:ignore.self class="modal fade" id="confirmModal" tabindex="-1" aria-labelledby="confirmModalLabel" aria-hidden="true" style="margin-top:60px;">
                                 <div class="modal-dialog modal-md">
                                     <div class="modal-content">
-                                        <form wire:submit.prevent="avail_service('confirmModal')">
+                                        <form wire:submit.prevent="avail_service('confirmModalToggler')">
                                             <div class="modal-header bg-dark">
                                                 <h5 class="modal-title text-white" id="confirmModalLabel">Confirmation</h5>
                                             </div>

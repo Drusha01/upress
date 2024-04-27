@@ -16,6 +16,7 @@ class Pendingservices extends Component
     }
     public $error;
     public $service_availed = [
+        'image_proof'=>NULL,
         'availed_services'=>[],
         'availed_service_items'=> []
     ];
@@ -56,6 +57,7 @@ class Pendingservices extends Component
             "u.department_id",
             "d.name as department_name",
             "u.is_active",
+            "avs.image_proof",            
             "avs.date_created",
             "avs.date_updated",
         )

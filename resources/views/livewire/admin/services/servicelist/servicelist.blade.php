@@ -19,7 +19,7 @@
                 
                         </div>
                         <div class="table-responsive">
-                            <table class="table table-bordered text-black">
+                            <table class="table table-bordered text-black text-black">
                                     <thead class="thead-dark">
                                     <tr>
                                         <th>#</th>
