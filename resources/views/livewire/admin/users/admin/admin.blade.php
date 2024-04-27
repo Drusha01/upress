@@ -39,7 +39,7 @@
                                             <tr class="table-light">
                                                 <th scope="row" class="px-4 py-3 align-middle">{{(intval($users_data->currentPage()-1)*$users_data->perPage())+$key+1 }}</th>
                                                 <td class="align-middle">
-                                                    <img style="height:100px; width:100px;" src="{{asset('storage/profile/'.$value->image) }}">
+                                                    <img style="height:100px; width:100px;" src="{{asset('storage/content/profile/'.$value->image) }}">
                                                 </td>
                                                 <td class="align-middle">{{ $value->email}}</td>
                                                  <td class="align-middle">{{ $value->first_name}}</td>
