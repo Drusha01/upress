@@ -49,7 +49,7 @@ class PendingOrder extends Component
         ->layout('components.layouts.admin');
     }
     public function view_order($id,$modal_id){
-        $customer_order = DB::table('orders as o')
+         $customer_order = DB::table('orders as o')
             ->select(
                 'o.id as id',
                 'os.name as order_status',
@@ -64,6 +64,7 @@ class PendingOrder extends Component
                 "u.department_id",
                 "d.name as department_name",
                 "u.is_active",
+                "o.image_proof",
                 "o.date_created",
                 "o.date_updated",
             )
@@ -99,6 +100,7 @@ class PendingOrder extends Component
             ->toArray();
         $this->order_details = [
             'order_id'=> $id,
+            'image_proof'=>$customer_order->image_proof,
             'customer_order'=> $customer_order,
             'order_items'=> $order_items,
         ];

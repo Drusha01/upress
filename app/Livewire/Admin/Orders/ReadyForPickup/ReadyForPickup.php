@@ -7,12 +7,15 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Livewire\WithPagination; 
+use Livewire\WithFileUploads;
 
 class ReadyForPickup extends Component
 {
     use WithPagination;
+    use WithFileUploads;
     public $order_details = [
         'order_id'=> NULL,
+        'image_proof'=> NULL,
         'customer_order'=> [],
         'order_items'=> [],
     ];
@@ -58,6 +61,7 @@ class ReadyForPickup extends Component
                 "u.department_id",
                 "d.name as department_name",
                 "u.is_active",
+                "o.image_proof",
                 "o.date_created",
                 "o.date_updated",
             )
@@ -93,6 +97,7 @@ class ReadyForPickup extends Component
             ->toArray();
         $this->order_details = [
             'order_id'=> $id,
+            'image_proof'=>NULL,
             'customer_order'=> $customer_order,
             'order_items'=> $order_items,
         ];
@@ -115,12 +120,73 @@ class ReadyForPickup extends Component
         $order_status = DB::table('order_status')
             ->where('name','=','Completed')
             ->first();
+        $order_details['image_proof'] = NULL;
+        if($this->order_details['image_proof']){
+            $order_details['image_proof'] = self::save_image($this->order_details['image_proof'],'orders/proof','orders','image_proof');
+            if($order_details['image_proof'] == 0){
+                return;
+            }
+        }
         if(DB::table('orders')
             ->where('id','=',$id)
             ->update([
-                'status'=>$order_status->id
+                'status'=>$order_status->id,
+                'image_proof'=> $order_details['image_proof']
             ])){
             $this->dispatch('closeModal',$modal_id);
         }
+    }
+    public function save_image($image_file,$folder_name,$table_name,$column_name){
+        if($image_file && file_exists(storage_path().'/app/livewire-tmp/'.$image_file->getfilename())){
+            $file_extension =$image_file->getClientOriginalExtension();
+            $tmp_name = 'livewire-tmp/'.$image_file->getfilename();
+            $size = Storage::size($tmp_name);
+            $mime = Storage::mimeType($tmp_name);
+            $max_image_size = 20 * 1024*1024; // 5 mb
+            $file_extensions = array('image/jpeg','image/png','image/jpg');
+            
+            if($size<= $max_image_size){
+                $valid_extension = false;
+                foreach ($file_extensions as $value) {
+                    if($value == $mime){
+                        $valid_extension = true;
+                        break;
+                    }
+                }
+                if($valid_extension){
+                    // move
+                    $new_file_name = md5($tmp_name).'.'.$file_extension;
+                    while(DB::table($table_name)
+                    ->where([$column_name=> $new_file_name])
+                    ->first()){
+                        $new_file_name = md5($tmp_name.rand(1,10000000)).'.'.$file_extension;
+                    }
+                    if(Storage::move($tmp_name, 'public/content/'.$folder_name.'/'.$new_file_name)){
+                        return $new_file_name;
+                    }
+                }else{
+                    $this->dispatch('swal:redirect',
+                        position         									: 'center',
+                        icon              									: 'warning',
+                        title             									: 'Invalid image type!',
+                        showConfirmButton 									: 'true',
+                        timer             									: '1000',
+                        link              									: '#'
+                    );
+                    return 0;
+                }
+            }else{
+                $this->dispatch('swal:redirect',
+                    position         									: 'center',
+                    icon              									: 'warning',
+                    title             									: 'Image is too large!',
+                    showConfirmButton 									: 'true',
+                    timer             									: '1000',
+                    link              									: '#'
+                );
+                return 0;
+            } 
+        }
+        return 0;
     }
 }

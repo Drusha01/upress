@@ -142,8 +142,7 @@
                 </div>
             
                 <div class="modal-footer bg-white text-black">
-                    <a href="#" class="btn btn-primary">Download PDF</a>
-                    <a href="#" class="btn btn-secondary">Print</a>
+                      <a href="#"  onclick="print_this('to_print')" class="btn btn-secondary">Print</a>
                     <button type="button" class="btn btn-light" data-bs-dismiss="modal">Close</button>
                 </div>
 

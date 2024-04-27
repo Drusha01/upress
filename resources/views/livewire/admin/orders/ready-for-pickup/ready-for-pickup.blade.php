@@ -81,11 +81,11 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <div class="modal-body bg-white text-black">
+                <div class="modal-body bg-white text-black" id="to_print">
                     <div class="container-fluid">
                         <div class="row justify-content-center align-items-center mb-4">
                             <div class="col-6 col-md-3 text-center">
-                                <img class="img-fluid rounded-circle mb-2" src="{{url('landingpage')}}/assets/images/wmsu.png" alt="University Logo" style="max-width: 100px;">
+                                <img  src="{{url('landingpage')}}/assets/images/wmsu.png" alt="University Logo" style="max-width: 100px;max-height: 100px;">
                             </div>
                             <div class="col-6 col-md-3 text-center">
                                 <span>Western Mindanao State University</span><br>
@@ -93,7 +93,7 @@
                                 <span>Zamboanga City</span>
                             </div>
                             <div class="col-6 col-md-3 text-center">
-                                <img class="img-fluid rounded-circle mb-2" src="{{url('assets')}}/logo/upress-logo.png" alt="University Logo" style="max-width: 100px;">
+                                <img  src="{{url('assets')}}/logo/upress-logo.png" alt="University Logo" style="max-width: 100px;max-height: 100px;">
                             </div>
                         </div>
                         <div class="row">
@@ -173,8 +173,7 @@
                 </div>
             
                 <div class="modal-footer bg-white text-black">
-                    <a href="#" class="btn btn-primary">Download PDF</a>
-                    <a href="#" class="btn btn-secondary">Print</a>
+                      <a href="#"  onclick="print_this('to_print')" class="btn btn-secondary">Print</a>
                     <button type="button" class="btn btn-light" data-bs-dismiss="modal">Close</button>
                 </div>
 
@@ -210,7 +209,7 @@
         <div class="modal-dialog modal-xl" role="document">
             <div class="modal-content">
                 <div class="modal-header bg-dark text-white">
-                    <h5 class="modal-title" id="completeModalLabel">Confirm Order</h5>
+                    <h5 class="modal-title" id="completeModalLabel">Complete Order</h5>
                     <button type="button" class="close text-light" data-bs-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -222,6 +221,12 @@
                             <br>
                             Note! once it is complete, you cannot undo the order.
                         </p>
+                    </div>
+                    <div class="row my-4 d-flex justify-content-start">
+                        <div class="col-6 " style="background-color:white">
+                            <label for="file-proof" class="form-label text-black"> Proof</label>
+                            <input type="file" id="file-proof" wire:model="order_details.image_proof" class="form-control" required>
+                        </div>
                     </div>
                     <div class="modal-footer bg-white">
                         <button type="button" class="btn btn-light" data-bs-dismiss="modal">Close</button>

@@ -72,7 +72,7 @@
     </div>
 
     <button class="btn btn-success me-md-2" data-bs-toggle="modal" data-bs-target="#viewModal" id="viewModalToggler" style="display:none">Add</button>
-    <div class="modal fade" id="viewModal" tabindex="-1" role="dialog" aria-labelledby="viewModalLabel" aria-hidden="true">
+      <div wire:ignore.self class="modal fade" id="viewModal" tabindex="-1" role="dialog" aria-labelledby="viewModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-xl" role="document">
             <div class="modal-content">
                 <div class="modal-header bg-dark text-white">
@@ -81,11 +81,11 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <div class="modal-body bg-white text-black">
+                <div class="modal-body bg-white text-black" id="to_print">
                     <div class="container-fluid">
-                        <div class="row justify-content-center align-items-center mb-4">
-                            <div class="col-6 col-md-3 text-center">
-                                <img class="img-fluid rounded-circle mb-2" src="{{url('landingpage')}}/assets/images/wmsu.png" alt="University Logo" style="max-width: 100px;">
+                        <div class="row d-flex justify-content-center align-items-center mb-4">
+                          <div class="col-6 col-md-3 text-center">
+                                <img  src="{{url('landingpage')}}/assets/images/wmsu.png" alt="University Logo" style="max-width: 100px;max-height: 100px;">
                             </div>
                             <div class="col-6 col-md-3 text-center">
                                 <span>Western Mindanao State University</span><br>
@@ -93,7 +93,7 @@
                                 <span>Zamboanga City</span>
                             </div>
                             <div class="col-6 col-md-3 text-center">
-                                <img class="img-fluid rounded-circle mb-2" src="{{url('assets')}}/logo/upress-logo.png" alt="University Logo" style="max-width: 100px;">
+                                <img  src="{{url('assets')}}/logo/upress-logo.png" alt="University Logo" style="max-width: 100px;max-height: 100px;">
                             </div>
                         </div>
                         <div class="row">
@@ -143,8 +143,7 @@
                                             $valid_cart = true;
                                         ?>
                                         @forelse($order_details['order_items']  as $key => $value )
-                                        <?php if($valid_cart && $value->quantity > $value->product_quantity || !$value->is_active) {$valid_cart = false;}?>
-                                        <tr @if($value->quantity > $value->product_quantity || !$value->is_active) class="bg-danger" @endif >
+                                        <tr >
                                             <th scope="row" class="align-middle">{{$key+1 }}</th>
                                             <td class="text-center align-middle">
                                                 <img src="{{asset('storage/content/products/'.$value->product_image)}}" alt="Product Image"  style="object-fit: cover;width:150px; height: 150px;">
@@ -170,18 +169,21 @@
                             </div>
                         </div>
                     </div>
-                    
+                    <div class="row">
+                        <div class="col">
+                            <img src="@if(isset($order_details['image_proof'])){{asset('storage/content/orders/proof/'.$order_details['image_proof'])}} @endif" alt="" class="img-fluid">
+                        </div>
+                    </div>
                 </div>
             
                 <div class="modal-footer bg-white text-black">
-                    <a href="#" class="btn btn-primary">Download PDF</a>
-                    <a href="#" class="btn btn-secondary">Print</a>
+                    <a href="#"  onclick="print_this('to_print')" class="btn btn-secondary">Print</a>
                     <button type="button" class="btn btn-light" data-bs-dismiss="modal">Close</button>
                 </div>
 
             </div>
         </div>
-    </div> 
+    </div>   
     <button class="btn btn-success me-md-2" data-bs-toggle="modal" data-bs-target="#declineModal" id="declineModalToggler" style="display:none">Add</button>
     <div wire:ignore.self class="modal fade" id="declineModal" tabindex="-1" role="dialog" aria-labelledby="declineModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-xl" role="document">
