@@ -308,7 +308,7 @@ class PendingOrder extends Component
                                     </g>
                                 </svg>
                                 ',
-                                $current_stock->product_name.' with '.$current_stock->product_size.' and '. $current_stock->product_color.' is low on stocks',
+                                $current_stock->product_name.' with size'.$current_stock->product_size.' and color '. $current_stock->product_color.' is low on stocks',
                                 '/admin/stock/stocklist',
                                 0,
                                 $this->user_id,
