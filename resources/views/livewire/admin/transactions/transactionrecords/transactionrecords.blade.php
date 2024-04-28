@@ -22,7 +22,7 @@
                                     </div>
                             </div>
                             <div class="table-responsive">
-                                <table id="shoppingCart" class="table-condensed table">
+                                <table id="shoppingCart" class="table-condensed table text-black">
                                     <thead>
                                         <tr>
                                             <th style="width:20%">Track No.</th>
