@@ -36,7 +36,7 @@ class ReadyForPickup extends Component
             ->where('status','=',$order_status->id)
             ->join('order_status as os','os.id','o.status')
             ->join('users as u','u.id','o.order_by')
-            ->orderBy('o.date_created','desc')
+            ->orderBy('o.date_updated','desc')
             ->paginate(10);
         return view('livewire.customer.order.ready-for-pickup.ready-for-pickup',[
             'customer_order'=>$customer_order

@@ -39,7 +39,7 @@ class ServicesCompleted extends Component
             ->join('users as u','u.id','avs.customer_id')
             ->where('customer_id','=',$this->user_id)
             ->where('service_status_id','=',$service_status->id)
-            ->orderBy('avs.date_created','desc')
+            ->orderBy('avs.date_updated','desc')
             ->paginate(10);
         return view('livewire.customer.services.services-completed.services-completed',[
             'availed_services'=>$availed_services

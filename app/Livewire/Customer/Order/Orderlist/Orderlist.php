@@ -32,7 +32,7 @@ class Orderlist extends Component
             ->where('order_by','=',$data['id'])
             ->join('order_status as os','os.id','o.status')
             ->join('users as u','u.id','o.order_by')
-            ->orderBy('o.date_created','desc')
+            ->orderBy('o.date_updated','desc')
             ->paginate(10);
 
         return view('livewire.customer.order.orderlist.orderlist',[
