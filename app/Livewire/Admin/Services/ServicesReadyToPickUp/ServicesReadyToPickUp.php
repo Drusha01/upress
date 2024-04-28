@@ -167,7 +167,7 @@ class ServicesReadyToPickUp extends Component
                             <g id="Data_Approved"/>
                         </svg>
                         ',
-                        'Services approved',
+                        'Services returned to approved',
                         '/customer/services/approved',
                         $availed_services->user_id,
                         $this->user_id,
