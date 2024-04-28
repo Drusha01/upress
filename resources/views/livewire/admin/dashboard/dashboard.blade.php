@@ -6,13 +6,9 @@
                 <h4 class="mb-3 mb-md-0">Welcome to Dashboard</h4>
             </div>
             <div class="d-flex align-items-center flex-wrap text-nowrap">
-                <button type="button" class="btn btn-outline-primary me-2 mb-2 mb-md-0" id="printButton" onclick="printReport()">
+                <button type="button" class="btn btn-outline-primary me-2 mb-2 mb-md-0" id="printButton">
                     <i data-feather="printer"></i>
                     Print
-                </button>
-                <button type="button" class="btn btn-primary mb-2 mb-md-0 mx-2" id="printPDF" wire:click="downloadpdf()">
-                    <i data-feather="download-cloud"></i>
-                    Download Report
                 </button>
                 <div class="col mx-2">
                     <select name=""  class="form-select" wire:model.live="dashboard.current_year" >
@@ -195,8 +191,9 @@
                                     </div>
                                 </div>
                             </div>
-                            <canvas id="orderStatusChart" width="100%" height="18"></canvas>
-
+                            <div class="orderStatusChart">
+                            <canvas id="orderStatusChart"></canvas>
+                           </div>
                         </div>
                 </div>
             </div>                
@@ -212,8 +209,9 @@
                                 </div>
                             </div>
                         </div>
-                        <canvas id="availServiceStatusChart" width="100%" height="18"></canvas>
-
+                        <div class="availServiceStatusChart">
+                        <canvas id="availServiceStatusChart"></canvas>
+                        </div>
                     </div>
             </div>
         </div>    
@@ -439,7 +437,29 @@
 
     renderRevenueChart()
     </script>
-  
+
+    <style>
+        .availServiceStatusChart, .orderStatusChart {
+        max-height: 90%;
+        width: auto;
+
+    }
+    @media print {
+        #printButton {
+            display: none;
+        }
+    }
+
+    .navbar-container {
+        display: block;
+    }
+
+    @media print {
+        .navbar-container {
+            display: none;
+        }
+    }
+ </style>
   
 </div>
 
