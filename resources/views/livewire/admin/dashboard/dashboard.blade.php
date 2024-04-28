@@ -10,6 +10,10 @@
                     <i data-feather="printer"></i>
                     Print
                 </button>
+                <button type="button" class="btn btn-primary mb-2 mb-md-0 mx-2" id="printPDF" wire:click="downloadpdf()">
+                    <i data-feather="download-cloud"></i>
+                    Download Report
+                </button>
                 <div class="col mx-2">
                     <select name=""  class="form-select" wire:model.live="dashboard.current_year" >
                         @foreach($dashboard['years'] as $key => $value)
@@ -445,7 +449,8 @@
 
     }
     @media print {
-        #printButton {
+        #printButton,
+        #printPDF {
             display: none;
         }
     }
