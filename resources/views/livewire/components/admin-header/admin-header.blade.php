@@ -1,4 +1,5 @@
 <div>
+    <div class="navbar-container">
     <nav class="navbar" style="background-color: #8d021f; ">
         <a href="#" class="sidebar-toggler">
             <i data-feather="menu"></i>
@@ -103,3 +104,4 @@
         </div>
     </nav>
 </div>
+<div>
