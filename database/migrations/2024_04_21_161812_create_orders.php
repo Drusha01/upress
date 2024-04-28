@@ -16,12 +16,14 @@ return new class extends Migration
             order_by INT NOT NULL ,
             status INT DEFAULT 1 NOT NULL,
             total_price double ,
+            image_proof VARCHAR(100) ,
             is_active BOOL DEFAULT 1,
             date_created DATETIME DEFAULT CURRENT_TIMESTAMP,
             date_updated DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
         );');
         DB::statement('CREATE INDEX idx_orders_order_by ON orders(order_by);');
         DB::statement('CREATE INDEX idx_orders_status ON orders(status);');
+        DB::statement('CREATE INDEX idx_orders_image_proof ON orders(image_proof(10));');
     }
 
     /**

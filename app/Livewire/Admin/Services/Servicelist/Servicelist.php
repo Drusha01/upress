@@ -20,6 +20,11 @@ class Servicelist extends Component
         'image' => NULL,
         'error' => NULL,
     ];
+    public $user_id;
+    public function mount(Request $request){
+        $session = $request->session()->all();
+        $this->user_id = $session['id'];
+    }
     public function render()
     {
         $service_data = DB::table('services')
@@ -194,5 +199,23 @@ class Servicelist extends Component
         ])){
             $this->dispatch('closeModal',$modal_id);
         }
+    }
+    public function insert_notification(
+        $notification_icon,
+        $notification_content,
+        $notification_link,
+        $notification_target,
+        $notification_creator,
+        $notification_for_admin
+    ){
+        DB::table('notifications')
+            ->insert([
+                'notification_icon' =>$notification_icon,
+                'notification_content' =>$notification_content,
+                'notification_link' => $notification_link,
+                'notification_target' => $notification_target,
+                'notification_creator' => $notification_creator,
+                'notification_for_admin' =>  $notification_for_admin
+            ]);
     }
 }

@@ -30,7 +30,7 @@
                                         <td data-th="Price" class="align-middle text-center">{{$value->service_status}}</td>
                                         <td class="align-middle text-center">
                                             <button class="btn btn-danger btn-sm" wire:click="view_availed_service({{$value->id}},'approveModalToggler')">
-                                                Return to Approved Order
+                                                Return to Approved Service
                                             </button>
                                             <button class="btn btn-success btn-sm" wire:click="view_availed_service({{$value->id}},'completeModalToggler')">
                                                 Complete

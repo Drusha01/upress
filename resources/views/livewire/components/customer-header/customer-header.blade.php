@@ -50,12 +50,46 @@
                                 <span class="badge bg-primary">3</span>
                             </a>
                         </li> -->
-                        <li class="nav-item dropdown" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Notifications">
+                        <li class="nav-item dropdown" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Notifications" wire:click="update_notifications({ $header_info['user_id']}})">
                             <a class="nav-link dropdown-toggle" href="#" id="notificationDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <i class="far fa-bell"></i>
-                                <span class="badge bg-primary" id="notificationCount">{{$header_info['notification_items']}}</span>
+                                <span class="badge bg-primary" id="notificationCount">{{$header_info['notifications_count']}}</span>
                             </a>
-                            <div class="dropdown-menu p-0" aria-labelledby="notificationDropdown" id="notificationDropdownMenu">
+                            <div wire:ignore.self class="dropdown-menu p-0"  aria-labelledby="notificationDropdown" id="notificationDropdownMenu">
+                                <div class="px-3 py-2 d-flex align-items-center justify-content-between border-bottom">
+                                    <p class=" pt-3 pb-0">{{$header_info['notifications_count']}} New Notifications</p>
+                                    <a  class="text-muted" wire:click="clear_notification()">Clear all</a>
+                                </div>
+                                <div class="p-1">
+                                    @foreach($header_info['notifications_list'] as $key => $value)
+                                    @if($value->is_read == 0 ) 
+                                        <a  href="{{$value->notification_link}}" style="max-height:70px" class="dropdown-item d-flex align-items-center py-2 bg-secondary  ">
+                                            <div class="d-flex align-items-center justify-content-center  rounded-circle mr-4 text-white">
+                                                <?php echo $value->notification_icon ?>
+                                            </div>
+                                            <div class="flex-grow-1 me-2">
+                                                <p class="p-0 m-0 text-white" > {{$value->notification_content}}</p>
+                                                <p class="tx-12 p-0 m-0 text-white">   <?php echo(self::timeAgo($value->date_created)); ?> </p>
+                                            </div>	
+                                        </a>
+                                    @else
+                                        <a  href="{{$value->notification_link}}" style="max-height:70px" class="dropdown-item d-flex align-items-center py-2 ">
+                                            <div class="d-flex align-items-center justify-content-center  rounded-circle mr-4">
+                                                <?php echo $value->notification_icon ?>
+                                            </div>
+                                            <div class="flex-grow-1 me-2">
+                                                <p class="p-0 m-0"> {{$value->notification_content}}</p>
+                                                <p class="tx-12 p-0 m-0 text-success">   <?php echo(self::timeAgo($value->date_created)); ?> </p>
+                                            </div>	
+                                        </a>
+                                    @endif
+                                   
+                                    @endforeach
+                                    
+                                </div>
+                                <div class="px-3 py-2 d-flex align-items-center justify-content-center border-top">
+                                    <!-- <a href="javascript:;">View all</a> -->
+                                </div>
                             </div>
                         </li>
                         <li class="nav-item" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Contact us">

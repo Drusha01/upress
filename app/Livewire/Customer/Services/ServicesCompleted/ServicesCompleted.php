@@ -89,10 +89,15 @@ class ServicesCompleted extends Component
             ->where('avail_service_id','=',$availed_services->id)
             ->get()
             ->toArray();
+            $availed_services_total = 0;
+            foreach ($availed_service_items as $key => $value) {
+                $availed_services_total +=$value->total_price;
+            }
             $this->service_availed = [
                 'image_proof'=>$availed_services->image_proof,
                 'availed_services'=>$availed_services,
-                'availed_service_items'=> $availed_service_items
+                'availed_service_items'=> $availed_service_items,
+                'availed_services_total'=>$availed_services_total
             ];
         }
         $this->dispatch('openModal',$modal_id);

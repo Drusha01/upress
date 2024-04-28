@@ -30,7 +30,7 @@
                                         <td data-th="Price" class="align-middle text-center">{{$value->service_status}}</td>
                                         <td class="align-middle text-center">
                                             <button class="btn btn-warning btn-sm" wire:click="view_availed_service({{$value->id}},'pendingModalToggler')">
-                                                Return to Pending Order
+                                                Return to Pending Service
                                             </button>
                                             <button class="btn btn-success btn-sm" wire:click="view_availed_service({{$value->id}},'rtpiModalToggler')">
                                                 Ready for Pickup
@@ -171,7 +171,7 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <form wire:submit.prevent="save_pending_availed_service(1,'pendingModalToggler')">
+                <form wire:submit.prevent="save_pending_availed_service(@if($service_availed['availed_services']) {{$service_availed['availed_services']->id}} @endif,'pendingModalToggler')">
                     <div class="modal-body bg-white text-black">
                         <p class="text-warning text-center">
                             Are you sure you want to return this pending order?

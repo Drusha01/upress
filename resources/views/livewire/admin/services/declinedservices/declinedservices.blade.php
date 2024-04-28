@@ -30,7 +30,7 @@
                                         <td data-th="Price" class="align-middle text-center">{{$value->service_status}}</td>
                                         <td class="align-middle text-center">
                                             <button class="btn btn-warning btn-sm" wire:click="view_availed_service({{$value->id}},'pendingModalToggler')">
-                                                    Return to Pending Order
+                                                    Return to Pending Service
                                                 </button>
                                             <button class="btn btn-primary btn-sm" wire:click="view_availed_service({{$value->id}},'viewModalToggler')">
                                                 View

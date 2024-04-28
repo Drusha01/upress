@@ -296,15 +296,7 @@
                     labels: ['Service Status'],
                     datasets: [{
                         label: [
-                            <?php 
-                            foreach($dashboard['avail_service_status'] as $key =>$value){
-                                if ($key === array_key_last($dashboard['avail_service_status'])) {
-                                    echo "'".$value->name."'";
-                                }else{
-                                    echo "'".$value->name."',";
-                                }
-                            }
-                            ?>
+                            'Service Status'
                         ],
                         data: [
                             <?php 

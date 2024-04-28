@@ -12,62 +12,46 @@
                         <div class="indicator">
                             <div class="circle"></div>
                         </div>
+                        {{$header_info['notifications_count']}} 
                     </a>
                     <div class="dropdown-menu p-0" aria-labelledby="notificationDropdown">
                         <div class="px-3 py-2 d-flex align-items-center justify-content-between border-bottom">
-                            <p>6 New Notifications</p>
-                            <a href="javascript:;" class="text-muted">Clear all</a>
+                            <p class=" pt-3 pb-0">{{$header_info['notifications_count']}} New Notifications</p>
                         </div>
                         <div class="p-1">
-                            <a href="javascript:;" class="dropdown-item d-flex align-items-center py-2">
-                                <div class="wd-30 ht-30 d-flex align-items-center justify-content-center bg-primary rounded-circle me-3">
-                                                        <i class="icon-sm text-white" data-feather="gift"></i>
-                                </div>
-                                <div class="flex-grow-1 me-2">
-                                                        <p>New Order Recieved</p>
-                                                        <p class="tx-12 text-muted">30 min ago</p>
-                                </div>	
-                            </a>
-                            <a href="javascript:;" class="dropdown-item d-flex align-items-center py-2">
-                                <div class="wd-30 ht-30 d-flex align-items-center justify-content-center bg-primary rounded-circle me-3">
-                                                        <i class="icon-sm text-white" data-feather="alert-circle"></i>
-                                </div>
-                                <div class="flex-grow-1 me-2">
-                                                        <p>Server Limit Reached!</p>
-                                                        <p class="tx-12 text-muted">1 hrs ago</p>
-                                </div>	
-                            </a>
-                            <a href="javascript:;" class="dropdown-item d-flex align-items-center py-2">
-                                <div class="wd-30 ht-30 d-flex align-items-center justify-content-center bg-primary rounded-circle me-3">
-                                <img class="wd-30 ht-30 rounded-circle" src="https://via.placeholder.com/30x30" alt="userr">
-                                </div>
-                                <div class="flex-grow-1 me-2">
-                                                        <p>New customer registered</p>
-                                                        <p class="tx-12 text-muted">2 sec ago</p>
-                                </div>	
-                            </a>
-                            <a href="javascript:;" class="dropdown-item d-flex align-items-center py-2">
-                                <div class="wd-30 ht-30 d-flex align-items-center justify-content-center bg-primary rounded-circle me-3">
-                                    <i class="icon-sm text-white" data-feather="layers"></i>
-                                </div>
-                                <div class="flex-grow-1 me-2">
-                                    <p>Apps are ready for update</p>
-                                    <p class="tx-12 text-muted">5 hrs ago</p>
-                                </div>	
-                            </a>
-                            <a href="javascript:;" class="dropdown-item d-flex align-items-center py-2">
-                                <div class="wd-30 ht-30 d-flex align-items-center justify-content-center bg-primary rounded-circle me-3">
-                                    <i class="icon-sm text-white" data-feather="download"></i>
-                                </div>
-                                <div class="flex-grow-1 me-2">
-                                    <p>Download completed</p>
-                                    <p class="tx-12 text-muted">6 hrs ago</p>
-                                </div>	
-                            </a>
+                            @foreach($header_info['notifications_list'] as $key => $value)
+                                @if($value->is_read == 0 ) 
+                                    <a  href="{{$value->notification_link}}" style="max-height:70px" class="dropdown-item d-flex align-items-center py-2 bg-danger  ">
+                                        <div class="d-flex align-items-center justify-content-center  rounded-circle mx-3 text-white" style="max-width:24px;max-heigh:24px">
+                                            <?php echo $value->notification_icon ?>
+                                        </div>
+                                        <div class="flex-grow-1 me-2">
+                                            <p class="p-0 m-0 text-white" > {{$value->notification_content}}</p>
+                                            <p class="tx-12 p-0 m-0  text-success">   <?php echo(self::timeAgo($value->date_created)); ?> </p>
+                                        </div>	
+                                        <button wire:click="update_is_read({{$value->id}},1)" class="btn btn-outline-secondary text-white" >
+                                            mark as read
+                                        </button>
+                                    </a>
+                                @else
+                                    <a href="{{$value->notification_link}}" style="max-height:70px" class="dropdown-item d-flex align-items-center py-2 ">
+                                        <div class="d-flex align-items-center justify-content-center  rounded-circle mx-3 text-white" style="max-width:24px;max-heigh:24px">
+                                            <?php echo $value->notification_icon ?>
+                                        </div>
+                                        <div class="flex-grow-1 me-2">
+                                            <p class="p-0 m-0"> {{$value->notification_content}}</p>
+                                            <p class="tx-12 p-0 m-0 text-success">   <?php echo(self::timeAgo($value->date_created)); ?> </p>
+                                        </div>
+                                        <button wire:click="update_is_read({{$value->id}},0)" class="btn btn-outline-secondary text-white">
+                                            mark as unread
+                                        </button>
+                                    </a>
+                                @endif
+                            @endforeach
                         </div>
-                        <div class="px-3 py-2 d-flex align-items-center justify-content-center border-top">
+                        <!-- <div class="px-3 py-2 d-flex align-items-center justify-content-center border-top">
                             <a href="javascript:;">View all</a>
-                        </div>
+                        </div> -->
                     </div>
                 </li>
                 <li class="nav-item dropdown">

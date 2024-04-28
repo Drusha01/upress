@@ -117,7 +117,7 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-md-6 mt-3">
+                            <div class="text-start col-md-6 mt-3">
                                 <div class="mb-2">
                                     <p><strong>Order ID:</strong> @if($order_details['customer_order']) {{str_pad($order_details['customer_order']->id, 8, '0', STR_PAD_LEFT)}} @endif</p>
                                 </div>

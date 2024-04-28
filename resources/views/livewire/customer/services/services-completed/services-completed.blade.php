@@ -134,7 +134,7 @@
                                     <p><strong>Avail Service Date :</strong>@if($service_availed['availed_services']) {{date_format(date_create($service_availed['availed_services']->date_created),"M d, Y h:i a")}} @endif</p>
                                 </div>
                                 <div class="mb-2">
-                                    <p><strong>Total Amount:</strong> @if(isset($service_availed['availed_services']->total_price)) {{number_format($service_availed['availed_services']->total_price, 2, '.', ',')}} @endif</p>
+                                    <p><strong>Total Amount:</strong> @if(isset($service_availed['availed_services_total'])) {{number_format($service_availed['availed_services_total'], 2, '.', ',')}} @endif</p>
                                 </div>
                             </div>
                         </div>
@@ -167,13 +167,13 @@
                                                     <td class="align-middle">{{$value->service_name}}</td>
                                                     <td class="align-middle">{{$value->service_description}}</td>
                                                     <td class="align-middle">
-                                                        <input type="number"  class="form-control" wire:change="update_total_price()" wire:model="service_availed.availed_service_items.{{$key}}.quantity">
+                                                        <input type="number"  class="form-control" wire:change="update_total_price()" wire:model="service_availed.availed_service_items.{{$key}}.quantity"  value="{{$value->quantity}}">
                                                     </td>
                                                     <td class="align-middle">
-                                                        <input type="number"  class="form-control" wire:change="update_total_price()" step="0.01" wire:model="service_availed.availed_service_items.{{$key}}.price_per_unit">
+                                                        <input type="number"  class="form-control" wire:change="update_total_price()"  value="{{$value->price_per_unit}}" step="0.01" wire:model="service_availed.availed_service_items.{{$key}}.price_per_unit">
                                                     </td>
                                                     <td class="align-middle">
-                                                        <input type="text"  class="form-control bg-white" disabled wire:model="service_availed.availed_service_items.{{$key}}.total_price">
+                                                        <input type="text"  class="form-control bg-white" value="{{$value->total_price}}" disabled wire:model="service_availed.availed_service_items.{{$key}}.total_price">
                                                     </td>
                                                     <td class="align-middle" class="form-control" >
                                                         <textarea type="text" value="{{$value->remarks}}" wire:model="service_availed.availed_service_items.{{$key}}.remarks"></textarea>
