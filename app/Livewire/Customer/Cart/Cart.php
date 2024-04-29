@@ -206,7 +206,7 @@ class Cart extends Component
             'valid'=> true,
             'total_price'=> 0,
         ];
-        if( $cart ){
+        if( count($cart) ){
             foreach ($cart  as $key => $value) {
                 if($value->quantity > $value->product_quantity){
                     $order['valid'] = false;
