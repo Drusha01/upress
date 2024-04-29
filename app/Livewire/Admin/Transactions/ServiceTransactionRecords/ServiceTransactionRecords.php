@@ -467,6 +467,8 @@ class ServiceTransactionRecords extends Component
                         DB::raw('sum(asi.total_price) as total_service_revenue')
                         )
                     ->join('service_status as ss','ss.id','avs.service_status_id')
+                    ->join('availed_service_items as asi','asi.avail_service_id','avs.id')
+                    ->join('users as u','u.id','avs.customer_id')
                     ->where('service_status_id','=',$service_status->id)
                     ->where(DB::raw('YEAR(asi.date_updated)'),'=',$this->filters['year'])
                     ->where('u.department_id','=',$this->filters['department_id'])
