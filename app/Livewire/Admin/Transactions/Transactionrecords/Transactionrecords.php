@@ -417,6 +417,93 @@ class Transactionrecords extends Component
             ->first();
         if($this->filters['year']){
             if($this->filters['college_id']){
+                $departments_data = DB::table('departments')
+                    ->where('college_id','=',$this->filters['college_id'])
+                    ->get();
+                if($this->filters['department_id']){
+                    $total_product_revenue =  DB::table('orders as o')
+                    ->select(DB::raw('sum(o.total_price) as total_product_revenue'))
+                    ->join('order_status as os','os.id','o.status')
+                    ->join('users as u','u.id','o.order_by')
+                    ->where('os.name','=','Completed')
+                    ->where(DB::raw('YEAR(o.date_updated)'),'=',$this->filters['year'])
+                    ->where('u.college_id','=',$this->filters['college_id'])
+                    ->where('u.department_id','=',$this->filters['department_id'])
+                    ->first();
+                }else{
+                    $total_product_revenue =  DB::table('orders as o')
+                    ->select(DB::raw('sum(o.total_price) as total_product_revenue'))
+                    ->join('order_status as os','os.id','o.status')
+                    ->join('users as u','u.id','o.order_by')
+                    ->where('os.name','=','Completed')
+                    ->where(DB::raw('YEAR(o.date_updated)'),'=',$this->filters['year'])
+                    ->where('u.college_id','=',$this->filters['college_id'])
+                    ->first();
+                }
+            }else{
+                if($this->filters['department_id']){
+                    $total_product_revenue =  DB::table('orders as o')
+                    ->select(DB::raw('sum(o.total_price) as total_product_revenue'))
+                    ->join('order_status as os','os.id','o.status')
+                    ->join('users as u','u.id','o.order_by')
+                    ->where('os.name','=','Completed')
+                    ->where(DB::raw('YEAR(o.date_updated)'),'=',$this->filters['year'])
+                    ->where('u.department_id','=',$this->filters['department_id'])
+                    ->first();
+                }else{
+                    $total_product_revenue =  DB::table('orders as o')
+                    ->select(DB::raw('sum(o.total_price) as total_product_revenue'))
+                    ->join('order_status as os','os.id','o.status')
+                    ->join('users as u','u.id','o.order_by')
+                    ->where('os.name','=','Completed')
+                    ->where(DB::raw('YEAR(o.date_updated)'),'=',$this->filters['year'])
+                    ->first();
+                }
+            }
+        }else{
+            if($this->filters['college_id']){
+                $departments_data = DB::table('departments')
+                ->where('college_id','=',$this->filters['college_id'])
+                ->get();
+                if($this->filters['department_id']){
+                    $total_product_revenue =  DB::table('orders as o')
+                    ->select(DB::raw('sum(o.total_price) as total_product_revenue'))
+                    ->join('order_status as os','os.id','o.status')
+                    ->join('users as u','u.id','o.order_by')
+                    ->where('os.name','=','Completed')
+                    ->where('u.college_id','=',$this->filters['college_id'])
+                    ->where('u.department_id','=',$this->filters['department_id'])
+                    ->first();
+                }else{
+                    $total_product_revenue =  DB::table('orders as o')
+                    ->select(DB::raw('sum(o.total_price) as total_product_revenue'))
+                    ->join('order_status as os','os.id','o.status')
+                    ->join('users as u','u.id','o.order_by')
+                    ->where('os.name','=','Completed')
+                    ->where('u.college_id','=',$this->filters['college_id'])
+                    ->first();
+                }
+            }else{
+                if($this->filters['department_id']){
+                    $total_product_revenue =  DB::table('orders as o')
+                    ->select(DB::raw('sum(o.total_price) as total_product_revenue'))
+                    ->join('order_status as os','os.id','o.status')
+                    ->join('users as u','u.id','o.order_by')
+                    ->where('os.name','=','Completed')
+                    ->where('u.department_id','=',$this->filters['department_id'])
+                    ->first();
+                }else{
+                    $total_product_revenue =  DB::table('orders as o')
+                    ->select(DB::raw('sum(o.total_price) as total_product_revenue'))
+                    ->join('order_status as os','os.id','o.status')
+                    ->join('users as u','u.id','o.order_by')
+                    ->where('os.name','=','Completed')
+                    ->first();
+                }
+            }
+        }
+        if($this->filters['year']){
+            if($this->filters['college_id']){
                 if($this->filters['department_id']){
                     $customer_order = DB::table('orders as o')
                     ->select(
@@ -646,7 +733,8 @@ class Transactionrecords extends Component
         $pdf = Pdf::loadView('livewire.admin.transactions.transactionrecords.exportpdf',  array( 
             'header'=>$header,
             'customer_order'=> $customer_order,
-            'filters'=>$this->filters
+            'filters'=>$this->filters,
+            'total_revenue'=>$total_product_revenue->total_product_revenue
             ));
         return response()->streamDownload(function () use ($pdf) {
             echo $pdf->setPaper('a4', 'landscape')->stream();

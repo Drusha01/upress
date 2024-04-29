@@ -38,6 +38,8 @@
         <div class="row" id="content">
             <div class="row text-center">
                 <h4>Year {{$filters['year']}}</h4>
+                <h4>Total Revenue {{number_format($total_revenue, 2, '.', ',')}}</h4>
+                
             </div>
             <div class="table-responsive">
                 <table id="shoppingCart" class="table-condensed table text-black">
