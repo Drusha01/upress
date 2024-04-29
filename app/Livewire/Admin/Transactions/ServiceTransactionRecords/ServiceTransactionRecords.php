@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Livewire\WithPagination; 
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class ServiceTransactionRecords extends Component
 {
@@ -18,30 +19,365 @@ class ServiceTransactionRecords extends Component
         'availed_services'=>[],
         'availed_service_items'=> []
     ];
+    public $filters = [
+        'department_id'=> NULL,
+        'college_id'=>NULL,
+        'status_id' =>NULL,
+        'year'=>NULL,
+    ];
     public function render()
     {
         $service_status = DB::table('service_status')
             ->where('name','=','Completed')
             ->first();
-        $availed_services = DB::table('availed_services as avs')
+        $years = DB::table('availed_services')
             ->select(
-                'avs.id',
-                "u.first_name",
-                "u.middle_name",
-                "u.last_name",
-                "u.email" ,
-                "ss.name as service_status",
-                DB::raw('sum(total_price) as total')
-            )
-            ->join('service_status as ss','ss.id','avs.service_status_id')
-            ->join('availed_service_items as asi','asi.avail_service_id','avs.id')
-            ->join('users as u','u.id','avs.customer_id')
-            ->where('service_status_id','=',$service_status->id)
-            ->groupBy('avs.id')
-            ->orderBy('avs.date_created','desc')
-            ->paginate(10);
+                DB::raw('YEAR(date_updated) as year')
+                )
+            ->orderBy(DB::raw('YEAR(date_updated)'),'desc')
+            ->groupBy(DB::raw('YEAR(date_updated)'))
+            ->get()
+            ->toArray();
+        $colleges_data = DB::table('colleges')
+            ->get();
+        $departments_data = DB::table('departments')
+            ->get();
+        if($this->filters['year']){
+            if($this->filters['college_id']){
+                if($this->filters['department_id']){
+                    $total_service_revenue =  DB::table('availed_services as avs')
+                    ->select(
+                        DB::raw('sum(asi.total_price) as total_service_revenue')
+                        )
+                    ->join('service_status as ss','ss.id','avs.service_status_id')
+                    ->join('availed_service_items as asi','asi.avail_service_id','avs.id')
+                    ->join('users as u','u.id','avs.customer_id')
+                    ->where('service_status_id','=',$service_status->id)
+                    ->where(DB::raw('YEAR(asi.date_updated)'),'=',$this->filters['year'])
+                    ->where('u.college_id','=',$this->filters['college_id'])
+                    ->where('u.department_id','=',$this->filters['department_id'])
+                    ->first();
+                }else{
+                    $total_service_revenue =  DB::table('availed_services as avs')
+                    ->select(
+                        DB::raw('sum(asi.total_price) as total_service_revenue')
+                        )
+                    ->join('service_status as ss','ss.id','avs.service_status_id')
+                    ->join('availed_service_items as asi','asi.avail_service_id','avs.id')
+                    ->join('users as u','u.id','avs.customer_id')
+                    ->where('service_status_id','=',$service_status->id)
+                    ->where(DB::raw('YEAR(asi.date_updated)'),'=',$this->filters['year'])
+                    ->where('u.college_id','=',$this->filters['college_id'])
+                    ->first();
+                }
+            }else{
+                if($this->filters['department_id']){
+                    $total_service_revenue =  DB::table('availed_services as avs')
+                    ->select(
+                        DB::raw('sum(asi.total_price) as total_service_revenue')
+                        )
+                    ->join('service_status as ss','ss.id','avs.service_status_id')
+                    ->join('availed_service_items as asi','asi.avail_service_id','avs.id')
+                    ->join('users as u','u.id','avs.customer_id')
+                    ->where('service_status_id','=',$service_status->id)
+                    ->where(DB::raw('YEAR(asi.date_updated)'),'=',$this->filters['year'])
+                    ->where('u.department_id','=',$this->filters['department_id'])
+                    ->first();
+                }else{
+                    $total_service_revenue =  DB::table('availed_services as avs')
+                    ->select(
+                        DB::raw('sum(asi.total_price) as total_service_revenue')
+                        )
+                    ->join('service_status as ss','ss.id','avs.service_status_id')
+                    ->join('availed_service_items as asi','asi.avail_service_id','avs.id')
+                    ->join('users as u','u.id','avs.customer_id')
+                    ->where('service_status_id','=',$service_status->id)
+                    ->where(DB::raw('YEAR(asi.date_updated)'),'=',$this->filters['year'])
+                    ->first();
+                }
+            }
+        }else{
+            if($this->filters['college_id']){
+                if($this->filters['department_id']){
+                    $total_service_revenue =  DB::table('availed_services as avs')
+                    ->select(
+                        DB::raw('sum(asi.total_price) as total_service_revenue')
+                        )
+                    ->join('service_status as ss','ss.id','avs.service_status_id')
+                    ->join('availed_service_items as asi','asi.avail_service_id','avs.id')
+                    ->join('users as u','u.id','avs.customer_id')
+                    ->where('service_status_id','=',$service_status->id)
+                    ->where('u.college_id','=',$this->filters['college_id'])
+                    ->where('u.department_id','=',$this->filters['department_id'])
+                    ->first();
+                }else{
+                    $total_service_revenue =  DB::table('availed_services as avs')
+                    ->select(
+                        DB::raw('sum(asi.total_price) as total_service_revenue')
+                        )
+                    ->join('service_status as ss','ss.id','avs.service_status_id')
+                    ->join('availed_service_items as asi','asi.avail_service_id','avs.id')
+                    ->join('users as u','u.id','avs.customer_id')
+                    ->where('service_status_id','=',$service_status->id)
+                    ->where('u.college_id','=',$this->filters['college_id'])
+                    ->first();
+                }
+            }else{
+                if($this->filters['department_id']){
+                    $total_service_revenue =  DB::table('availed_services as avs')
+                    ->select(
+                        DB::raw('sum(asi.total_price) as total_service_revenue')
+                        )
+                    ->join('service_status as ss','ss.id','avs.service_status_id')
+                    ->join('availed_service_items as asi','asi.avail_service_id','avs.id')
+                    ->join('users as u','u.id','avs.customer_id')
+                    ->where('service_status_id','=',$service_status->id)
+                    ->where('u.department_id','=',$this->filters['department_id'])
+                    ->first();
+                }else{
+                    $total_service_revenue =  DB::table('availed_services as avs')
+                    ->select(
+                        DB::raw('sum(asi.total_price) as total_service_revenue')
+                        )
+                    ->join('service_status as ss','ss.id','avs.service_status_id')
+                    ->join('availed_service_items as asi','asi.avail_service_id','avs.id')
+                    ->join('users as u','u.id','avs.customer_id')
+                    ->where('service_status_id','=',$service_status->id)
+                    ->first();
+                }
+            }
+           
+        }
+       
+        
+        if($this->filters['college_id']){
+            $departments_data = DB::table('departments')
+            ->where('college_id','=',$this->filters['college_id'])
+            ->get();
+            if($this->filters['department_id']){
+                if($this->filters['year']){
+                    $availed_services = DB::table('availed_services as avs')
+                    ->select(
+                        'avs.id',
+                        "u.first_name",
+                        "u.middle_name",
+                        "u.last_name",
+                        "u.email" ,
+                        "ss.name as service_status",
+                        "u.college_id",
+                        "c.name as college_name",
+                        "u.department_id",
+                        "d.name as department_name",
+                        DB::raw('sum(total_price) as total')
+                    )
+                    ->join('service_status as ss','ss.id','avs.service_status_id')
+                    ->join('availed_service_items as asi','asi.avail_service_id','avs.id')
+                    ->join('users as u','u.id','avs.customer_id')
+                    ->leftjoin('colleges as c','u.college_id','c.id')
+                    ->leftjoin('departments as d','u.department_id','d.id')
+                    ->where('service_status_id','=',$service_status->id)
+                    ->where(DB::raw('YEAR(avs.date_updated)'),'=',$this->filters['year'])
+                    ->where('u.college_id','=',$this->filters['college_id'])
+                    ->where('u.department_id','=',$this->filters['department_id'])
+                    ->groupBy('avs.id')
+                    ->orderBy('avs.date_created','desc')
+                    ->paginate(10);
+                }else{
+                    $availed_services = DB::table('availed_services as avs')
+                        ->select(
+                            'avs.id',
+                            "u.first_name",
+                            "u.middle_name",
+                            "u.last_name",
+                            "u.email" ,
+                            "ss.name as service_status",
+                            "u.college_id",
+                            "c.name as college_name",
+                            "u.department_id",
+                            "d.name as department_name",
+                            DB::raw('sum(total_price) as total')
+                        )
+                        ->join('service_status as ss','ss.id','avs.service_status_id')
+                        ->join('availed_service_items as asi','asi.avail_service_id','avs.id')
+                        ->join('users as u','u.id','avs.customer_id')
+                        ->leftjoin('colleges as c','u.college_id','c.id')
+                        ->leftjoin('departments as d','u.department_id','d.id')
+                        ->where('service_status_id','=',$service_status->id)
+                        ->where('u.college_id','=',$this->filters['college_id'])
+                        ->where('u.department_id','=',$this->filters['department_id'])
+                        ->groupBy('avs.id')
+                        ->orderBy('avs.date_created','desc')
+                        ->paginate(10);
+                }
+            }else{
+                if($this->filters['year']){
+                    $availed_services = DB::table('availed_services as avs')
+                        ->select(
+                            'avs.id',
+                            "u.first_name",
+                            "u.middle_name",
+                            "u.last_name",
+                            "u.email" ,
+                            "ss.name as service_status",
+                            "u.college_id",
+                            "c.name as college_name",
+                            "u.department_id",
+                            "d.name as department_name",
+                            DB::raw('sum(total_price) as total')
+                        )
+                        ->join('service_status as ss','ss.id','avs.service_status_id')
+                        ->join('availed_service_items as asi','asi.avail_service_id','avs.id')
+                        ->join('users as u','u.id','avs.customer_id')
+                        ->leftjoin('colleges as c','u.college_id','c.id')
+                        ->leftjoin('departments as d','u.department_id','d.id')
+                        ->where('service_status_id','=',$service_status->id)
+                        ->where(DB::raw('YEAR(avs.date_updated)'),'=',$this->filters['year'])
+                        ->where('u.college_id','=',$this->filters['college_id'])
+                        ->groupBy('avs.id')
+                        ->orderBy('avs.date_created','desc')
+                        ->paginate(10);
+                }else{
+                    $availed_services = DB::table('availed_services as avs')
+                        ->select(
+                            'avs.id',
+                            "u.first_name",
+                            "u.middle_name",
+                            "u.last_name",
+                            "u.email" ,
+                            "ss.name as service_status",
+                            "u.college_id",
+                            "c.name as college_name",
+                            "u.department_id",
+                            "d.name as department_name",
+                            DB::raw('sum(total_price) as total')
+                        )
+                        ->join('service_status as ss','ss.id','avs.service_status_id')
+                        ->join('availed_service_items as asi','asi.avail_service_id','avs.id')
+                        ->join('users as u','u.id','avs.customer_id')
+                        ->leftjoin('colleges as c','u.college_id','c.id')
+                        ->leftjoin('departments as d','u.department_id','d.id')
+                        ->where('service_status_id','=',$service_status->id)
+                        ->where('u.college_id','=',$this->filters['college_id'])
+                        ->groupBy('avs.id')
+                        ->orderBy('avs.date_created','desc')
+                        ->paginate(10);
+                }
+            }
+           
+        }else{
+            if($this->filters['department_id']){
+                if($this->filters['year']){
+                    $availed_services = DB::table('availed_services as avs')
+                        ->select(
+                            'avs.id',
+                            "u.first_name",
+                            "u.middle_name",
+                            "u.last_name",
+                            "u.email" ,
+                            "ss.name as service_status",
+                            "u.college_id",
+                            "c.name as college_name",
+                            "u.department_id",
+                            "d.name as department_name",
+                            DB::raw('sum(total_price) as total')
+                        )
+                        ->join('service_status as ss','ss.id','avs.service_status_id')
+                        ->join('availed_service_items as asi','asi.avail_service_id','avs.id')
+                        ->join('users as u','u.id','avs.customer_id')
+                        ->leftjoin('colleges as c','u.college_id','c.id')
+                        ->leftjoin('departments as d','u.department_id','d.id')
+                        ->where('service_status_id','=',$service_status->id)
+                        ->where(DB::raw('YEAR(avs.date_updated)'),'=',$this->filters['year'])
+                        ->where('u.department_id','=',$this->filters['department_id'])
+                        ->groupBy('avs.id')
+                        ->orderBy('avs.date_created','desc')
+                        ->paginate(10);
+                }else{
+                    $availed_services = DB::table('availed_services as avs')
+                        ->select(
+                            'avs.id',
+                            "u.first_name",
+                            "u.middle_name",
+                            "u.last_name",
+                            "u.email" ,
+                            "ss.name as service_status",
+                            "u.college_id",
+                            "c.name as college_name",
+                            "u.department_id",
+                            "d.name as department_name",
+                            DB::raw('sum(total_price) as total')
+                        )
+                        ->join('service_status as ss','ss.id','avs.service_status_id')
+                        ->join('availed_service_items as asi','asi.avail_service_id','avs.id')
+                        ->join('users as u','u.id','avs.customer_id')
+                        ->leftjoin('colleges as c','u.college_id','c.id')
+                        ->leftjoin('departments as d','u.department_id','d.id')
+                        ->where('service_status_id','=',$service_status->id)
+                        ->where('u.department_id','=',$this->filters['department_id'])
+                        ->groupBy('avs.id')
+                        ->orderBy('avs.date_created','desc')
+                        ->paginate(10);
+                }
+            }else{
+                if($this->filters['year']){
+                    $availed_services = DB::table('availed_services as avs')
+                        ->select(
+                            'avs.id',
+                            "u.first_name",
+                            "u.middle_name",
+                            "u.last_name",
+                            "u.email" ,
+                            "ss.name as service_status",
+                            "u.college_id",
+                            "c.name as college_name",
+                            "u.department_id",
+                            "d.name as department_name",
+                            DB::raw('sum(total_price) as total')
+                        )
+                        ->join('service_status as ss','ss.id','avs.service_status_id')
+                        ->join('availed_service_items as asi','asi.avail_service_id','avs.id')
+                        ->join('users as u','u.id','avs.customer_id')
+                        ->leftjoin('colleges as c','u.college_id','c.id')
+                        ->leftjoin('departments as d','u.department_id','d.id')
+                        ->where('service_status_id','=',$service_status->id)
+                        ->where(DB::raw('YEAR(avs.date_updated)'),'=',$this->filters['year'])
+                        ->groupBy('avs.id')
+                        ->orderBy('avs.date_created','desc')
+                        ->paginate(10);
+                }else{
+                    $availed_services = DB::table('availed_services as avs')
+                        ->select(
+                            'avs.id',
+                            "u.first_name",
+                            "u.middle_name",
+                            "u.last_name",
+                            "u.email" ,
+                            "ss.name as service_status",
+                            "u.college_id",
+                            "c.name as college_name",
+                            "u.department_id",
+                            "d.name as department_name",
+                            DB::raw('sum(total_price) as total')
+                        )
+                        ->join('service_status as ss','ss.id','avs.service_status_id')
+                        ->join('availed_service_items as asi','asi.avail_service_id','avs.id')
+                        ->join('users as u','u.id','avs.customer_id')
+                        ->leftjoin('colleges as c','u.college_id','c.id')
+                        ->leftjoin('departments as d','u.department_id','d.id')
+                        ->where('service_status_id','=',$service_status->id)
+                        ->groupBy('avs.id')
+                        ->orderBy('avs.date_created','desc')
+                        ->paginate(10);
+                }
+            }
+        }
+        
         return view('livewire.admin.transactions.service-transaction-records.service-transaction-records',[
-            'availed_services'=>$availed_services
+            'availed_services'=>$availed_services,
+            'colleges_data'=>$colleges_data,
+            'departments_data'=>$departments_data,
+            'years'=>$years,
+            'total_service_revenue'=>$total_service_revenue
         ])
         ->layout('components.layouts.admin');
     }
@@ -91,5 +427,252 @@ class ServiceTransactionRecords extends Component
             ];
         }
         $this->dispatch('openModal',$modal_id);
+    }
+    public function downloadPDF(){
+        $service_status = DB::table('service_status')
+        ->where('name','=','Completed')
+        ->first();
+        if($this->filters['college_id']){
+            $departments_data = DB::table('departments')
+            ->where('college_id','=',$this->filters['college_id'])
+            ->get();
+            if($this->filters['department_id']){
+                if($this->filters['year']){
+                    $availed_services = DB::table('availed_services as avs')
+                    ->select(
+                        'avs.id',
+                        "u.first_name",
+                        "u.middle_name",
+                        "u.last_name",
+                        "u.email" ,
+                        "ss.name as service_status",
+                        "u.college_id",
+                        "c.name as college_name",
+                        "u.department_id",
+                        "d.name as department_name",
+                        DB::raw('sum(total_price) as total')
+                    )
+                    ->join('service_status as ss','ss.id','avs.service_status_id')
+                    ->join('availed_service_items as asi','asi.avail_service_id','avs.id')
+                    ->join('users as u','u.id','avs.customer_id')
+                    ->leftjoin('colleges as c','u.college_id','c.id')
+                    ->leftjoin('departments as d','u.department_id','d.id')
+                    ->where('service_status_id','=',$service_status->id)
+                    ->where(DB::raw('YEAR(avs.date_updated)'),'=',$this->filters['year'])
+                    ->where('u.college_id','=',$this->filters['college_id'])
+                    ->where('u.department_id','=',$this->filters['department_id'])
+                    ->groupBy('avs.id')
+                    ->orderBy('avs.date_created','desc')
+                    ->get()
+                    ->toArray();
+                }else{
+                    $availed_services = DB::table('availed_services as avs')
+                        ->select(
+                            'avs.id',
+                            "u.first_name",
+                            "u.middle_name",
+                            "u.last_name",
+                            "u.email" ,
+                            "ss.name as service_status",
+                            "u.college_id",
+                            "c.name as college_name",
+                            "u.department_id",
+                            "d.name as department_name",
+                            DB::raw('sum(total_price) as total')
+                        )
+                        ->join('service_status as ss','ss.id','avs.service_status_id')
+                        ->join('availed_service_items as asi','asi.avail_service_id','avs.id')
+                        ->join('users as u','u.id','avs.customer_id')
+                        ->leftjoin('colleges as c','u.college_id','c.id')
+                        ->leftjoin('departments as d','u.department_id','d.id')
+                        ->where('service_status_id','=',$service_status->id)
+                        ->where('u.college_id','=',$this->filters['college_id'])
+                        ->where('u.department_id','=',$this->filters['department_id'])
+                        ->groupBy('avs.id')
+                        ->orderBy('avs.date_created','desc')
+                        ->get()
+                        ->toArray();
+                }
+            }else{
+                if($this->filters['year']){
+                    $availed_services = DB::table('availed_services as avs')
+                        ->select(
+                            'avs.id',
+                            "u.first_name",
+                            "u.middle_name",
+                            "u.last_name",
+                            "u.email" ,
+                            "ss.name as service_status",
+                            "u.college_id",
+                            "c.name as college_name",
+                            "u.department_id",
+                            "d.name as department_name",
+                            DB::raw('sum(total_price) as total')
+                        )
+                        ->join('service_status as ss','ss.id','avs.service_status_id')
+                        ->join('availed_service_items as asi','asi.avail_service_id','avs.id')
+                        ->join('users as u','u.id','avs.customer_id')
+                        ->leftjoin('colleges as c','u.college_id','c.id')
+                        ->leftjoin('departments as d','u.department_id','d.id')
+                        ->where('service_status_id','=',$service_status->id)
+                        ->where(DB::raw('YEAR(avs.date_updated)'),'=',$this->filters['year'])
+                        ->where('u.college_id','=',$this->filters['college_id'])
+                        ->groupBy('avs.id')
+                        ->orderBy('avs.date_created','desc')
+                        ->get()
+                        ->toArray();
+                }else{
+                    $availed_services = DB::table('availed_services as avs')
+                        ->select(
+                            'avs.id',
+                            "u.first_name",
+                            "u.middle_name",
+                            "u.last_name",
+                            "u.email" ,
+                            "ss.name as service_status",
+                            "u.college_id",
+                            "c.name as college_name",
+                            "u.department_id",
+                            "d.name as department_name",
+                            DB::raw('sum(total_price) as total')
+                        )
+                        ->join('service_status as ss','ss.id','avs.service_status_id')
+                        ->join('availed_service_items as asi','asi.avail_service_id','avs.id')
+                        ->join('users as u','u.id','avs.customer_id')
+                        ->leftjoin('colleges as c','u.college_id','c.id')
+                        ->leftjoin('departments as d','u.department_id','d.id')
+                        ->where('service_status_id','=',$service_status->id)
+                        ->where('u.college_id','=',$this->filters['college_id'])
+                        ->groupBy('avs.id')
+                        ->orderBy('avs.date_created','desc')
+                        ->get()
+                        ->toArray();
+                }
+            }
+           
+        }else{
+            if($this->filters['department_id']){
+                if($this->filters['year']){
+                    $availed_services = DB::table('availed_services as avs')
+                        ->select(
+                            'avs.id',
+                            "u.first_name",
+                            "u.middle_name",
+                            "u.last_name",
+                            "u.email" ,
+                            "ss.name as service_status",
+                            "u.college_id",
+                            "c.name as college_name",
+                            "u.department_id",
+                            "d.name as department_name",
+                            DB::raw('sum(total_price) as total')
+                        )
+                        ->join('service_status as ss','ss.id','avs.service_status_id')
+                        ->join('availed_service_items as asi','asi.avail_service_id','avs.id')
+                        ->join('users as u','u.id','avs.customer_id')
+                        ->leftjoin('colleges as c','u.college_id','c.id')
+                        ->leftjoin('departments as d','u.department_id','d.id')
+                        ->where('service_status_id','=',$service_status->id)
+                        ->where(DB::raw('YEAR(avs.date_updated)'),'=',$this->filters['year'])
+                        ->where('u.department_id','=',$this->filters['department_id'])
+                        ->groupBy('avs.id')
+                        ->orderBy('avs.date_created','desc')
+                        ->get()
+                        ->toArray();
+                }else{
+                    $availed_services = DB::table('availed_services as avs')
+                        ->select(
+                            'avs.id',
+                            "u.first_name",
+                            "u.middle_name",
+                            "u.last_name",
+                            "u.email" ,
+                            "ss.name as service_status",
+                            "u.college_id",
+                            "c.name as college_name",
+                            "u.department_id",
+                            "d.name as department_name",
+                            DB::raw('sum(total_price) as total')
+                        )
+                        ->join('service_status as ss','ss.id','avs.service_status_id')
+                        ->join('availed_service_items as asi','asi.avail_service_id','avs.id')
+                        ->join('users as u','u.id','avs.customer_id')
+                        ->leftjoin('colleges as c','u.college_id','c.id')
+                        ->leftjoin('departments as d','u.department_id','d.id')
+                        ->where('service_status_id','=',$service_status->id)
+                        ->where('u.department_id','=',$this->filters['department_id'])
+                        ->groupBy('avs.id')
+                        ->orderBy('avs.date_created','desc')
+                        ->get()
+                        ->toArray();
+                }
+            }else{
+                if($this->filters['year']){
+                    $availed_services = DB::table('availed_services as avs')
+                        ->select(
+                            'avs.id',
+                            "u.first_name",
+                            "u.middle_name",
+                            "u.last_name",
+                            "u.email" ,
+                            "ss.name as service_status",
+                            "u.college_id",
+                            "c.name as college_name",
+                            "u.department_id",
+                            "d.name as department_name",
+                            DB::raw('sum(total_price) as total')
+                        )
+                        ->join('service_status as ss','ss.id','avs.service_status_id')
+                        ->join('availed_service_items as asi','asi.avail_service_id','avs.id')
+                        ->join('users as u','u.id','avs.customer_id')
+                        ->leftjoin('colleges as c','u.college_id','c.id')
+                        ->leftjoin('departments as d','u.department_id','d.id')
+                        ->where('service_status_id','=',$service_status->id)
+                        ->where(DB::raw('YEAR(avs.date_updated)'),'=',$this->filters['year'])
+                        ->groupBy('avs.id')
+                        ->orderBy('avs.date_created','desc')
+                        ->get()
+                        ->toArray();
+                }else{
+                    $availed_services = DB::table('availed_services as avs')
+                        ->select(
+                            'avs.id',
+                            "u.first_name",
+                            "u.middle_name",
+                            "u.last_name",
+                            "u.email" ,
+                            "ss.name as service_status",
+                            "u.college_id",
+                            "c.name as college_name",
+                            "u.department_id",
+                            "d.name as department_name",
+                            DB::raw('sum(total_price) as total')
+                        )
+                        ->join('service_status as ss','ss.id','avs.service_status_id')
+                        ->join('availed_service_items as asi','asi.avail_service_id','avs.id')
+                        ->join('users as u','u.id','avs.customer_id')
+                        ->leftjoin('colleges as c','u.college_id','c.id')
+                        ->leftjoin('departments as d','u.department_id','d.id')
+                        ->where('service_status_id','=',$service_status->id)
+                        ->groupBy('avs.id')
+                        ->orderBy('avs.date_created','desc')
+                        ->get()
+                        ->toArray();
+                }
+            }
+        }
+
+        $file_name = 'Complete Availed Services ';
+        $header =NULL;
+        $content = NULL;
+        $pdf = Pdf::loadView('livewire.admin.transactions.service-transaction-records.exportpdf',  array( 
+            'header'=>$header,
+            'availed_services'=> $availed_services,
+            'filters'=>$this->filters
+            ));
+        return response()->streamDownload(function () use ($pdf) {
+            echo $pdf->setPaper('a4', 'landscape')->stream();
+        },  $file_name.'.pdf');
+
     }
 }
