@@ -94,7 +94,7 @@
     <button class="btn btn-success me-md-2" data-bs-toggle="modal" data-bs-target="#viewModal" id="viewModalToggler" style="display:none">Add</button>
     <div wire:ignore.self class="modal fade" id="viewModal" tabindex="-1" role="dialog" aria-labelledby="viewModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-xl" role="document">
-            <div class="modal-content" >
+            <div class="modal-content">
                 <div class="modal-header bg-dark text-white">
                     <h5 class="modal-title" id="viewModalLabel">Order Details</h5>
                     <button type="button" class="close text-light" data-bs-dismiss="modal" aria-label="Close">
@@ -103,8 +103,8 @@
                 </div>
                 <div class="modal-body bg-white text-black" id="to_print">
                     <div class="container-fluid">
-                        <div class="row justify-content-center align-items-center mb-4">
-                            <div class="col-6 col-md-3 text-center">
+                        <div class="row d-flex justify-content-center align-items-center mb-4">
+                          <div class="col-6 col-md-3 text-center">
                                 <img  src="{{url('landingpage')}}/assets/images/wmsu.png" alt="University Logo" style="max-width: 100px;max-height: 100px;">
                             </div>
                             <div class="col-6 col-md-3 text-center">
@@ -117,7 +117,7 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-md-6 mt-3 text-start">
+                            <div class="text-start col-md-6 mt-3">
                                 <div class="mb-2">
                                     <p><strong>Order ID:</strong> @if($order_details['customer_order']) {{str_pad($order_details['customer_order']->id, 8, '0', STR_PAD_LEFT)}} @endif</p>
                                 </div>
@@ -174,7 +174,7 @@
                                             <td class="align-middle">{{$value->product_color}}</td>
                                             <td class="align-middle">{{$value->product_quantity}}</td>
                                             <td class="align-middle">
-                                            {{$value->quantity}}
+                                               {{$value->quantity}}
                                             </td>
                                             <td class="align-middle">{{$value->product_price}}</td>
                                         </tr>
@@ -189,7 +189,11 @@
                             </div>
                         </div>
                     </div>
-                    
+                    <div class="row">
+                        <div class="col">
+                            <img src="@if(isset($order_details['image_proof'])){{asset('storage/content/orders/proof/'.$order_details['image_proof'])}} @endif" alt="" class="img-fluid">
+                        </div>
+                    </div>
                 </div>
             
                 <div class="modal-footer bg-white text-black">
@@ -199,5 +203,5 @@
 
             </div>
         </div>
-    </div> 
+    </div>  
 </div>

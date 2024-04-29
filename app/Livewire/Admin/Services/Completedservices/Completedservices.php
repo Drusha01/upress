@@ -11,8 +11,10 @@ use Livewire\WithPagination;
 class Completedservices extends Component
 {
     use WithPagination;
+    public $user_id;
     public function mount(Request $request){
-        $data = $request->session()->all();
+        $session = $request->session()->all();
+        $this->user_id = $session['id'];
     }
     public $service_availed = [
         'image_proof'=>NULL,
@@ -84,12 +86,35 @@ class Completedservices extends Component
             ->where('avail_service_id','=',$availed_services->id)
             ->get()
             ->toArray();
+            $availed_services_total = 0;
+            foreach ($availed_service_items as $key => $value) {
+                $availed_services_total +=$value->total_price;
+            }
             $this->service_availed = [
                 'image_proof'=>$availed_services->image_proof,
                 'availed_services'=>$availed_services,
-                'availed_service_items'=> $availed_service_items
+                'availed_service_items'=> $availed_service_items,
+                'availed_services_total'=>$availed_services_total
             ];
         }
         $this->dispatch('openModal',$modal_id);
+    }
+    public function insert_notification(
+        $notification_icon,
+        $notification_content,
+        $notification_link,
+        $notification_target,
+        $notification_creator,
+        $notification_for_admin
+    ){
+        DB::table('notifications')
+            ->insert([
+                'notification_icon' =>$notification_icon,
+                'notification_content' =>$notification_content,
+                'notification_link' => $notification_link,
+                'notification_target' => $notification_target,
+                'notification_creator' => $notification_creator,
+                'notification_for_admin' =>  $notification_for_admin
+            ]);
     }
 }

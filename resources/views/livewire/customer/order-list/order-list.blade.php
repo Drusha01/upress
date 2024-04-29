@@ -62,8 +62,7 @@
                     </div>
                     <div class="track-card">
                         <div class="button d-flex justify-content-end">
-                            <a href="#" class="btn btn-primary">Download PDF</a>
-                            <a href="#" class="btn btn-primary ml-2">Print</a>
+                            <a href="#"  onclick="print_this('to_print')" class="btn btn-secondary">Print</a>
                         </div>
                     </div>
                 </div>

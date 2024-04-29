@@ -16,6 +16,11 @@ class DeclinedOrder extends Component
         'customer_order'=> [],
         'order_items'=> [],
     ];
+    public $user_id;
+    public function mount(Request $request){
+        $session = $request->session()->all();
+        $this->user_id = $session['id'];
+    }
     public function render()
     {
         $order_status = DB::table('order_status')
@@ -43,7 +48,7 @@ class DeclinedOrder extends Component
         ->layout('components.layouts.admin');
     }
     public function view_order($id,$modal_id){
-        $customer_order = DB::table('orders as o')
+         $customer_order = DB::table('orders as o')
             ->select(
                 'o.id as id',
                 'os.name as order_status',
@@ -58,6 +63,7 @@ class DeclinedOrder extends Component
                 "u.department_id",
                 "d.name as department_name",
                 "u.is_active",
+                "o.image_proof",
                 "o.date_created",
                 "o.date_updated",
             )
@@ -93,6 +99,7 @@ class DeclinedOrder extends Component
             ->toArray();
         $this->order_details = [
             'order_id'=> $id,
+            'image_proof'=>$customer_order->image_proof,
             'customer_order'=> $customer_order,
             'order_items'=> $order_items,
         ];
@@ -107,7 +114,62 @@ class DeclinedOrder extends Component
             ->update([
                 'status'=>$order_status->id
             ])){
+            
+            $customer_order = DB::table('orders as o')
+                ->select(
+                    'o.id as id',
+                    'os.name as order_status',
+                    'o.total_price',
+                    'o.date_created as date_created',
+                    "u.id as user_id",
+                    "u.first_name",
+                    "u.middle_name",
+                    "u.last_name",
+                    "u.email" ,
+                    "u.college_id",
+                    "c.name as college_name",
+                    "u.department_id",
+                    "d.name as department_name",
+                    "u.is_active",
+                    "o.image_proof",
+                    "o.date_created",
+                    "o.date_updated",
+                )
+                ->join('order_status as os','os.id','o.status')
+                ->join('users as u','u.id','o.order_by')
+                ->join('colleges as c','u.college_id','c.id')
+                ->join('departments as d','u.department_id','d.id')
+                ->where('o.id','=',$id)
+                ->first();
+            self::insert_notification(
+                '
+                <svg width="800px" height="800px" viewBox="0 0 1024 1024" class="icon"  version="1.1" xmlns="http://www.w3.org/2000/svg"><path d="M511.9 183c-181.8 0-329.1 147.4-329.1 329.1s147.4 329.1 329.1 329.1c181.8 0 329.1-147.4 329.1-329.1S693.6 183 511.9 183z m0 585.2c-141.2 0-256-114.8-256-256s114.8-256 256-256 256 114.8 256 256-114.9 256-256 256z" fill="#0F1F3C" /><path d="M548.6 365.7h-73.2v161.4l120.5 120.5 51.7-51.7-99-99z" fill="#0F1F3C" /></svg>
+                ',
+                'Order returned to pending',
+                '/customer/orders/pending',
+                $customer_order->user_id,
+                $this->user_id,
+                0,
+            );
             $this->dispatch('closeModal',$modal_id);
         }
+    }
+    public function insert_notification(
+        $notification_icon,
+        $notification_content,
+        $notification_link,
+        $notification_target,
+        $notification_creator,
+        $notification_for_admin
+    ){
+        DB::table('notifications')
+            ->insert([
+                'notification_icon' =>$notification_icon,
+                'notification_content' =>$notification_content,
+                'notification_link' => $notification_link,
+                'notification_target' => $notification_target,
+                'notification_creator' => $notification_creator,
+                'notification_for_admin' =>  $notification_for_admin
+            ]);
     }
 }

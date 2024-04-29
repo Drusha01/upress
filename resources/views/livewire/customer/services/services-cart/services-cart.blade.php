@@ -99,6 +99,11 @@
                                             <div class="modal-body">
                                                 <p class="text-bold"> Are you sure you want to order?</p>
                                             </div>
+                                            @if($error)
+                                            <div class="row ">
+                                                <p class="text-danger"> {{$error}}</p>
+                                            </div>
+                                            @endif
                                             <div class="modal-footer bg-white">
                                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" style="border-radius: 8px">Cancel</button>
                                                 <button  class="btn btn-success" type="submit" style="border-radius: 8px">Confirm</button>

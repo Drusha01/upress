@@ -10,7 +10,7 @@
                     <i data-feather="printer"></i>
                     Print
                 </button>
-                <button type="button" class="btn btn-primary mb-2 mb-md-0 mx-2" id="printPDF" wire:click="downloadPdf()">
+                <button type="button" class="btn btn-primary mb-2 mb-md-0 mx-2" id="printPDF" wire:click="downloadpdf()">
                     <i data-feather="download-cloud"></i>
                     Download Report
                 </button>
@@ -296,15 +296,7 @@
                     labels: ['Service Status'],
                     datasets: [{
                         label: [
-                            <?php 
-                            foreach($dashboard['avail_service_status'] as $key =>$value){
-                                if ($key === array_key_last($dashboard['avail_service_status'])) {
-                                    echo "'".$value->name."'";
-                                }else{
-                                    echo "'".$value->name."',";
-                                }
-                            }
-                            ?>
+                            'Service Status'
                         ],
                         data: [
                             <?php 

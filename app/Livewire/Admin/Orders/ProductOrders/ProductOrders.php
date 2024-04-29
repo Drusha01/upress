@@ -42,4 +42,22 @@ class ProductOrders extends Component
         ])
         ->layout('components.layouts.admin');
     }
+    public function insert_notification(
+        $notification_icon,
+        $notification_content,
+        $notification_link,
+        $notification_target,
+        $notification_creator,
+        $notification_for_admin
+    ){
+        DB::table('notifications')
+            ->insert([
+                'notification_icon' =>$notification_icon,
+                'notification_content' =>$notification_content,
+                'notification_link' => $notification_link,
+                'notification_target' => $notification_target,
+                'notification_creator' => $notification_creator,
+                'notification_for_admin' =>  $notification_for_admin
+            ]);
+    }
 }

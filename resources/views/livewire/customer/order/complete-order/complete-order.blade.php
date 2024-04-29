@@ -163,7 +163,7 @@
                                         ?>
                                         @forelse($order_details['order_items']  as $key => $value )
                                         <?php if($valid_cart && $value->quantity > $value->product_quantity || !$value->is_active) {$valid_cart = false;}?>
-                                        <tr @if($value->quantity > $value->product_quantity || !$value->is_active) class="bg-danger" @endif >
+                                        <tr >
                                             <th scope="row" class="align-middle">{{$key+1 }}</th>
                                             <td class="text-center align-middle">
                                                 <img src="{{asset('storage/content/products/'.$value->product_image)}}" alt="Product Image"  style="object-fit: cover;width:150px; height: 150px;">
@@ -189,7 +189,11 @@
                             </div>
                         </div>
                     </div>
-                    
+                    <div class="row">
+                        <div class="col">
+                            <img src="@if(isset($order_details['image_proof'])){{asset('storage/content/orders/proof/'.$order_details['image_proof'])}} @endif" alt="" class="img-fluid">
+                        </div>
+                    </div>
                 </div>
             
                 <div class="modal-footer bg-white text-black">

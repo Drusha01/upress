@@ -35,7 +35,7 @@ class CompletedOrder extends Component
             ->where('o.status','=',$order_status->id)
             ->join('order_status as os','os.id','o.status')
             ->join('users as u','u.id','o.order_by')
-            ->orderBy('o.date_created','desc')
+            ->orderBy('o.date_updated','desc')
             ->paginate(10);
         return view('livewire.admin.orders.completed-order.completed-order',[
             'customer_order'=>$customer_order
@@ -43,7 +43,7 @@ class CompletedOrder extends Component
         ->layout('components.layouts.admin');
     }
     public function view_order($id,$modal_id){
-        $customer_order = DB::table('orders as o')
+         $customer_order = DB::table('orders as o')
             ->select(
                 'o.id as id',
                 'os.name as order_status',
@@ -58,6 +58,7 @@ class CompletedOrder extends Component
                 "u.department_id",
                 "d.name as department_name",
                 "u.is_active",
+                "o.image_proof",
                 "o.date_created",
                 "o.date_updated",
             )
@@ -93,9 +94,28 @@ class CompletedOrder extends Component
             ->toArray();
         $this->order_details = [
             'order_id'=> $id,
+            'image_proof'=>$customer_order->image_proof,
             'customer_order'=> $customer_order,
             'order_items'=> $order_items,
         ];
         $this->dispatch('openModal',$modal_id);
+    }
+    public function insert_notification(
+        $notification_icon,
+        $notification_content,
+        $notification_link,
+        $notification_target,
+        $notification_creator,
+        $notification_for_admin
+    ){
+        DB::table('notifications')
+            ->insert([
+                'notification_icon' =>$notification_icon,
+                'notification_content' =>$notification_content,
+                'notification_link' => $notification_link,
+                'notification_target' => $notification_target,
+                'notification_creator' => $notification_creator,
+                'notification_for_admin' =>  $notification_for_admin
+            ]);
     }
 }

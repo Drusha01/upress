@@ -192,7 +192,11 @@
                             </div>
                         </div>
                     </div>
-                    
+                    <div class="row">
+                        <div class="col">
+                            <img src="@if(isset($order_details['image_proof'])){{asset('storage/content/orders/proof/'.$order_details['image_proof'])}} @endif" alt="" class="img-fluid">
+                        </div>
+                    </div>
                 </div>
             
                 <div class="modal-footer bg-white text-black">

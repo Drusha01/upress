@@ -44,6 +44,9 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 
+        <script src="jquery.min.js" type="text/javascript"></script>
+        <script src="jquery.timeago.js" type="text/javascript"></script>
+
     </head>
     <body>
         <div class="main-wrapper">
@@ -243,6 +246,9 @@
                 WinPrint.close();
                 }, 1000);
             }
+            jQuery(document).ready(function() {
+                jQuery("time.timeago").timeago();
+            });
         </script>
     </body>
 </html>

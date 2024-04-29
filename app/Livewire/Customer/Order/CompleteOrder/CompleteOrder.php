@@ -36,7 +36,7 @@ class CompleteOrder extends Component
         ->where('status','=',$order_status->id)
         ->join('order_status as os','os.id','o.status')
         ->join('users as u','u.id','o.order_by')
-        ->orderBy('o.date_created','desc')
+        ->orderBy('o.date_updated','desc')
         ->paginate(10);
         return view('livewire.customer.order.complete-order.complete-order',[
             'customer_order'=>$customer_order
@@ -59,6 +59,7 @@ class CompleteOrder extends Component
                 "u.department_id",
                 "d.name as department_name",
                 "u.is_active",
+                "o.image_proof",
                 "o.date_created",
                 "o.date_updated",
             )
@@ -94,6 +95,7 @@ class CompleteOrder extends Component
             ->toArray();
         $this->order_details = [
             'order_id'=> $id,
+            'image_proof'=>$customer_order->image_proof,
             'customer_order'=> $customer_order,
             'order_items'=> $order_items,
         ];

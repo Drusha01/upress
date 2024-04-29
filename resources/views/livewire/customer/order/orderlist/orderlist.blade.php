@@ -100,7 +100,7 @@
                     <h5 class="modal-title" id="viewModalLabel">Order Details</h5>
                     <button type="button" class="btn-close bg-white" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <div class="modal-body bg-white text-black">
+                <div class="modal-body bg-white text-black" id="to_print">
                     <div class="container-fluid">
                         <div class="row justify-content-center align-items-center mb-4">
                             <div class="col-6 col-md-3 text-center">
@@ -191,12 +191,14 @@
                     
                 </div>
                 <div class="modal-footer bg-white text-black">
+
                     <a href="#" class="btn btn-primary">Download PDF</a>
 
                     <button type="button" class="btn btn-outline-primary me-2 mb-2 mb-md-0" id="printButton" onclick="printOrder()">
                         <i data-feather="printer"></i>
                         Print
                     </button>
+
 
                     <button type="button" class="btn btn-light" data-bs-dismiss="modal">Close</button>
                 </div>
