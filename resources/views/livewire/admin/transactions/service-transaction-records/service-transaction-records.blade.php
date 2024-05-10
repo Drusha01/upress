@@ -12,6 +12,40 @@
                             <!-- <button type="button" class="btn btn-success float-end mb-2" data-bs-toggle="modal" data-bs-target="#addServiceModal">
                                 Add Service
                             </button> -->
+                            <div class="col-2 d-flex p-2 ">
+                                <h4>
+                                    @if($total_service_revenue->total_service_revenue)Total Revenue: {{number_format($total_service_revenue->total_service_revenue,2)}} @endif
+                                </h4>
+                            </div>
+                            <div class="col-1 mx-2">
+                                <select name="" id="" class="form-select " wire:model.live="filters.year">
+                                    <option selected value="">Select Year</option>
+                                    @foreach($years as $key =>$value)
+                                        <option value="{{$value->year}}">{{$value->year}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="col-2 mx-2">
+                                <select name="" id="" class="form-select " wire:model.live="filters.college_id">
+                                    <option selected value="">Select College</option>
+                                    @foreach($colleges_data as $key =>$value)
+                                        <option value="{{$value->id}}">{{$value->name}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="col-2 mx-2">
+                                <select name="" id="" class="form-select " wire:model.live="filters.department_id">
+                                    <option selected value="">Select Department</option>
+                                    @foreach($departments_data as $key =>$value)
+                                        <option value="{{$value->id}}">{{$value->name}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="col-1  ">
+                                <button class="btn btn-secondary" wire:click="downloadPDF()">
+                                    Download
+                                </button>
+                            </div>
                         </div>
                         <div class="table-responsive">
                             <table id="shoppingCart" class="table-condensed table text-black">
@@ -19,6 +53,8 @@
                                     <tr>
                                         <th style="width:20%">Track No.</th>
                                         <th style="width:12%">Account Name</th>
+                                        <th style="width:12%" >College</th>
+                                        <th style="width:12%" >Department</th>
                                         <th style="width:12%" class="text-center">Status</th>
                                         <th style="width:12%" >Total</th>
                                         <th style="width:12%" class="align-middle text-center">Action</th>
@@ -29,6 +65,8 @@
                                     <tr>
                                         <td data-th="Price" class="align-middle">Track No: {{str_pad($value->id, 8, '0', STR_PAD_LEFT)}}</td>
                                         <td data-th="Price" class="align-middle">{{$value->first_name.' '.$value->middle_name.' '.$value->last_name}}</td>
+                                        <td data-th="Price" class="align-middle">{{$value->college_name}}</td>
+                                        <td data-th="Price" class="align-middle">{{$value->department_name}}</td>
                                         <td data-th="Price" class="align-middle text-center">{{$value->service_status}}</td>
                                         <td data-th="Price" class="align-middle">{{number_format($value->total,2)}}</td>
                                         <td class="align-middle text-center">
